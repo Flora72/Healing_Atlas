@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Create Account 🌸</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-   <style>
+  <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -72,7 +72,8 @@
       position: relative;
     }
 
-    .form-group input {
+    .form-group input,
+    .form-group select {
       width: 100%;
       padding: 1rem 0.75rem 0.25rem;
       border: 2px solid #f4c2c2;
@@ -92,23 +93,15 @@
     }
 
     .form-group input:focus + label,
-    .form-group input:not(:placeholder-shown) + label {
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group select:focus + label,
+    .form-group select:not([value=""]) + label {
       top: -0.6rem;
       left: 0.6rem;
       background-color: #fff;
       padding: 0 0.3rem;
       font-size: 0.75rem;
       color: #c04e90;
-    }
-
-    .checkbox {
-      display: flex;
-      align-items: center;
-      font-size: 0.9rem;
-    }
-
-    .checkbox input {
-      margin-right: 0.5rem;
     }
 
     button[type="submit"] {
@@ -155,7 +148,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="left-panel" style="background: url('{% static 'images/background.jpg' %}') center/cover no-repeat;"></div>
+    <div class="left-panel"></div>
 
     <div class="right-panel">
       <div class="form-container">
@@ -191,11 +184,6 @@
           <div class="form-group">
             {{ form.role }}
             <label for="id_role">Role</label>
-          </div>
-
-          <div class="form-group">
-            {{ form.emotional_tone }}
-            <label for="id_emotional_tone">Emotional Tone</label>
           </div>
 
           <button type="submit">Create account</button>
