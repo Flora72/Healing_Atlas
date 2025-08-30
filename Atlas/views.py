@@ -30,7 +30,7 @@ def substance_support(request):
 
 
 
-def custom_logout(request):
+def logout_view(request):
     logout(request)
     return redirect('index')  
 
