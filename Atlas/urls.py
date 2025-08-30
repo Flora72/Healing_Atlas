@@ -18,5 +18,6 @@ urlpatterns = [
     path('admin/resources/', views.resource_gallery, name='resources'),
     path('admin/resources/edit/<int:resource_id>/', views.edit_resource, name='edit_resource'),
     path('admin/resources/delete/<int:resource_id>/', views.delete_resource, name='delete_resource'),
+    path('substance_support/', views.substance_support, name='substance_support'),
 
 ]
