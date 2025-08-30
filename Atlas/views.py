@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 # -------------------------------------------------------
 #                    GENERAL VIEWS 
@@ -12,6 +13,12 @@ def index(request):
 
 def crisis_mode(request):
     return render(request, 'crisis.html')
+
+
+@login_required
+def survivor_dashboard(request):
+    return render(request, 'survivor_dashboard.html')
+
 
 # -------------------------------------------------------
 #                    AUTH VIEWS 
@@ -27,7 +34,25 @@ def user_dashboard(request):
     return render(request, 'dashboard.html')
 
 def login_view(request):
-    form = AuthenticationForm()
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+
+            # Role-based redirect
+            role = getattr(user, 'role', None)
+            if role == 'admin':
+                return redirect('admin_dashboard')
+            elif role == 'survivor':
+                return redirect('user_dashboard')  # or 'survivor_dashboard' if you create one
+            else:
+                return redirect('user_dashboard')  # fallback
+
+        else:
+            messages.error(request, "Invalid login credentials.")
+    else:
+        form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
 
@@ -38,6 +63,8 @@ def signup_view(request):
             form.save()
             messages.success(request, "Account created successfully. You can now log in.")
             return redirect('login')  
+        else:
+            print("Form errors:", form.errors) 
     else:
         form = CustomUserCreationForm()
     return render(request, 'signup.html', {'form': form})
