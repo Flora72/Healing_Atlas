@@ -57,10 +57,11 @@ ROOT_URLCONF = 'HEALING_ATLAS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'Atlas/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -68,6 +69,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'HEALING_ATLAS.wsgi.application'
 
@@ -81,13 +83,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-TEMPLATES = [
-    {
-        'DIRS': [os.path.join(BASE_DIR, 'Atlas/templates')],
-        
-    },
-]
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'Atlas/static'),
