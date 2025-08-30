@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <title>{% block title %}Healing Atlas{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-   <style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -44,12 +45,6 @@
 
     .sidebar a:hover {
       background-color: #fbeaea;
-    }
-
-    .sidebar .logout {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #a33;
     }
 
     .main-content {
@@ -111,18 +106,16 @@
 <body>
   <aside class="sidebar">
     <nav>
-      <a href="{% url 'user_dashboard' %}">🏠 Home</a>
-      <a href="{% url 'mental_health' %}">🧠 Mental Health</a>
-      <a href="{% url 'substance_support' %}">🌿 Substance Support</a>
-      <a href="{% url 'mood_tracker' %}">📊 Mood Tracker</a>
-      <a href="{% url 'journal' %}">📓 Journal</a>
-      <a href="{% url 'resources' %}">📚 Resources</a>
-      <a href="{% url 'affirmations' %}">💬 Affirmations</a>
-      <a href="{% url 'settings' %}">⚙️ Settings</a>
+      <a href="{% url 'user_dashboard' %}"><i class="fas fa-home"></i> Home</a>
+      <a href="{% url 'mental_health' %}"><i class="fas fa-brain"></i> Mental Health</a>
+      <a href="{% url 'substance_support' %}"><i class="fas fa-leaf"></i> Substance Support</a>
+      <a href="{% url 'mood_tracker' %}"><i class="fas fa-chart-line"></i> Mood Tracker</a>
+      <a href="{% url 'journal' %}"><i class="fas fa-book"></i> Journal</a>
+      <a href="{% url 'resources' %}"><i class="fas fa-folder-open"></i> Resources</a>
+      <a href="{% url 'affirmations' %}"><i class="fas fa-comment-dots"></i> Affirmations</a>
+      <a href="{% url 'settings' %}"><i class="fas fa-cog"></i> Settings</a>
+      <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
     </nav>
-    <div class="logout">
-      <a href="{% url 'logout' %}">🚪 Log Out</a>
-    </div>
   </aside>
 
   <main class="main-content">
