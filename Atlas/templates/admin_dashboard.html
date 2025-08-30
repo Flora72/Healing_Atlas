@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Manage Users 👥</title>
+  <title>Admin Dashboard 🌸</title>
   <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Helvetica', sans-serif;
       background-color: #fdf6f9;
       color: #333;
     }
@@ -50,51 +51,44 @@
 
     .dashboard {
       flex-grow: 1;
-      padding: 3rem;
+      padding: 2rem;
     }
 
-    h1 {
+    .dashboard h1 {
       font-size: 2rem;
-      color: #c04e90;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      color: #d16ba5;
     }
 
     .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
     }
 
     .card {
-      background-color: #fff;
-      border: 2px solid #f4c2c2;
-      border-radius: 10px;
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      color: #c04e90;
-    }
-
-    .card p {
-      margin: 0.5rem 0;
-    }
-
-    .card a {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #d16ba5;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
+      background-color: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     }
 
     .card i {
-      margin-right: 0.3rem;
+      font-size: 2rem;
+      color: #d16ba5;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
     }
   </style>
 </head>
@@ -113,19 +107,23 @@
     </aside>
 
     <main class="dashboard">
-      <h1>User Overview 👥</h1>
+      <h1>Welcome, Admin 🌸</h1>
       <div class="card-grid">
-        {% for user in users %}
         <div class="card">
-          <h3>{{ user.username }}</h3>
-          <p><strong>Role:</strong> {{ user.role }}</p>
-          <p><strong>Emotional Tone:</strong> {{ user.emotional_tone }}</p>
-          {% if user.safety_flag %}
-            <p style="color: red;"><i class="fas fa-exclamation-triangle"></i> Safety Flag Active</p>
-          {% endif %}
-          <a href="#">View Profile</a>
+          <i class="fas fa-user-shield"></i>
+          <h3>Moderation</h3>
+          <p>Review flagged content and user reports.</p>
         </div>
-        {% endfor %}
+        <div class="card">
+          <i class="fas fa-chart-line"></i>
+          <h3>Engagement</h3>
+          <p>Track user activity and emotional pacing.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-heart"></i>
+          <h3>Support Requests</h3>
+          <p>Respond to crisis mode activations.</p>
+        </div>
       </div>
     </main>
   </div>

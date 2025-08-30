@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Healing Atlas 🌿</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url("{% static 'images/background.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      font-family: 'Helvetica', sans-serif;
+      color: #333;
+    }
+
+    .glass-box {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.3);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 10vh auto;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    nav {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #d16ba5;
+      font-weight: bold;
+    }
+
+    .cta {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #d16ba5;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #444;
+    }
+
+    .footer a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{% url 'index' %}">Home</a>
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'signup' %}">Signup</a>
+  </nav>
+
+  <div class="glass-box">
+    <h1>Welcome to Healing Atlas 🌿</h1>
+    <p>This space is built for you — gently, safely, and with care.</p>
+    <a href="{% url 'signup' %}" class="cta">Begin Your Journey</a>
+  </div>
+
+  <div class="footer">
+    <p>Need help now? <a href="{% url 'crisis' %}">Click here</a></p>
+  </div>
+</body>
+</html>

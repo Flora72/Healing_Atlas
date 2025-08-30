@@ -1,25 +1,110 @@
-{% extends 'base.html' %}
-{% block title %}Journal Space{% endblock %}
-{% block content %}
-<section class="journal">
-  <h1>Your Journal 📓</h1>
-  <p>This space is yours — write freely, gently, and without judgment.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Journal Space 📓</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffaf7;
+      color: #333;
+    }
 
-  <form method="post">
-    {% csrf_token %}
-    <label for="mood">Mood Tag:</label>
-    <select name="mood" id="mood">
-      <option value="calm">🌿 Calm</option>
-      <option value="anxious">🌪️ Anxious</option>
-      <option value="hopeful">🌈 Hopeful</option>
-      <option value="tired">😴 Tired</option>
-      <option value="grateful">💖 Grateful</option>
-    </select>
+    header {
+      background-color: #f4c2c2;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4a2c2a;
+    }
 
-    <label for="entry">Journal Entry:</label>
-    <textarea name="entry" id="entry" rows="6" placeholder="Write what’s on your heart..."></textarea>
+    section.journal {
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
 
-    <button type="submit">Save Entry</button>
-  </form>
-</section>
-{% endblock %}
+    h1 {
+      font-size: 2rem;
+      color: #c04e90;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: bold;
+      color: #4a2c2a;
+    }
+
+    select, textarea {
+      padding: 0.75rem;
+      border: 2px solid #f4c2c2;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #fff;
+    }
+
+    textarea::placeholder {
+      color: #aaa;
+    }
+
+    button {
+      align-self: flex-start;
+      padding: 0.75rem 1.5rem;
+      background-color: #d16ba5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>Healing Atlas Journal</header>
+
+  <section class="journal">
+    <h1>Your Journal 📓</h1>
+    <p>This space is yours — write freely, gently, and without judgment.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <label for="mood">Mood Tag:</label>
+      <select name="mood" id="mood">
+        <option value="calm">🌿 Calm</option>
+        <option value="anxious">🌪️ Anxious</option>
+        <option value="hopeful">🌈 Hopeful</option>
+        <option value="tired">😴 Tired</option>
+        <option value="grateful">💖 Grateful</option>
+      </select>
+
+      <label for="entry">Journal Entry:</label>
+      <textarea name="entry" id="entry" rows="6" placeholder="Write what’s on your heart..."></textarea>
+
+      <button type="submit">Save Entry</button>
+    </form>
+  </section>
+
+  <footer>© 2025 Healing Atlas. Your words matter here.</footer>
+</body>
+</html>

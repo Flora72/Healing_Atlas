@@ -1,32 +1,108 @@
-{% extends 'base.html' %}
-{% block title %}Settings & Safety{% endblock %}
-{% block content %}
-<section class="settings">
-  <h1>Your Safety Settings 🛡️</h1>
-  <form method="post">
-    {% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings & Safety 🛡️</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffaf7;
+      color: #333;
+    }
 
-    <label for="visibility">Profile Visibility:</label>
-    <select name="visibility" id="visibility">
-      <option value="private">🔒 Private</option>
-      <option value="anonymous">👤 Anonymous</option>
-      <option value="visible">🌐 Visible to community</option>
-    </select>
+    header {
+      background-color: #f4c2c2;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4a2c2a;
+    }
 
-    <label for="tone">Emotional Tone:</label>
-    <select name="tone" id="tone">
-      <option value="soft">🌸 Soft Mode</option>
-      <option value="neutral">🌿 Neutral</option>
-      <option value="alert">⚠️ Alert Mode</option>
-    </select>
+    section.settings {
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
 
-    <label for="crisis_toggle">Enable Crisis Button:</label>
-    <select name="crisis_toggle" id="crisis_toggle">
-      <option value="enabled">✅ Enabled</option>
-      <option value="disabled">🚫 Disabled</option>
-    </select>
+    h1 {
+      font-size: 2rem;
+      color: #c04e90;
+      margin-bottom: 1rem;
+    }
 
-    <button type="submit">Save Preferences</button>
-  </form>
-</section>
-{% endblock %}
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    label {
+      font-weight: bold;
+      color: #4a2c2a;
+    }
+
+    select {
+      padding: 0.75rem;
+      border: 2px solid #f4c2c2;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #fff;
+    }
+
+    button {
+      align-self: flex-start;
+      padding: 0.75rem 1.5rem;
+      background-color: #d16ba5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>Healing Atlas Settings</header>
+
+  <section class="settings">
+    <h1>Your Safety Settings 🛡️</h1>
+    <form method="post">
+      {% csrf_token %}
+
+      <label for="visibility">Profile Visibility:</label>
+      <select name="visibility" id="visibility">
+        <option value="private">🔒 Private</option>
+        <option value="anonymous">👤 Anonymous</option>
+        <option value="visible">🌐 Visible to community</option>
+      </select>
+
+      <label for="tone">Emotional Tone:</label>
+      <select name="tone" id="tone">
+        <option value="soft">🌸 Soft Mode</option>
+        <option value="neutral">🌿 Neutral</option>
+        <option value="alert">⚠️ Alert Mode</option>
+      </select>
+
+      <label for="crisis_toggle">Enable Crisis Button:</label>
+      <select name="crisis_toggle" id="crisis_toggle">
+        <option value="enabled">✅ Enabled</option>
+        <option value="disabled">🚫 Disabled</option>
+      </select>
+
+      <button type="submit">Save Preferences</button>
+    </form>
+  </section>
+
+  <footer>© 2025 Healing Atlas. You’re in control of your safety.</footer>
+</body>
+</html>

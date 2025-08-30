@@ -6,8 +6,8 @@ from django.shortcuts import redirect
 # -------------------------------------------------------
 #                    GENERAL VIEWS 
 # -------------------------------------------------------
-def landing(request):
-    return render(request, 'landing.html')
+def index(request):
+    return render(request, 'index.html')
 
 
 def crisis_mode(request):
@@ -17,6 +17,7 @@ def crisis_mode(request):
 #                    AUTH VIEWS 
 # -------------------------------------------------------
 from django.contrib.auth.decorators import login_required
+from .forms import CustomUserCreationForm
 
 @login_required
 def user_dashboard(request):
@@ -28,13 +29,12 @@ def login_view(request):
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('dashboard')
+            form.save()
+            return redirect('login')  
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
 

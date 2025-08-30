@@ -1,11 +1,68 @@
-{% extends 'base.html' %}
-{% block title %}Affirmation Generator{% endblock %}
-{% block content %}
-<section class="affirmation">
-  <h1>Your Affirmation 🌸</h1>
-  <blockquote>{{ affirmation }}</blockquote>
-  <form method="get">
-    <button type="submit">Give Me Another</button>
-  </form>
-</section>
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Affirmation Generator 🌸</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url("{% static 'images/affirmation-bg.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      font-family: 'Helvetica', sans-serif;
+      color: #333;
+    }
+
+    .affirmation-box {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.4);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 10vh auto;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #d16ba5;
+      margin-bottom: 1rem;
+    }
+
+    blockquote {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin: 1rem 0;
+      color: #444;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background-color: #d16ba5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #c04e90;
+    }
+  </style>
+</head>
+<body>
+  <div class="affirmation-box">
+    <h1>Your Affirmation 🌸</h1>
+    <blockquote>{{ affirmation }}</blockquote>
+    <form method="get">
+      <button type="submit">Give Me Another</button>
+    </form>
+  </div>
+</body>
+</html>

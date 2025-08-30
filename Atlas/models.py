@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import AbstractUser, Group, Permission, UserManager
 
 # 🌿 Custom User Model
 class CustomUser(AbstractUser):
@@ -47,6 +47,8 @@ class Resource(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     is_archived = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    objects = UserManager()
 
     def __str__(self):
         return self.title

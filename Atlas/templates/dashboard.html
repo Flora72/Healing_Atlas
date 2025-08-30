@@ -1,17 +1,93 @@
-{% extends 'base.html' %}
-{% block title %}Your Dashboard{% endblock %}
-{% block content %}
-<section class="dashboard">
-  <h1>Welcome back, {{ request.user.username }} 🌼</h1>
-  <p>Here’s your healing space. Choose where you’d like to begin today:</p>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Dashboard 🌼</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fef8f4;
+      color: #333;
+    }
 
-  <div class="dashboard-tiles">
-    <a href="{% url 'mental_health' %}" class="tile">🧠 Mental Health</a>
-    <a href="{% url 'substance_support' %}" class="tile">🌿 Substance Support</a>
-    <a href="{% url 'mood_tracker' %}" class="tile">📊 Mood Tracker</a>
-    <a href="{% url 'journal' %}" class="tile">📓 Journal Space</a>
-    <a href="{% url 'resources' %}" class="tile">📚 Resources</a>
-    <a href="{% url 'affirmations' %}" class="tile">💬 Affirmations</a>
-  </div>
-</section>
-{% endblock %}
+    header {
+      background-color: #f4c2c2;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4a2c2a;
+    }
+
+    section.dashboard {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #c04e90;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .tile {
+      display: block;
+      background-color: #fff;
+      border: 2px solid #f4c2c2;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      color: #4a2c2a;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tile:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>Healing Atlas Dashboard</header>
+
+  <section class="dashboard">
+    <h1>Welcome back, {{ request.user.username }} 🌼</h1>
+    <p>Here’s your healing space. Choose where you’d like to begin today:</p>
+
+    <div class="dashboard-tiles">
+      <a href="{% url 'mental_health' %}" class="tile">🧠 Mental Health</a>
+      <a href="{% url 'substance_support' %}" class="tile">🌿 Substance Support</a>
+      <a href="{% url 'mood_tracker' %}" class="tile">📊 Mood Tracker</a>
+      <a href="{% url 'journal' %}" class="tile">📓 Journal Space</a>
+      <a href="{% url 'resources' %}" class="tile">📚 Resources</a>
+      <a href="{% url 'affirmations' %}" class="tile">💬 Affirmations</a>
+    </div>
+  </section>
+
+  <footer>© 2025 Healing Atlas. You’re safe here.</footer>
+</body>
+</html>
