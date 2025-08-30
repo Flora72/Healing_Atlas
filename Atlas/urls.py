@@ -16,6 +16,7 @@ urlpatterns = [
     path('settings/', views.settings_page, name='settings'),
     path('admin/users/', views.manage_users, name='manage_users'),
     path('admin/resources/', views.resource_gallery, name='resources'),
+    path('resource/<int:id>/', views.resource_detail, name='resource_detail'),
     path('admin/resources/edit/<int:resource_id>/', views.edit_resource, name='edit_resource'),
     path('admin/resources/delete/<int:resource_id>/', views.delete_resource, name='delete_resource'),
     path('substance_support/', views.substance_support, name='substance_support'),
