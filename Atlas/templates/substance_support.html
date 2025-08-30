@@ -1,19 +1,8 @@
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Substance Use Support</title>
+{% extends 'base_dashboard.html' %}
+{% block title %}Substance Support | Healing Atlas{% endblock %}
+{% block content %}
+  {% load static %}
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f4f7f6;
-      color: #3c3c3c;
-      margin: 0;
-      padding: 0;
-    }
-
     .container {
       max-width: 800px;
       margin: 3rem auto;
@@ -63,8 +52,7 @@
       border-left: 3px solid #ccc;
     }
   </style>
-</head>
-<body>
+
   <div class="container">
     <section class="section intro">
       <h1>Substance Use Support 🌿</h1>
@@ -99,5 +87,4 @@
       </ul>
     </section>
   </div>
-</body>
-</html>
+{% endblock %}
