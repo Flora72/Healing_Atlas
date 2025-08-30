@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> Healing | Dashboard </title>
+  <title>Healing | Dashboard</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <style>
     body {
@@ -11,21 +11,57 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #fef8f4;
       color: #333;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #f4c2c2;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #4a2c2a;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
+    }
+
+    .sidebar a:hover {
+      background-color: #fbeaea;
+    }
+
+    .sidebar .logout {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #a33;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 2rem;
     }
 
     header {
-      background-color: #f4c2c2;
-      padding: 1.5rem;
-      text-align: center;
       font-size: 1.5rem;
       font-weight: bold;
-      color: #4a2c2a;
-    }
-
-    section.dashboard {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
+      color: #c04e90;
+      margin-bottom: 1rem;
     }
 
     h1 {
@@ -68,14 +104,30 @@
       padding: 1rem;
       font-size: 0.9rem;
       color: #888;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
-  <header>Healing Atlas Dashboard</header>
+  <aside class="sidebar">
+    <nav>
+      <a href="{% url 'user_dashboard' %}">🏠 Home</a>
+      <a href="{% url 'mental_health' %}">🧠 Mental Health</a>
+      <a href="{% url 'substance_support' %}">🌿 Substance Support</a>
+      <a href="{% url 'mood_tracker' %}">📊 Mood Tracker</a>
+      <a href="{% url 'journal' %}">📓 Journal</a>
+      <a href="{% url 'resources' %}">📚 Resources</a>
+      <a href="{% url 'affirmations' %}">💬 Affirmations</a>
+      <a href="{% url 'settings' %}">⚙️ Settings</a>
+    </nav>
+    <div class="logout">
+      <a href="{% url 'logout' %}">🚪 Log Out</a>
+    </div>
+  </aside>
 
-  <section class="dashboard">
-    <h1>Welcome back, {{ request.user.username }} 👋 👋 </h1>
+  <main class="main-content">
+    <header>Healing Atlas Dashboard</header>
+    <h1>Welcome back, {{ request.user.username }} 👋</h1>
     <p>Here’s your healing space. Choose where you’d like to begin today:</p>
 
     <div class="dashboard-tiles">
@@ -86,8 +138,8 @@
       <a href="{% url 'resources' %}" class="tile">📚 Resources</a>
       <a href="{% url 'affirmations' %}" class="tile">💬 Affirmations</a>
     </div>
-  </section>
 
-  <footer>© 2025 Healing Atlas. You’re safe here.</footer>
+    <footer>© 2025 Healing Atlas. You’re safe here.</footer>
+  </main>
 </body>
 </html>
