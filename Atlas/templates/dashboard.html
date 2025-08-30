@@ -3,9 +3,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Healing | Dashboard</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <style>
+  <title>{% block title %}Healing Atlas{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -126,20 +126,9 @@
   </aside>
 
   <main class="main-content">
-    <header>Healing Atlas Dashboard</header>
-    <h1>Welcome back, {{ request.user.username }} 👋</h1>
-    <p>Here’s your healing space. Choose where you’d like to begin today:</p>
-
-    <div class="dashboard-tiles">
-      <a href="{% url 'mental_health' %}" class="tile">🧠 Mental Health</a>
-      <a href="{% url 'substance_support' %}" class="tile">🌿 Substance Support</a>
-      <a href="{% url 'mood_tracker' %}" class="tile">📊 Mood Tracker</a>
-      <a href="{% url 'journal' %}" class="tile">📓 Journal Space</a>
-      <a href="{% url 'resources' %}" class="tile">📚 Resources</a>
-      <a href="{% url 'affirmations' %}" class="tile">💬 Affirmations</a>
-    </div>
-
-    <footer>© 2025 Healing Atlas. You’re safe here.</footer>
+    {% block content %}
+    <!-- Page-specific content goes here -->
+    {% endblock %}
   </main>
 </body>
 </html>
