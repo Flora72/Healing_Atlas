@@ -1,19 +1,14 @@
+{% extends 'base_dashboard.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Affirmation Generator 🌸</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% block title %}Affirmation Generator 🌸 | Healing Atlas{% endblock %}
+
+{% block content %}
   <style>
-    body {
-      margin: 0;
-      padding: 0;
+    .affirmation-background {
       background-image: url("{% static 'images/affirmation-bg.jpg' %}");
       background-size: cover;
       background-position: center;
-      font-family: 'Helvetica', sans-serif;
-      color: #333;
+      padding: 10vh 0;
     }
 
     .affirmation-box {
@@ -22,9 +17,11 @@
       padding: 2rem;
       border-radius: 12px;
       max-width: 600px;
-      margin: 10vh auto;
+      margin: auto;
       text-align: center;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      font-family: 'Helvetica', sans-serif;
+      color: #333;
     }
 
     h1 {
@@ -55,14 +52,14 @@
       background-color: #c04e90;
     }
   </style>
-</head>
-<body>
-  <div class="affirmation-box">
-    <h1>Your Affirmation 🌸</h1>
-    <blockquote>{{ affirmation }}</blockquote>
-    <form method="get">
-      <button type="submit">Give Me Another</button>
-    </form>
+
+  <div class="affirmation-background">
+    <div class="affirmation-box">
+      <h1>Your Affirmation 🌸</h1>
+      <blockquote>{{ affirmation }}</blockquote>
+      <form method="get">
+        <button type="submit">Give Me Another</button>
+      </form>
+    </div>
   </div>
-</body>
-</html>
+{% endblock %}
