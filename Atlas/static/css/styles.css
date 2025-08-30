@@ -366,8 +366,22 @@ footer {
 }
 
 /* -------------------------------------------------------
- RESOURCES PAGE STYLES
+ FORMS  STYLES
 ------------------------------------------------------- */
+  .form-group select:focus + label,
+ .form-group select:valid + label {
+  top: -0.6rem;
+  left: 0.6rem;
+  background-color: #fff;
+  padding: 0 0.3rem;
+  font-size: 0.75rem;
+  color: #c04e90;
+ }
+
+ .form-group select option[value=""] {
+  color: #aaa;
+}
+
 /* -------------------------------------------------------
  RESOURCES PAGE STYLES
 ------------------------------------------------------- */
