@@ -8,8 +8,12 @@ class ResourceForm(forms.ModelForm):
         model = Resource
         fields = ['title', 'description', 'file', 'emotional_tone', 'tags']
 
-
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2', 'role', 'emotional_tone']
+class CustomUserCreationForm(forms.ModelForm):
+    role = forms.ChoiceField(
+        choices=[('', 'Select your role'), ('survivor', 'Survivor'), ('ally', 'Ally'), ('admin', 'Admin')],
+        widget=forms.Select(attrs={
+            'id': 'id_role',
+            'class': 'form-control',
+            'required': True
+        })
+    )
