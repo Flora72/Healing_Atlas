@@ -52,22 +52,29 @@
       padding: 2rem;
     }
 
-    header {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #c04e90;
-      margin-bottom: 1rem;
+    .frosted-welcome {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #4a2c2a;
+      transition: opacity 0.6s ease;
     }
 
-    h1 {
+    .frosted-welcome h1 {
       font-size: 2rem;
       color: #c04e90;
       margin-bottom: 0.5rem;
     }
 
-    p {
-      font-size: 1rem;
-      margin-bottom: 2rem;
+    .frosted-welcome p {
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
     .dashboard-tiles {
@@ -92,30 +99,6 @@
     .tile:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .frosted-welcome {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #4a2c2a;
-    }
-
-    .frosted-welcome h1 {
-      font-size: 2rem;
-      color: #c04e90;
-      margin-bottom: 0.5rem;
-    }
-
-    .frosted-welcome p {
-      font-size: 1.1rem;
-      line-height: 1.6;
     }
 
     footer {
@@ -143,8 +126,8 @@
   </aside>
 
   <main class="main-content">
-    <div class="frosted-welcome">
-      <h1>Hey hey, {{ request.user.username }} 👋 👋</h1>
+    <div id="welcomeBox" class="frosted-welcome">
+      <h1>Hey hey, {{ request.user.username }} 🌿</h1>
       <p>Welcome to your healing space. You’re safe here, and your pace is valid. Let’s take this one gentle step at a time.</p>
     </div>
 
@@ -152,5 +135,21 @@
     <!-- Page-specific content goes here -->
     {% endblock %}
   </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const welcomeBox = document.getElementById('welcomeBox');
+      const tiles = document.querySelectorAll('.tile');
+
+      tiles.forEach(tile => {
+        tile.addEventListener('click', () => {
+          if (welcomeBox) {
+            welcomeBox.style.opacity = '0';
+            welcomeBox.style.pointerEvents = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
