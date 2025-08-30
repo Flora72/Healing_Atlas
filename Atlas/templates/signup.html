@@ -1,237 +1,248 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Create Account 🌸</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fffaf7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <title>Create Account 🌸</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fffaf7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    .container {
-      display: flex;
-      width: 900px;
-      height: 600px;
-      border-radius: 30px;
-      overflow: hidden;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-    }
+        .container {
+            display: flex;
+            width: 900px;
+            height: 600px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
 
-    .left-panel {
-      flex: 1;
-      background: url("{% static 'images/background.jpg' %}") center/cover no-repeat;
-    }
+        .left-panel {
+            flex: 1;
+            background: url("{% static 'images/background.jpg' %}") center/cover no-repeat;
+        }
 
-    .right-panel {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
+        .right-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
 
-    .form-container {
-      width: 100%;
-      max-width: 400px;
-    }
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+        }
 
-    h1 {
-      text-align: center;
-      color: #c04e90;
-      margin-bottom: 1rem;
-    }
+        h1 {
+            text-align: center;
+            color: #c04e90;
+            margin-bottom: 1rem;
+        }
 
-    .subtext {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-size: 0.9rem;
-    }
+        .subtext {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
 
-    .subtext a {
-      color: #c04e90;
-      text-decoration: none;
-      font-weight: bold;
-    }
+        .subtext a {
+            color: #c04e90;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
 
-    .form-group {
-      position: relative;
-    }
+        .form-group {
+            position: relative;
+        }
 
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 1rem 0.75rem 0.25rem;
-      border: 2px solid #f4c2c2;
-      border-radius: 10px;
-      font-size: 1rem;
-      background-color: #fff;
-    }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem 0.75rem 0.25rem;
+            border: 2px solid #f4c2c2;
+            border-radius: 10px;
+            font-size: 1rem;
+            background-color: #fff;
+        }
 
-    .form-group label {
-      position: absolute;
-      top: 1rem;
-      left: 0.75rem;
-      font-size: 0.9rem;
-      color: #888;
-      pointer-events: none;
-      transition: all 0.2s ease;
-    }
+        .form-group label {
+            position: absolute;
+            top: 1rem;
+            left: 0.75rem;
+            font-size: 0.9rem;
+            color: #888;
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
 
-    .form-group input:focus + label,
-    .form-group input:not(:placeholder-shown) + label,
-    .form-group select:focus + label,
-    .form-group select:not([value=""]) + label {
-      top: -0.6rem;
-      left: 0.6rem;
-      background-color: #fff;
-      padding: 0 0.3rem;
-      font-size: 0.75rem;
-      color: #c04e90;
-    }
+        .form-group input:focus+label,
+        .form-group input:not(:placeholder-shown)+label,
+        .form-group select:focus+label,
+        .form-group select:not([value=""])+label {
+            top: -0.6rem;
+            left: 0.6rem;
+            background-color: #fff;
+            padding: 0 0.3rem;
+            font-size: 0.75rem;
+            color: #c04e90;
+        }
 
-    /* Ensure consistent appearance across browsers */
-.form-group select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: #fff;
-  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%207%205-7z%22%20fill%3D%22%23c04e90%22/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 10px 7px;
-  padding-right: 2rem;
-  color: #333;
-}
+        /* Ensure consistent appearance across browsers */
+        .form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: #fff;
+            background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%207%205-7z%22%20fill%3D%22%23c04e90%22/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 10px 7px;
+            padding-right: 2rem;
+            color: #333;
+        }
 
-/* Style the placeholder option */
-.form-group select option[value=""] {
-  color: #aaa;
-}
+        /* Style the placeholder option */
+        .form-group select option[value=""] {
+            color: #aaa;
+        }
 
-/* Float label when a valid role is selected */
-.form-group select:focus + label,
-.form-group select:valid + label {
-  top: -0.6rem;
-  left: 0.6rem;
-  background-color: #fff;
-  padding: 0 0.3rem;
-  font-size: 0.75rem;
-  color: #c04e90;
-}
+        /* Float label when a valid role is selected */
+        .form-group select:focus+label,
+        .form-group select:valid+label {
+            top: -0.6rem;
+            left: 0.6rem;
+            background-color: #fff;
+            padding: 0 0.3rem;
+            font-size: 0.75rem;
+            color: #c04e90;
+        }
 
 
-    button[type="submit"] {
-      padding: 0.75rem;
-      background-color: #d16ba5;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
-    }
+        button[type="submit"] {
+            padding: 0.75rem;
+            background-color: #d16ba5;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+        }
 
-    .separator {
-      text-align: center;
-      margin: 2rem 0 1rem;
-      font-size: 0.9rem;
-      color: #888;
-    }
+        .separator {
+            text-align: center;
+            margin: 2rem 0 1rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
 
-    .social-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
 
-    .social-buttons button {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem;
-      border: 2px solid #f4c2c2;
-      border-radius: 10px;
-      background-color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-    }
+        .social-buttons button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border: 2px solid #f4c2c2;
+            border-radius: 10px;
+            background-color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-    .social-buttons img {
-      width: 20px;
-      height: 20px;
-    }
-  </style>
+        .social-buttons img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="container">
-    <div class="left-panel"></div>
+    <div class="container">
+        <div class="left-panel"></div>
 
-    <div class="right-panel">
-      <div class="form-container">
-        <h1>Create an account</h1>
-        <div class="subtext">
-          Already have an account? <a href="{% url 'login' %}">Log in</a>
+        <div class="right-panel">
+            <div class="form-container">
+                <h1>Create an account</h1>
+                <div class="subtext">
+                    Already have an account? <a href="{% url 'login' %}">Log in</a>
+                </div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li style="color: #4a2c2a; font-weight: bold;">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+
+                    <div class="form-group">
+                        {{ form.username }}
+                        <label for="id_username">Username</label>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.email }}
+                        <label for="id_email">Email</label>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.password1 }}
+                        <label for="id_password1">Password</label>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.password2 }}
+                        <label for="id_password2">Confirm Password</label>
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.role }}
+                        <label for="id_role">Role</label>
+                    </div>
+
+                    <button type="submit">Create account</button>
+                </form>
+
+                <div class="separator">Or register with</div>
+                <div class="social-buttons">
+                    <button class="google-btn">
+                        <img src="{% static 'images/google.svg' %}" alt="Google" />
+                        Google
+                    </button>
+                    <button class="apple-btn">
+                        <img src="{% static 'images/apple.svg' %}" alt="Apple" />
+                        Apple
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <form method="post">
-          {% csrf_token %}
-          {{ form.non_field_errors }}
-
-          <div class="form-group">
-            {{ form.username }}
-            <label for="id_username">Username</label>
-          </div>
-
-          <div class="form-group">
-            {{ form.email }}
-            <label for="id_email">Email</label>
-          </div>
-
-          <div class="form-group">
-            {{ form.password1 }}
-            <label for="id_password1">Password</label>
-          </div>
-
-          <div class="form-group">
-            {{ form.password2 }}
-            <label for="id_password2">Confirm Password</label>
-          </div>
-
-          <div class="form-group">
-            {{ form.role }}
-            <label for="id_role">Role</label>
-          </div>
-
-          <button type="submit">Create account</button>
-        </form>
-
-        <div class="separator">Or register with</div>
-        <div class="social-buttons">
-          <button class="google-btn">
-            <img src="{% static 'images/google.svg' %}" alt="Google" />
-            Google
-          </button>
-          <button class="apple-btn">
-            <img src="{% static 'images/apple.svg' %}" alt="Apple" />
-            Apple
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 </body>
+
 </html>
