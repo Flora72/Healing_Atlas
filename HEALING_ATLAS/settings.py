@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Atlas'
 ]
 
 MIDDLEWARE = [
@@ -78,6 +81,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+TEMPLATES = [
+    {
+        'DIRS': [os.path.join(BASE_DIR, 'Atlas/templates')],
+        
+    },
+]
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'Atlas/static'),
+]
 
 
 # Password validation
