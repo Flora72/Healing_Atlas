@@ -94,6 +94,30 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
+    .frosted-welcome {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #4a2c2a;
+    }
+
+    .frosted-welcome h1 {
+      font-size: 2rem;
+      color: #c04e90;
+      margin-bottom: 0.5rem;
+    }
+
+    .frosted-welcome p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -119,6 +143,11 @@
   </aside>
 
   <main class="main-content">
+    <div class="frosted-welcome">
+      <h1>Hey hey, {{ request.user.username }} 👋 👋</h1>
+      <p>Welcome to your healing space. You’re safe here, and your pace is valid. Let’s take this one gentle step at a time.</p>
+    </div>
+
     {% block content %}
     <!-- Page-specific content goes here -->
     {% endblock %}
