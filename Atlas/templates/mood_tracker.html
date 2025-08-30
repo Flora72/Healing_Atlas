@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Mood Tracker{% endblock %}
+{% block content %}
+<section class="mood-tracker">
+  <h1>How are you feeling today? 🌤️</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label for="mood">Select your mood:</label>
+    <select name="mood" id="mood">
+      <option value="calm">🌿 Calm</option>
+      <option value="anxious">🌪️ Anxious</option>
+      <option value="hopeful">🌈 Hopeful</option>
+      <option value="tired">😴 Tired</option>
+      <option value="angry">🔥 Angry</option>
+      <option value="grateful">💖 Grateful</option>
+    </select>
+
+    <label for="note">Would you like to share more?</label>
+    <textarea name="note" id="note" rows="4" placeholder="Write freely..."></textarea>
+
+    <button type="submit">Save Check-In</button>
+  </form>
+</section>
+{% endblock %}

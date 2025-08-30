@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Affirmation Generator{% endblock %}
+{% block content %}
+<section class="affirmation">
+  <h1>Your Affirmation 🌸</h1>
+  <blockquote>{{ affirmation }}</blockquote>
+  <form method="get">
+    <button type="submit">Give Me Another</button>
+  </form>
+</section>
+{% endblock %}

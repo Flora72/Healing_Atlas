@@ -7,3 +7,17 @@ class SurvivorProfile(models.Model):
 
     def __str__(self):
         return self.name
+from django.contrib.auth.models import AbstractUser
+
+class CustomUser(AbstractUser):
+    role = models.CharField(max_length=20, choices=[
+        ('survivor', 'Survivor'),
+        ('ally', 'Ally'),
+        ('admin', 'Admin'),
+    ])
+    emotional_tone = models.CharField(max_length=20, choices=[
+        ('soft', 'Soft'),
+        ('neutral', 'Neutral'),
+        ('alert', 'Alert'),
+    ])
+    safety_flag = models.BooleanField(default=False)

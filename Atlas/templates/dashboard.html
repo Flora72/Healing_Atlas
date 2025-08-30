@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Your Dashboard{% endblock %}
+{% block content %}
+<section class="dashboard">
+  <h1>Welcome back, {{ request.user.username }} 🌼</h1>
+  <p>Here’s your healing space. Choose where you’d like to begin today:</p>
+
+  <div class="dashboard-tiles">
+    <a href="{% url 'mental_health' %}" class="tile">🧠 Mental Health</a>
+    <a href="{% url 'substance_support' %}" class="tile">🌿 Substance Support</a>
+    <a href="{% url 'mood_tracker' %}" class="tile">📊 Mood Tracker</a>
+    <a href="{% url 'journal' %}" class="tile">📓 Journal Space</a>
+    <a href="{% url 'resources' %}" class="tile">📚 Resources</a>
+    <a href="{% url 'affirmations' %}" class="tile">💬 Affirmations</a>
+  </div>
+</section>
+{% endblock %}

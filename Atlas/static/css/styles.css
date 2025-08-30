@@ -1,0 +1,376 @@
+/* -------------------------------------------------------
+ GLOBAL PAGE STYLES
+------------------------------------------------------- */
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fdf6f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header nav {
+  background-color: #ffe6f0;
+  padding: 1rem;
+  text-align: center;
+}
+
+header nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #b30059;
+  font-weight: bold;
+}
+
+/* -------------------------------------------------------
+ CRISIS PAGE STYLES
+------------------------------------------------------- */
+
+.crisis {
+  max-width: 700px;
+  margin: 3rem auto;
+  background-color: #fff0f5;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.crisis h1 {
+  color: #b30059;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.emergency-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.emergency-list li {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.grounding-tools h2 {
+  margin-top: 2rem;
+  color: #660033;
+}
+
+.grounding-tools ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+}
+
+/* -------------------------------------------------------
+ FOOTER PAGE STYLES
+------------------------------------------------------- */
+
+footer {
+  background-color: #ffe6f0;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+/* -------------------------------------------------------
+ DASHBOARD PAGE STYLES
+------------------------------------------------------- */
+
+.dashboard {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #f0fff5;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.dashboard h1 {
+  color: #006644;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.tile {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.tile:hover {
+  transform: scale(1.03);
+  background-color: #e6fff2;
+}
+
+/* -------------------------------------------------------
+ JOURNAL PAGE STYLES
+------------------------------------------------------- */
+
+.journal {
+  max-width: 700px;
+  margin: 3rem auto;
+  background-color: #fef6ff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.journal h1 {
+  color: #9933cc;
+  margin-bottom: 1rem;
+}
+
+.journal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.journal label {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.journal select,
+.journal textarea {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.journal button {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background-color: #9933cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.journal button:hover {
+  background-color: #7a299e;
+}
+
+/* -------------------------------------------------------
+ AFFIRMATION PAGE STYLES
+------------------------------------------------------- */
+
+.affirmation {
+  max-width: 600px;
+  margin: 3rem auto;
+  background-color: #fff9f0;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.affirmation h1 {
+  color: #cc6600;
+  margin-bottom: 1rem;
+}
+
+.affirmation blockquote {
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #444;
+  margin: 2rem 0;
+}
+
+.affirmation button {
+  padding: 0.75rem 1.5rem;
+  background-color: #cc6600;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.affirmation button:hover {
+  background-color: #b35900;
+}
+
+
+/* -------------------------------------------------------
+ MOOD PAGE STYLES
+------------------------------------------------------- */
+
+.mood-tracker {
+  max-width: 600px;
+  margin: 3rem auto;
+  background-color: #f0faff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.mood-tracker h1 {
+  color: #0077b6;
+  margin-bottom: 1rem;
+}
+
+.mood-tracker form {
+  display: flex;
+  flex-direction: column;
+}
+
+.mood-tracker label {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.mood-tracker select,
+.mood-tracker textarea {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.mood-tracker button {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.mood-tracker button:hover {
+  background-color: #005f8f;
+}
+
+/* -------------------------------------------------------
+ RESOURCES PAGE STYLES
+------------------------------------------------------- */
+
+.resources {
+  max-width: 900px;
+  margin: 3rem auto;
+  background-color: #f0fff9;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.resources h1 {
+  color: #006644;
+  margin-bottom: 1rem;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.resource-card {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.resource-card h2 {
+  color: #004d33;
+  margin-bottom: 1rem;
+}
+
+.resource-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.resource-card li {
+  margin-bottom: 0.75rem;
+}
+
+.resource-card a {
+  text-decoration: none;
+  color: #007a5e;
+  font-weight: bold;
+}
+
+.resource-card a:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------------
+ SETTINGS PAGE STYLES
+------------------------------------------------------- */
+
+.settings {
+  max-width: 700px;
+  margin: 3rem auto;
+  background-color: #fffef5;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.settings h1 {
+  color: #996600;
+  margin-bottom: 1rem;
+}
+
+.settings form {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings label {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.settings select {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.settings button {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background-color: #996600;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.settings button:hover {
+  background-color: #7a5900;
+}
+
+/* -------------------------------------------------------
+ RESOURCES PAGE STYLES
+------------------------------------------------------- */
+/* -------------------------------------------------------
+ RESOURCES PAGE STYLES
+------------------------------------------------------- */
+/* -------------------------------------------------------
+ RESOURCES PAGE STYLES
+------------------------------------------------------- */

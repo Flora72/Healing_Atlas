@@ -1,0 +1,18 @@
+{% extends 'base_admin.html' %}
+{% block title %}Manage Users{% endblock %}
+{% block content %}
+<h1>User Overview 👥</h1>
+<div class="card-grid">
+  {% for user in users %}
+  <div class="card">
+    <h3>{{ user.username }}</h3>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+    <p><strong>Emotional Tone:</strong> {{ user.emotional_tone }}</p>
+    {% if user.safety_flag %}
+      <p style="color: red;"><i class="fas fa-exclamation-triangle"></i> Safety Flag Active</p>
+    {% endif %}
+    <a href="#">View Profile</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

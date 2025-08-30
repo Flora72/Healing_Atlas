@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Journal Space{% endblock %}
+{% block content %}
+<section class="journal">
+  <h1>Your Journal 📓</h1>
+  <p>This space is yours — write freely, gently, and without judgment.</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <label for="mood">Mood Tag:</label>
+    <select name="mood" id="mood">
+      <option value="calm">🌿 Calm</option>
+      <option value="anxious">🌪️ Anxious</option>
+      <option value="hopeful">🌈 Hopeful</option>
+      <option value="tired">😴 Tired</option>
+      <option value="grateful">💖 Grateful</option>
+    </select>
+
+    <label for="entry">Journal Entry:</label>
+    <textarea name="entry" id="entry" rows="6" placeholder="Write what’s on your heart..."></textarea>
+
+    <button type="submit">Save Entry</button>
+  </form>
+</section>
+{% endblock %}

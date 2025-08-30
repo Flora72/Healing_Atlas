@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Admin Dashboard{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="admin-container">
+    <aside class="sidebar">
+      <h2>Healing Atlas 🧭</h2>
+      <nav>
+        <ul>
+          <li><a href="{% url 'admin_home' %}"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="{% url 'manage_users' %}"><i class="fas fa-users"></i> Users</a></li>
+          <li><a href="{% url 'resources' %}"><i class="fas fa-book-open"></i> Resources</a></li>
+          <li><a href="{% url 'settings' %}"><i class="fas fa-sliders-h"></i> Settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="dashboard">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>
