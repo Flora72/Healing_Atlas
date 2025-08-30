@@ -1,31 +1,18 @@
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Journal Space 📓</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% extends 'base_dashboard.html' %}
+{% load static %}
+{% block title %}Journal Space 📓 | Healing Atlas{% endblock %}
+
+{% block content %}
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fffaf7;
-      color: #333;
-    }
-
-    header {
-      background-color: #f4c2c2;
-      padding: 1.5rem;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #4a2c2a;
-    }
-
-    section.journal {
-      padding: 2rem;
+    .journal-container {
       max-width: 700px;
-      margin: auto;
+      margin: 3rem auto;
+      padding: 2rem;
+      background-color: #fffaf7;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
     }
 
     h1 {
@@ -73,18 +60,15 @@
       cursor: pointer;
     }
 
-    footer {
+    .footer-note {
       text-align: center;
-      padding: 1rem;
+      padding-top: 2rem;
       font-size: 0.9rem;
       color: #888;
     }
   </style>
-</head>
-<body>
-  <header>Healing Atlas Journal</header>
 
-  <section class="journal">
+  <div class="journal-container">
     <h1>Your Journal 📓</h1>
     <p>This space is yours — write freely, gently, and without judgment.</p>
 
@@ -104,8 +88,7 @@
 
       <button type="submit">Save Entry</button>
     </form>
-  </section>
 
-  <footer>© 2025 Healing Atlas. Your words matter here.</footer>
-</body>
-</html>
+    <div class="footer-note">© 2025 Healing Atlas. Your words matter here.</div>
+  </div>
+{% endblock %}
