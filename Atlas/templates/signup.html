@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Create Account 🌸</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <style>
     body {
       margin: 0;
@@ -103,6 +102,37 @@
       font-size: 0.75rem;
       color: #c04e90;
     }
+
+    /* Ensure consistent appearance across browsers */
+.form-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%207%205-7z%22%20fill%3D%22%23c04e90%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 10px 7px;
+  padding-right: 2rem;
+  color: #333;
+}
+
+/* Style the placeholder option */
+.form-group select option[value=""] {
+  color: #aaa;
+}
+
+/* Float label when a valid role is selected */
+.form-group select:focus + label,
+.form-group select:valid + label {
+  top: -0.6rem;
+  left: 0.6rem;
+  background-color: #fff;
+  padding: 0 0.3rem;
+  font-size: 0.75rem;
+  color: #c04e90;
+}
+
 
     button[type="submit"] {
       padding: 0.75rem;
