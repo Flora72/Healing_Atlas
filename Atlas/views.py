@@ -23,6 +23,10 @@ def survivor_dashboard(request):
 def mental_health(request):
     return render(request, 'mental_health.html')
 
+@login_required
+def substance_support(request):
+    return render(request, 'substance_support.html')
+
 # -------------------------------------------------------
 #                    AUTH VIEWS 
 # -------------------------------------------------------
