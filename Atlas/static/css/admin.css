@@ -78,3 +78,60 @@ body {
   font-weight: bold;
   text-decoration: none;
 }
+
+form label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+form select {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 1.5rem;
+}
+.tone-preview {
+  background-color: #fffef5;
+  border-left: 6px solid #996600;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+}
+
+form ul {
+  list-style: none;
+  padding: 0;
+}
+
+form li {
+  margin-bottom: 0.5rem;
+}
+.tag {
+  display: inline-block;
+  background-color: #eee;
+  color: #333;
+  padding: 0.3rem 0.6rem;
+  margin: 0.2rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.card-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.card-actions a {
+  color: #996600;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.tone-preview {
+  background-color: #fffef5;
+  border-left: 6px solid #996600;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+}

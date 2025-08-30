@@ -1,0 +1,21 @@
+{% if form.errors %}
+  <p style="color: red;">Please fix the errors below.</p>
+{% endif %}
+
+{% if suggested_tone %}
+  <div class="tone-preview">
+    <p><strong>Suggested Emotional Tone:</strong>
+      {% if suggested_tone == 'soft' %}🌸 Soft
+      {% elif suggested_tone == 'neutral' %}🌿 Neutral
+      {% elif suggested_tone == 'alert' %}⚠️ Alert
+      {% endif %}
+    </p>
+  </div>
+  <h1>Upload Healing Resource 📚</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Upload</button>
+</form>
+
+{% endif %}

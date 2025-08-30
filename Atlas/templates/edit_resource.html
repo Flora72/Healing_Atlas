@@ -1,0 +1,19 @@
+{% extends 'base_admin.html' %}
+{% block title %}Edit Resource{% endblock %}
+{% block content %}
+<h1>Edit Resource ✏️</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save Changes</button>
+</form>
+
+<div class="tone-preview">
+  <p><strong>Suggested Emotional Tone:</strong>
+    {% if resource.emotional_tone == 'soft' %}🌸 Soft
+    {% elif resource.emotional_tone == 'neutral' %}🌿 Neutral
+    {% elif resource.emotional_tone == 'alert' %}⚠️ Alert
+    {% endif %}
+  </p>
+</div>
+{% endblock %}

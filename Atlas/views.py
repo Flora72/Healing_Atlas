@@ -86,7 +86,49 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def resources_page(request):
+
     return render(request, 'resources.html')
+
+@login_required
+def resource_gallery(request):
+    tone_filter = request.GET.get('tone')
+    tag_filter = request.GET.get('tag')
+
+    resources = Resource.objects.filter(is_archived=False)  # Start with only active ones
+
+    if tone_filter:
+        resources = resources.filter(emotional_tone=tone_filter)
+    if tag_filter:
+        resources = resources.filter(tags__name=tag_filter)
+
+    tags = Tag.objects.all()
+    return render(request, 'resource_gallery.html', {
+        'resources': resources,
+        'tags': tags,
+        'selected_tag': tag_filter,
+        'selected_tone': tone_filter,
+    })
+
+
+from .utils import suggest_tone
+
+@login_required
+def upload_resource(request):
+    suggested_tone = None
+    if request.method == 'POST':
+        form = ResourceForm(request.POST, request.FILES)
+        if form.is_valid():
+            resource = form.save(commit=False)
+            suggested_tone = suggest_tone(resource.description)
+            resource.emotional_tone = suggested_tone
+            resource.save()
+            return redirect('resources')
+    else:
+        form = ResourceForm()
+    return render(request, 'upload_resource.html', {
+        'form': form,
+        'suggested_tone': suggested_tone
+    })
 
 
 # -------------------------------------------------------
@@ -111,8 +153,41 @@ def manage_users(request):
 
 
 # -------------------------------------------------------
-#                    AFFIRMATION VIEWS 
+#                    EDITING,DELETING RESOURCES VIEWS 
 # -------------------------------------------------------
+from django.shortcuts import get_object_or_404
+
+@login_required
+def edit_resource(request, resource_id):
+    resource = get_object_or_404(Resource, id=resource_id)
+    if request.method == 'POST':
+        form = ResourceForm(request.POST, request.FILES, instance=resource)
+        if form.is_valid():
+            updated = form.save(commit=False)
+            updated.emotional_tone = suggest_tone(updated.description)  # Optional re-check
+            updated.save()
+            form.save_m2m()
+            return redirect('resources')
+    else:
+        form = ResourceForm(instance=resource)
+    return render(request, 'edit_resource.html', {'form': form, 'resource': resource})
+
+@login_required
+def delete_resource(request, resource_id):
+    resource = get_object_or_404(Resource, id=resource_id)
+    if request.method == 'POST':
+        resource.is_archived = True
+        resource.save()
+        return redirect('resources')
+    return render(request, 'confirm_delete.html', {'resource': resource})
+
+@login_required
+def restore_resource(request, resource_id):
+    resource = get_object_or_404(Resource, id=resource_id)
+    resource.is_archived = False
+    resource.save()
+    return redirect('resources')
+
 
 # -------------------------------------------------------
 #                    AFFIRMATION VIEWS 

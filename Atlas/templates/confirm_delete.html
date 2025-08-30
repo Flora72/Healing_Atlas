@@ -1,0 +1,12 @@
+{% extends 'base_admin.html' %}
+{% block title %}Confirm Delete{% endblock %}
+{% block content %}
+<h2>Archive Resource 🗃️</h2>
+<p>Are you sure you want to archive <strong>{{ resource.title }}</strong>? This will hide it from users but keep it safe for future review.</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Yes, Archive</button>
+  <a href="{% url 'resources' %}">Cancel</a>
+</form>
+{% endblock %}
