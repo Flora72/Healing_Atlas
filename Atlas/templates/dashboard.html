@@ -113,7 +113,7 @@
 <body>
   <aside class="sidebar">
     <nav>
-      <a href="{% url 'user_dashboard' %}"><i class="fas fa-home"></i> Home</a>
+      <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Home</a>
       <a href="{% url 'mental_health' %}"><i class="fas fa-brain"></i> Mental Health</a>
       <a href="{% url 'substance_support' %}"><i class="fas fa-leaf"></i> Substance Support</a>
       <a href="{% url 'mood_tracker' %}"><i class="fas fa-chart-line"></i> Mood Tracker</a>
@@ -125,31 +125,10 @@
     </nav>
   </aside>
 
-  <main class="main-content">
-    <div id="welcomeBox" class="frosted-welcome">
-      <h1>Hey hey, {{ request.user.username }} 👋 👋</h1>
-      <p>Welcome to your healing space. You’re safe here, and your pace is valid. Let’s take this one gentle step at a time.</p>
-    </div>
-
     {% block content %}
     <!-- Page-specific content goes here -->
     {% endblock %}
   </main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const welcomeBox = document.getElementById('welcomeBox');
-      const tiles = document.querySelectorAll('.tile');
-
-      tiles.forEach(tile => {
-        tile.addEventListener('click', () => {
-          if (welcomeBox) {
-            welcomeBox.style.opacity = '0';
-            welcomeBox.style.pointerEvents = 'none';
-          }
-        });
-      });
-    });
-  </script>
 </body>
 </html>
