@@ -27,6 +27,9 @@ def mental_health(request):
 def substance_support(request):
     return render(request, 'substance_support.html')
 
+@login_required
+def dashboard_greeting(request):
+    return render(request, 'dashboard_greeting.html')
 
 def logout_view(request):
     logout(request)

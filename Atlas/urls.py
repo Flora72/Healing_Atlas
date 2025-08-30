@@ -15,6 +15,7 @@ urlpatterns = [
     path('resources/', views.resources_page, name='resources'),
     path('settings/', views.settings_page, name='settings'),
     path('admin/users/', views.manage_users, name='manage_users'),
+    path('dashboard_greeting/', views.dashboard_greeting, name='dashboard_greeting'),
     path('admin/resources/', views.resource_gallery, name='resource_gallerry'),
     path('resource/<int:id>/', views.resource_detail, name='resource_detail'),
     path('admin/resources/edit/<int:resource_id>/', views.edit_resource, name='edit_resource'),
