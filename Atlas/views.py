@@ -18,6 +18,9 @@ def crisis_mode(request):
 # -------------------------------------------------------
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
 
 @login_required
 def user_dashboard(request):
@@ -27,11 +30,13 @@ def login_view(request):
     form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
+
 def signup_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Account created successfully. You can now log in.")
             return redirect('login')  
     else:
         form = CustomUserCreationForm()
