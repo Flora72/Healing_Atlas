@@ -1,10 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
-
+from .models import Resource  
 # -------------------------------------------------------
 #                    GENERAL VIEWS 
 # -------------------------------------------------------
@@ -33,6 +32,10 @@ def substance_support(request):
 def logout_view(request):
     logout(request)
     return redirect('index')  
+
+def resource_detail(request, id):
+    resource = get_object_or_404(Resource, id=id)
+    return render(request, 'resource_detail.html', {'resource': resource})
 
 # -------------------------------------------------------
 #                    AUTH VIEWS 
