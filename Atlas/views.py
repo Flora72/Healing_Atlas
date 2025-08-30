@@ -28,7 +28,6 @@ def substance_support(request):
     return render(request, 'substance_support.html')
 
 
-
 def logout_view(request):
     logout(request)
     return redirect('index')  
