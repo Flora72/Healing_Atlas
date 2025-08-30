@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # -------------------------------------------------------
 #                    GENERAL VIEWS 
@@ -27,12 +28,16 @@ def mental_health(request):
 def substance_support(request):
     return render(request, 'substance_support.html')
 
+
+
+def custom_logout(request):
+    logout(request)
+    return redirect('index')  
+
 # -------------------------------------------------------
 #                    AUTH VIEWS 
 # -------------------------------------------------------
-from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
-from django.shortcuts import render, redirect
 from django.contrib import messages
 
 
