@@ -10,6 +10,7 @@ urlpatterns = [
     path('dashboard/', views.user_dashboard, name='user_dashboard'),
     path('mood-tracker/', views.mood_tracker, name='mood_tracker'),
     path('affirmations/', views.affirmations, name='affirmations'),
+    path('mental-health/', views.mental_health, name='mental_health'),
     path('journal/', views.journal_space, name='journal'),
     path('resources/', views.resources_page, name='resources'),
     path('settings/', views.settings_page, name='settings'),
@@ -17,13 +18,5 @@ urlpatterns = [
     path('admin/resources/', views.resource_gallery, name='resources'),
     path('admin/resources/edit/<int:resource_id>/', views.edit_resource, name='edit_resource'),
     path('admin/resources/delete/<int:resource_id>/', views.delete_resource, name='delete_resource'),
-
-
-
-
-
-
-
-
 
 ]

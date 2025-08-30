@@ -19,6 +19,9 @@ def crisis_mode(request):
 def survivor_dashboard(request):
     return render(request, 'survivor_dashboard.html')
 
+@login_required
+def mental_health(request):
+    return render(request, 'mental_health.html')
 
 # -------------------------------------------------------
 #                    AUTH VIEWS 
