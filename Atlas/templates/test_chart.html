@@ -11,37 +11,96 @@
       color: #4a2c2a;
       padding: 2rem;
     }
+
+    .back-button {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #c04e90;
+      text-decoration: none;
+      background-color: #fce8f1;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #f7b7d4;
+    }
+
     .chart-container {
       max-width: 700px;
-      margin: 0 auto;
+      margin: 2rem auto;
       background: #fff;
       padding: 1rem;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
     h2 {
       text-align: center;
       margin-bottom: 1rem;
       color: #c04e90;
     }
+
+    form {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    form button {
+      background-color: #c04e90;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #a03c75;
+    }
   </style>
 </head>
 <body>
 
+  <a href="/dashboard" class="back-button">← Back to Dashboard</a>
+
   <h2>Emotional Landscape</h2>
+
+  <form id="emotionForm">
+    <input type="date" id="date" required>
+    <select id="sentiment" required>
+      <option value="">Select Sentiment</option>
+      <option value="hopeful">Hopeful</option>
+      <option value="tired">Tired</option>
+      <option value="grateful">Grateful</option>
+      <option value="anxious">Anxious</option>
+      <option value="calm">Calm</option>
+    </select>
+    <textarea id="note" placeholder="Optional note..."></textarea>
+    <button type="submit">Add Entry</button>
+  </form>
+
   <div class="chart-container">
     <canvas id="emotionChart" width="600" height="400"></canvas>
   </div>
 
   <script>
-    // Simulated user-generated data (replace with Django context in production)
-    const emotionData = [
-      { date: "2025-08-25", score: 0.8, sentiment: "hopeful", note: "Felt optimistic about the new sprint." },
-      { date: "2025-08-26", score: 0.6, sentiment: "tired", note: "Long debugging session, but made progress." },
-      { date: "2025-08-27", score: 0.9, sentiment: "grateful", note: "Received beautiful feedback from a contributor." },
-      { date: "2025-08-28", score: 0.4, sentiment: "anxious", note: "Uncertainty around pricing decisions." },
-      { date: "2025-08-29", score: 0.7, sentiment: "calm", note: "Refined onboarding flow with gentle pacing." }
-    ];
+    const emotionData = [];
 
     const moodColors = {
       hopeful: '#f7b7a3',
@@ -52,21 +111,29 @@
       calm: '#a3d1f7'
     };
 
+    const sentimentScores = {
+      hopeful: 0.9,
+      grateful: 0.8,
+      calm: 0.6,
+      tired: 0.4,
+      anxious: 0.2
+    };
+
     const ctx = document.getElementById('emotionChart').getContext('2d');
-    new Chart(ctx, {
+    let emotionChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: emotionData.map(d => d.date),
+        labels: [],
         datasets: [{
           label: 'Sentiment Score',
-          data: emotionData.map(d => d.score),
+          data: [],
           borderColor: '#d16ba5',
           backgroundColor: 'rgba(209,107,165,0.2)',
           fill: true,
           tension: 0.4,
           pointRadius: 6,
           pointHoverRadius: 8,
-          pointBackgroundColor: emotionData.map(d => moodColors[d.sentiment] || '#d16ba5')
+          pointBackgroundColor: []
         }]
       },
       options: {
@@ -88,10 +155,8 @@
           tooltip: {
             callbacks: {
               label: function(context) {
-                const index = context.dataIndex;
-                const sentiment = emotionData[index].sentiment;
-                const note = emotionData[index].note || '';
-                return `Score: ${context.formattedValue} (${sentiment})\n${note}`;
+                const entry = emotionData[context.dataIndex];
+                return `Score: ${context.formattedValue} (${entry.sentiment})\n${entry.note || ''}`;
               }
             }
           },
@@ -127,6 +192,36 @@
           }
         }
       }
+    });
+
+    // Load saved data from localStorage
+    const savedData = JSON.parse(localStorage.getItem('emotionData')) || [];
+    savedData.forEach(entry => {
+      emotionData.push(entry);
+      emotionChart.data.labels.push(entry.date);
+      emotionChart.data.datasets[0].data.push(entry.score);
+      emotionChart.data.datasets[0].pointBackgroundColor.push(moodColors[entry.sentiment] || '#d16ba5');
+    });
+    emotionChart.update();
+
+    // Handle new entry
+    document.getElementById('emotionForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const date = document.getElementById('date').value;
+      const sentiment = document.getElementById('sentiment').value;
+      const note = document.getElementById('note').value;
+      const score = sentimentScores[sentiment] || 0.5;
+
+      const newEntry = { date, score, sentiment, note };
+      emotionData.push(newEntry);
+      localStorage.setItem('emotionData', JSON.stringify(emotionData));
+
+      emotionChart.data.labels.push(date);
+      emotionChart.data.datasets[0].data.push(score);
+      emotionChart.data.datasets[0].pointBackgroundColor.push(moodColors[sentiment] || '#d16ba5');
+      emotionChart.update();
+
+      document.getElementById('emotionForm').reset();
     });
   </script>
 
