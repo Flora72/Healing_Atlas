@@ -276,7 +276,7 @@ def analyze_sentiment(entry_text):
 
 @csrf_exempt
 def journal_view(request):
-    emotion_data = []
+    emotion_data = request.session.get("emotion_data", [])
     show_chart = False
 
     if request.method == "POST":
@@ -289,10 +289,11 @@ def journal_view(request):
             "score": sentiment_result["score"],
             "sentiment": sentiment_result["sentiment"]
         })
+        request.session["emotion_data"] = emotion_data  # Save it
         show_chart = True
 
     context = {
-        "show_chart": show_chart,
+        "show_chart": show_chart or bool(emotion_data),
         "emotion_data_json": json.dumps(emotion_data)
     }
     return render(request, "journal.html", context)
