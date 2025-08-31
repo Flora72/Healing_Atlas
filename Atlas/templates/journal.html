@@ -105,10 +105,17 @@
   <div class="chart-container">
     <canvas id="emotionChart"></canvas>
   </div>
+
+  <!-- Load Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Inject emotionData -->
   <script>
-    const sentiment = emotionData[context.dataIndex].sentiment;
+    const emotionData = JSON.parse('{{ emotion_data_json|safe }}');
   </script>
+
+  <!-- Load your chart logic -->
   <script src="{% static 'js/emotionChart.js' %}"></script>
 {% endif %}
+
 {% endblock %}
