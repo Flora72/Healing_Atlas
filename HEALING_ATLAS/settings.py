@@ -72,7 +72,8 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'HEALING_ATLAS.wsgi.application'
+WSGI_APPLICATION = 'Healing_Atlas.wsgi.application'
+
 
 
 # Database
