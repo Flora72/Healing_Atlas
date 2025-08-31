@@ -1,0 +1,29 @@
+<!-- resource_detail.html -->
+{% extends 'dashboard.html' %}
+{% block title %}{{ resource.title }} | Healing Atlas{% endblock %}
+{% block content %}
+  <div class="resource-detail-container">
+    <h1>{{ resource.title }} 🌼</h1>
+    <p><strong>Emotional Tone:</strong> {{ resource.emotional_tone }}</p>
+    <p><strong>Tags:</strong>
+      {% for tag in resource.tags.all %}
+        <span class="tag">{{ tag.name }}</span>
+      {% endfor %}
+    </p>
+    <p>{{ resource.description }}</p>
+
+    {% if resource.file %}
+      <a href="{{ resource.file.url }}" target="_blank" class="download-button">📥 Download Resource</a>
+    {% endif %}
+
+    <div class="reflection-box">
+      <h3>Reflective Prompt 💭</h3>
+      <p>How does this resource resonate with your current emotional state?</p>
+      <form method="post">
+        {% csrf_token %}
+        <textarea name="reflection" rows="4" placeholder="Write gently..."></textarea>
+        <button type="submit">Save Reflection</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

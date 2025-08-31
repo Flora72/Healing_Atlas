@@ -5,7 +5,7 @@ import os
 load_dotenv()
 
 # Get the token from the environment
-REMOVED = os.getenv("REMOVED")
+HF_TOKEN = os.getenv("HF_TOKEN")
 
 # Just to check it worked (optional)
-print("Your token is:", REMOVED)
+print("Your token is:", HF_TOKEN)

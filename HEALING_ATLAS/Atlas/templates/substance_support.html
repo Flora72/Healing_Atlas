@@ -1,0 +1,90 @@
+{% extends 'dashboard.html' %}
+{% block title %}Substance Support | Healing Atlas{% endblock %}
+{% block content %}
+  {% load static %}
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    h1, h2 {
+      color: #4b3f72;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    a {
+      color: #6a5acd;
+      text-decoration: underline;
+    }
+
+    .section {
+      margin-bottom: 2.5rem;
+    }
+
+    .emergency {
+      background-color: #fff0f0;
+      padding: 1rem;
+      border-left: 4px solid #ff6b6b;
+      border-radius: 8px;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #555;
+      margin: 1rem 0;
+      padding-left: 1rem;
+      border-left: 3px solid #ccc;
+    }
+  </style>
+
+  <div class="container">
+    <section class="section intro">
+      <h1>Substance Use Support 🌿</h1>
+      <p>This space is here to honor your journey. Whether you're exploring sobriety, harm reduction, or simply seeking clarity, you are welcome here. Healing is not a straight line — and you don’t have to walk it alone.</p>
+      <div class="quote">“Recovery is not about perfection. It’s about intention, compassion, and showing up for yourself.”</div>
+    </section>
+
+    <section class="section tools">
+      <h2>Gentle Tools for Support 🧰</h2>
+      <ul>
+        <li><a href="/sobriety-journal/">Sobriety Journal</a> – Track reflections, triggers, and wins</li>
+        <li><a href="/harm-reduction/">Harm Reduction Guide</a> – Practical safety tips and emotional pacing</li>
+        <li><a href="/support-groups/">Support Groups</a> – Find community and shared understanding</li>
+      </ul>
+    </section>
+
+    <section class="section affirmations">
+      <h2>Affirmations for Recovery 💬</h2>
+      <ul>
+        <li>I am allowed to take small steps.</li>
+        <li>My healing does not need to look like anyone else’s.</li>
+        <li>I am worthy of care, even when I struggle.</li>
+      </ul>
+    </section>
+
+    <section class="section emergency">
+      <h2>Need Immediate Help? 🚨</h2>
+      <p>If you're in crisis or need urgent support, please reach out to a local mental health professional or helpline. You are not alone.</p>
+      <ul>
+        <li><strong>Kenya Mental Health Helpline:</strong> 1199 (Free, 24/7)</li>
+        <li><strong>NACADA Kenya:</strong> <a href="https://nacada.go.ke">nacada.go.ke</a> – National Authority for the Campaign Against Alcohol and Drug Abuse</li>
+      </ul>
+    </section>
+  </div>
+{% endblock %}

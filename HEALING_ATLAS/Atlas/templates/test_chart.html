@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emotional Landscape Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff7f4;
+      color: #4a2c2a;
+      padding: 2rem;
+    }
+    .chart-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #c04e90;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Emotional Landscape</h2>
+  <div class="chart-container">
+    <canvas id="emotionChart" width="600" height="400"></canvas>
+  </div>
+
+  <script>
+    // Simulated user-generated data (replace with Django context in production)
+    const emotionData = [
+      { date: "2025-08-25", score: 0.8, sentiment: "hopeful", note: "Felt optimistic about the new sprint." },
+      { date: "2025-08-26", score: 0.6, sentiment: "tired", note: "Long debugging session, but made progress." },
+      { date: "2025-08-27", score: 0.9, sentiment: "grateful", note: "Received beautiful feedback from a contributor." },
+      { date: "2025-08-28", score: 0.4, sentiment: "anxious", note: "Uncertainty around pricing decisions." },
+      { date: "2025-08-29", score: 0.7, sentiment: "calm", note: "Refined onboarding flow with gentle pacing." }
+    ];
+
+    const moodColors = {
+      hopeful: '#f7b7a3',
+      positive: '#a3f7bf',
+      anxious: '#f7d6a3',
+      tired: '#d1d1d1',
+      grateful: '#f7a3e0',
+      calm: '#a3d1f7'
+    };
+
+    const ctx = document.getElementById('emotionChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: emotionData.map(d => d.date),
+        datasets: [{
+          label: 'Sentiment Score',
+          data: emotionData.map(d => d.score),
+          borderColor: '#d16ba5',
+          backgroundColor: 'rgba(209,107,165,0.2)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+          pointBackgroundColor: emotionData.map(d => moodColors[d.sentiment] || '#d16ba5')
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: {
+          duration: 1200,
+          easing: 'easeOutQuart'
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Emotional Landscape',
+            font: {
+              size: 18,
+              weight: 'bold'
+            },
+            color: '#c04e90'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const index = context.dataIndex;
+                const sentiment = emotionData[index].sentiment;
+                const note = emotionData[index].note || '';
+                return `Score: ${context.formattedValue} (${sentiment})\n${note}`;
+              }
+            }
+          },
+          legend: {
+            display: true,
+            labels: {
+              color: '#4a2c2a'
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Date',
+              color: '#4a2c2a'
+            },
+            ticks: {
+              color: '#4a2c2a'
+            }
+          },
+          y: {
+            beginAtZero: true,
+            max: 1,
+            title: {
+              display: true,
+              text: 'Sentiment Score',
+              color: '#4a2c2a'
+            },
+            ticks: {
+              color: '#4a2c2a'
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

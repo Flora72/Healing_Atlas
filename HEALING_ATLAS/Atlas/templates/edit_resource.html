@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Resource ✏️</title>
+  <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdf6f9;
+      color: #333;
+    }
+
+    .admin-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background-color: #d16ba5;
+      color: white;
+      padding: 2rem 1rem;
+      width: 250px;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 1rem;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .sidebar a i {
+      margin-right: 0.5rem;
+    }
+
+    .dashboard {
+      flex-grow: 1;
+      padding: 3rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #c04e90;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      margin-bottom: 2rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background-color: #d16ba5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .tone-preview {
+      background-color: #fff0f5;
+      border-left: 4px solid #d16ba5;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .tone-preview strong {
+      color: #c04e90;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <aside class="sidebar">
+      <h2>Healing Atlas 🧭</h2>
+      <nav>
+        <ul>
+          <li><a href="{% url 'admin_home' %}"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="{% url 'manage_users' %}"><i class="fas fa-users"></i> Users</a></li>
+          <li><a href="{% url 'resources' %}"><i class="fas fa-book-open"></i> Resources</a></li>
+          <li><a href="{% url 'settings' %}"><i class="fas fa-sliders-h"></i> Settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="dashboard">
+      <h1>Edit Resource ✏️</h1>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+      </form>
+
+      <div class="tone-preview">
+        <p><strong>Suggested Emotional Tone:</strong>
+          {% if resource.emotional_tone == 'soft' %}🌸 Soft
+          {% elif resource.emotional_tone == 'neutral' %}🌿 Neutral
+          {% elif resource.emotional_tone == 'alert' %}⚠️ Alert
+          {% endif %}
+        </p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

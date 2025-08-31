@@ -1,0 +1,92 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+{% block title %}Settings & Safety 🛡️ | Healing Atlas{% endblock %}
+
+{% block content %}
+  <style>
+    .settings-container {
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background-color: #fffaf7;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #c04e90;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    label {
+      font-weight: bold;
+      color: #4a2c2a;
+    }
+
+    select {
+      padding: 0.75rem;
+      border: 2px solid #f4c2c2;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #fff;
+    }
+
+    button {
+      align-self: flex-start;
+      padding: 0.75rem 1.5rem;
+      background-color: #d16ba5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .footer-note {
+      text-align: center;
+      padding-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+
+  <div class="settings-container">
+    <h1>Your Safety Settings </h1>
+    <form method="post">
+      {% csrf_token %}
+
+      <label for="visibility">Profile Visibility:</label>
+      <select name="visibility" id="visibility">
+        <option value="private">🔒 Private</option>
+        <option value="anonymous">👤 Anonymous</option>
+        <option value="visible">🌐 Visible to community</option>
+      </select>
+
+      <label for="tone">Emotional Tone:</label>
+      <select name="tone" id="tone">
+        <option value="soft">🌸 Soft Mode</option>
+        <option value="neutral">🌿 Neutral</option>
+        <option value="alert">⚠️ Alert Mode</option>
+      </select>
+
+      <label for="crisis_toggle">Enable Crisis Button:</label>
+      <select name="crisis_toggle" id="crisis_toggle">
+        <option value="enabled">✅ Enabled</option>
+        <option value="disabled">🚫 Disabled</option>
+      </select>
+
+      <button type="submit">Save Preferences</button>
+    </form>
+
+    <div class="footer-note">© 2025 Healing Atlas. You’re in control of your safety.</div>
+  </div>
+{% endblock %}
