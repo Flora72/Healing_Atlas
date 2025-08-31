@@ -3,80 +3,76 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Healing Atlas </title>
+  <title>Healing Atlas</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-image: url("{% static 'images/background.jpg' %}");
-      background-size: cover;
-      background-position: center;
-      font-family: 'Helvetica', sans-serif;
-      color: #333;
-    }
-
-    .glass-box {
-      backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.3);
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: 10vh auto;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    }
-
-    nav {
-      text-align: center;
-      padding: 1rem;
-    }
-
-    nav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: #d16ba5;
-      font-weight: bold;
-    }
-
-    .cta {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #d16ba5;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 2rem;
-      color: #444;
-    }
-
-    .footer a {
-      color: #0077cc;
-      text-decoration: none;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <nav>
-    <a href="{% url 'index' %}">Home</a>
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'signup' %}">Signup</a>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">Healing Atlas</div>
+    <ul class="nav-links">
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'library' %}">Library</a></li>
+      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="{% url 'signup' %}">Signup</a></li>
+    </ul>
   </nav>
 
-  <div class="glass-box">
-    <h1>Welcome to Healing Atlas 🌿</h1>
-    <p>This space is built for you — gently, safely, and with care.</p>
-    <a href="{% url 'signup' %}" class="cta">Begin Your Journey</a>
-  </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to Healing Atlas 🌿</h1>
+      <p>A sanctuary for story, truth, and emotional safety.</p>
+      <a href="{% url 'signup' %}" class="cta">Begin Your Journey</a>
+    </div>
+  </section>
 
-  <div class="footer">
-    <p>Need help now? <a href="{% url 'crisis' %}">Click here</a></p>
-  </div>
+  <!-- Support Modules -->
+  <section class="modules">
+    <div class="module">
+      <h2>Find Support</h2>
+      <p>Explore survivor-first resources and crisis care.</p>
+      <a href="{% url 'crisis' %}" class="module-link">Get Help Now</a>
+    </div>
+    <div class="module">
+      <h2>Explore the Library</h2>
+      <p>Curated articles, tools, and healing practices.</p>
+      <a href="{% url 'library' %}" class="module-link">Browse Resources</a>
+    </div>
+    <div class="module">
+      <h2>Your Dashboard</h2>
+      <p>Track your journey, set intentions, and reflect.</p>
+      <a href="{% url 'dashboard' %}" class="module-link">Go to Dashboard</a>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <h2>Voices from the Atlas</h2>
+    <div class="testimonial-carousel">
+      <blockquote>“Healing Atlas helped me find clarity in the chaos.”</blockquote>
+      <blockquote>“I felt seen, heard, and gently guided.”</blockquote>
+      <blockquote>“This space gave me the courage to begin again.”</blockquote>
+    </div>
+  </section>
+
+  <!-- Emotional Tools -->
+  <section class="tools">
+    <h2>Emotional Tools</h2>
+    <ul class="tool-list">
+      <li>🌬️ Grounding Exercises</li>
+      <li>📝 Guided Journaling</li>
+      <li>💬 Affirmation Generator</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Made with care by Healing Atlas. Need help now? <a href="{% url 'crisis' %}">Click here</a></p>
+  </footer>
+
 </body>
 </html>

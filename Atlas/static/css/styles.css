@@ -1,411 +1,192 @@
-/* -------------------------------------------------------
- GLOBAL PAGE STYLES
-------------------------------------------------------- */
-
+/* Global Reset & Font */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fdf6f9;
-  color: #333;
   margin: 0;
   padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to bottom right, #fdfbfb, #ebedee);
+  color: #2c2c2c;
 }
 
-header nav {
-  background-color: #ffe6f0;
-  padding: 1rem;
-  text-align: center;
+/* Navigation */
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-header nav a {
-  margin: 0 1rem;
+.logo {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #d16ba5;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
   text-decoration: none;
-  color: #b30059;
-  font-weight: bold;
+  color: #d16ba5;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-/* -------------------------------------------------------
- CRISIS PAGE STYLES
-------------------------------------------------------- */
+.nav-links a:hover {
+  color: #a94e8d;
+}
 
-.crisis {
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-image: url('../images/hero-bg.jpg'); /* Replace with your image */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 0 2rem;
+}
+
+.hero-content {
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 3rem;
+  border-radius: 16px;
   max-width: 700px;
-  margin: 3rem auto;
-  background-color: #fff0f5;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  animation: fadeIn 1.2s ease-out;
 }
 
-.crisis h1 {
-  color: #b30059;
-  font-size: 2rem;
+.hero h1 {
+  font-size: 2.8rem;
   margin-bottom: 1rem;
 }
 
-.emergency-list {
-  list-style: none;
-  padding: 0;
+.hero p {
+  font-size: 1.2rem;
   margin-bottom: 2rem;
 }
 
-.emergency-list li {
-  margin-bottom: 1rem;
-  font-weight: bold;
-}
-
-.grounding-tools h2 {
-  margin-top: 2rem;
-  color: #660033;
-}
-
-.grounding-tools ul {
-  list-style: disc;
-  margin-left: 1.5rem;
-}
-
-/* -------------------------------------------------------
- FOOTER PAGE STYLES
-------------------------------------------------------- */
-
-footer {
-  background-color: #ffe6f0;
-  padding: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-}
-/* -------------------------------------------------------
- DASHBOARD PAGE STYLES
-------------------------------------------------------- */
-
-.dashboard {
-  max-width: 800px;
-  margin: 3rem auto;
-  padding: 2rem;
-  background-color: #f0fff5;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.dashboard h1 {
-  color: #006644;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.dashboard-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.tile {
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  text-align: center;
+.cta {
+  padding: 0.85rem 2rem;
+  background-color: #d16ba5;
+  color: white;
+  border-radius: 10px;
   text-decoration: none;
-  font-weight: bold;
-  color: #333;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(209, 107, 165, 0.4);
+  transition: all 0.3s ease;
 }
 
-.tile:hover {
-  transform: scale(1.03);
-  background-color: #e6fff2;
+.cta:hover {
+  background-color: #c0559e;
+  box-shadow: 0 6px 16px rgba(209, 107, 165, 0.6);
 }
 
-/* -------------------------------------------------------
- JOURNAL PAGE STYLES
-------------------------------------------------------- */
+/* Modules Section */
+.modules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 4rem 2rem;
+  background-color: #f7f7f7;
+}
 
-.journal {
-  max-width: 700px;
-  margin: 3rem auto;
-  background-color: #fef6ff;
+.module {
+  background-color: white;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
-.journal h1 {
-  color: #9933cc;
+.module:hover {
+  transform: translateY(-5px);
+}
+
+.module h2 {
+  color: #d16ba5;
   margin-bottom: 1rem;
 }
 
-.journal form {
-  display: flex;
-  flex-direction: column;
-}
-
-.journal label {
+.module-link {
+  display: inline-block;
   margin-top: 1rem;
-  font-weight: bold;
+  color: #0077cc;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.journal select,
-.journal textarea {
-  margin-top: 0.5rem;
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.journal button {
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  background-color: #9933cc;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.journal button:hover {
-  background-color: #7a299e;
-}
-
-/* -------------------------------------------------------
- AFFIRMATION PAGE STYLES
-------------------------------------------------------- */
-
-.affirmation {
-  max-width: 600px;
-  margin: 3rem auto;
-  background-color: #fff9f0;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+/* Testimonials */
+.testimonials {
+  padding: 4rem 2rem;
+  background: linear-gradient(to right, #fdfbfb, #ebedee);
   text-align: center;
 }
 
-.affirmation h1 {
-  color: #cc6600;
-  margin-bottom: 1rem;
+.testimonials h2 {
+  margin-bottom: 2rem;
+  color: #d16ba5;
 }
 
-.affirmation blockquote {
-  font-size: 1.5rem;
+.testimonial-carousel blockquote {
   font-style: italic;
-  color: #444;
-  margin: 2rem 0;
-}
-
-.affirmation button {
-  padding: 0.75rem 1.5rem;
-  background-color: #cc6600;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.affirmation button:hover {
-  background-color: #b35900;
-}
-
-
-/* -------------------------------------------------------
- MOOD PAGE STYLES
-------------------------------------------------------- */
-
-.mood-tracker {
+  margin: 1rem auto;
   max-width: 600px;
-  margin: 3rem auto;
-  background-color: #f0faff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  color: #444;
+  animation: fadeIn 1s ease-in-out;
 }
 
-.mood-tracker h1 {
-  color: #0077b6;
-  margin-bottom: 1rem;
+/* Emotional Tools */
+.tools {
+  padding: 4rem 2rem;
+  background-color: #fff;
+  text-align: center;
 }
 
-.mood-tracker form {
-  display: flex;
-  flex-direction: column;
+.tools h2 {
+  margin-bottom: 1.5rem;
+  color: #d16ba5;
 }
 
-.mood-tracker label {
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-.mood-tracker select,
-.mood-tracker textarea {
-  margin-top: 0.5rem;
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.mood-tracker button {
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  background-color: #0077b6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.mood-tracker button:hover {
-  background-color: #005f8f;
-}
-
-/* -------------------------------------------------------
- RESOURCES PAGE STYLES
-------------------------------------------------------- */
-
-.resources {
-  max-width: 900px;
-  margin: 3rem auto;
-  background-color: #f0fff9;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.resources h1 {
-  color: #006644;
-  margin-bottom: 1rem;
-}
-
-.resource-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.resource-card {
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.resource-card h2 {
-  color: #004d33;
-  margin-bottom: 1rem;
-}
-
-.resource-card ul {
+.tool-list {
   list-style: none;
   padding: 0;
+  font-size: 1.1rem;
+  color: #555;
 }
 
-.resource-card li {
-  margin-bottom: 0.75rem;
+.tool-list li {
+  margin: 0.5rem 0;
 }
 
-.resource-card a {
-  text-decoration: none;
-  color: #007a5e;
-  font-weight: bold;
-}
-
-.resource-card a:hover {
-  text-decoration: underline;
-}
-
-/* -------------------------------------------------------
- SETTINGS PAGE STYLES
-------------------------------------------------------- */
-
-.settings {
-  max-width: 700px;
-  margin: 3rem auto;
-  background-color: #fffef5;
+/* Footer */
+.footer {
+  text-align: center;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-size: 0.95rem;
+  color: #555;
+  background-color: #f0f0f0;
 }
 
-.settings h1 {
-  color: #996600;
-  margin-bottom: 1rem;
+.footer a {
+  color: #0077cc;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.settings form {
-  display: flex;
-  flex-direction: column;
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-.settings label {
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-.settings select {
-  margin-top: 0.5rem;
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.settings button {
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  background-color: #996600;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.settings button:hover {
-  background-color: #7a5900;
-}
-
-/* -------------------------------------------------------
- FORMS  STYLES
-------------------------------------------------------- */
-.form-group select option[value=""] {
-  color: #aaa;
-}
-.form-group select:focus + label,
-.form-group select:valid + label {
-  top: -0.6rem;
-  left: 0.6rem;
-  background-color: #fff;
-  padding: 0 0.3rem;
-  font-size: 0.75rem;
-  color: #c04e90;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 1rem 0.75rem 0.25rem;
-  border: 2px solid #f4c2c2;
-  border-radius: 10px;
-  font-size: 1rem;
-  background-color: #fff;
-}
-.form-group select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%207%205-7z%22%20fill%3D%22%23c04e90%22/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 10px 7px;
-  padding-right: 2rem;
-  color: #333;
-}
-
-
-/* -------------------------------------------------------
- RESOURCES PAGE STYLES
-------------------------------------------------------- */
-/* -------------------------------------------------------
- RESOURCES PAGE STYLES
-------------------------------------------------------- */
