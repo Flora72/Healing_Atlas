@@ -55,10 +55,8 @@ class Resource(models.Model):
     def __str__(self):
         return self.title
 
-
-
 class MoodEntry(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     mood = models.CharField(max_length=50)
     note = models.TextField(blank=True)
     score = models.FloatField(null=True, blank=True)
