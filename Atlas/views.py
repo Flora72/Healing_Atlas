@@ -95,6 +95,23 @@ def mood_tracker(request):
     return render(request, 'mood_tracker.html')
 
 
+def mood_tracker_view(request):
+    emotion_data = [
+        {"date": "Aug 30", "score": 0.85, "sentiment": "hopeful"},
+        {"date": "Aug 29", "score": 0.42, "sentiment": "tired"},
+        {"date": "Aug 28", "score": 0.15, "sentiment": "anxious"},
+    ]
+
+    context = {
+        "show_chart": True,
+        "emotion_data": emotion_data,
+        "emotion_data_json": json.dumps(emotion_data)
+    }
+
+    return render(request, "journal.html/dashboard_greeting/mood_tracker.html", context)
+
+
+
 # -------------------------------------------------------
 #                    AFFIRMATION VIEWS 
 # -------------------------------------------------------
@@ -289,3 +306,4 @@ def dashboard_view(request):
     }
 
     return render(request, "your_template.html", context)
+

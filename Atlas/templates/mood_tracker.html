@@ -66,6 +66,15 @@
       font-size: 0.9rem;
       color: #888;
     }
+
+    .chart-container {
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background-color: #fef6f9;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
   </style>
 
   <div class="mood-tracker-container">
@@ -90,10 +99,22 @@
 
     <div class="footer-note">© 2025 Healing Atlas. Every feeling is welcome here.</div>
   </div>
-{% if show_chart %}
-  <canvas id="emotionChart"></canvas>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="{{ url_for('static', filename='js/emotionChart.js') }}"></script>
-{% endif %}
 
-{% endblock %}
+  {% if show_chart %}
+  <div class="chart-container" style="max-width: 700px; margin: 3rem auto;">
+    <canvas id="emotionChart"></canvas>
+  </div>
+
+  <!-- Load Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Load your custom chart logic -->
+  <script src="{% static 'js/emotionChart.js' %}"></script>
+
+  {% if emotion_data %}
+    <script>
+      const sentiment = emotionData[context.dataIndex].sentiment;
+
+    </script>
+  {% endif %}
+{% endif %}
