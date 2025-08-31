@@ -283,10 +283,9 @@ def journal_view(request):
         mood = request.POST.get("mood")
         entry = request.POST.get("entry")
 
-        # Analyze sentiment
         sentiment_result = analyze_sentiment(entry)
         emotion_data.append({
-            "date": "Today",  
+            "date": "Today",
             "score": sentiment_result["score"],
             "sentiment": sentiment_result["sentiment"]
         })
@@ -297,6 +296,7 @@ def journal_view(request):
         "emotion_data_json": json.dumps(emotion_data)
     }
     return render(request, "journal.html", context)
+
 
 def dashboard_view(request):
     emotion_data = [
