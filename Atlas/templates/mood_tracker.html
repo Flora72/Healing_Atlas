@@ -90,4 +90,10 @@
 
     <div class="footer-note">© 2025 Healing Atlas. Every feeling is welcome here.</div>
   </div>
+{% if show_chart %}
+  <canvas id="emotionChart"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/emotionChart.js') }}"></script>
+{% endif %}
+
 {% endblock %}
