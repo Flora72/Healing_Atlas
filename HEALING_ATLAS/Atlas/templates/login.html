@@ -3,32 +3,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login | Healing Atlas</title>
+  <title>Log In </title>
   <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
-  <main class="auth-wrapper">
-    <section class="auth-card">
-      <header>
-        <h1>Welcome Back</h1>
-        <p class="subtitle">Your sanctuary awaits. Log in gently.</p>
-      </header>
-      <form method="POST" class="form">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username" placeholder="Your Healing Atlas ID" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password" placeholder="Your secret key" required>
-        </div>
-        <button type="submit" class="btn-primary">Log In</button>
-      </form>
-      <footer>
-        <p>New here? <a href="{% url 'signup' %}">Create an account</a></p>
-      </footer>
-    </section>
-  </main>
+  <div class="auth-container">
+    <h1>Welcome Back</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <label for="id_username">Username</label>
+      {{ form.username }}
+
+      <label for="id_password">Password</label>
+      {{ form.password }}
+
+      <button type="submit">Log In</button>
+    </form>
+
+    <div class="separator">Or log in with</div>
+    <div class="social-buttons">
+      <button class="google-btn">
+        <img src="{% static 'images/google.svg' %}" alt="Google" />
+        Google
+      </button>
+      <button class="apple-btn">
+        <img src="{% static 'images/apple.svg' %}" alt="Apple" />
+        Apple
+      </button>
+    </div>
+
+    <div class="link">
+      <p>New here? <a href="{% url 'signup' %}">Create an account</a></p>
+    </div>
+  </div>
 </body>
 </html>

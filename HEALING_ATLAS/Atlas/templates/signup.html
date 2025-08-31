@@ -2,41 +2,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Join Healing Atlas</title>
+  <meta charset="UTF-8" />
+  <title>Create Account </title>
   <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
-  <main class="auth-wrapper">
-    <section class="auth-card">
-      <header>
-        <h1>Begin Your Healing Journey</h1>
-        <p class="subtitle">Create your sanctuary space with care and intention.</p>
-      </header>
-      <form method="POST" class="form">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username" placeholder="e.g. mariposa_hope" required>
+  <div class="container">
+    <div class="left-panel"></div>
+
+    <div class="right-panel">
+      <div class="form-container">
+        <h1>Create an account</h1>
+        <div class="subtext">
+          Already have an account? <a href="{% url 'login' %}">Log in</a>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" placeholder="you@example.com" required>
+
+        {% if messages %}
+          <div class="messages">
+            {% for message in messages %}
+              {{ message }}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <form method="post">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+
+          <div class="form-group">
+            {{ form.username }}
+            <label for="id_username">Username</label>
+            {% for error in form.username.errors %}
+              <div class="error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            {{ form.email }}
+            <label for="id_email">Email</label>
+            {% for error in form.email.errors %}
+              <div class="error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            {{ form.password1 }}
+            <label for="id_password1">Password</label>
+            {% for error in form.password1.errors %}
+              <div class="error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            {{ form.password2 }}
+            <label for="id_password2">Confirm Password</label>
+            {% for error in form.password2.errors %}
+              <div class="error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="form-group">
+            {{ form.role }}
+            <label for="id_role">Role</label>
+            {% for error in form.role.errors %}
+              <div class="error">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <button type="submit">Create account</button>
+        </form>
+
+        <div class="separator">Or register with</div>
+        <div class="social-buttons">
+          <button class="google-btn">
+            <img src="{% static 'images/google.svg' %}" alt="Google" />
+            Google
+          </button>
+          <button class="apple-btn">
+            <img src="{% static 'images/apple.svg' %}" alt="Apple" />
+            Apple
+          </button>
         </div>
-        <div class="form-group">
-          <label for="password1">Password</label>
-          <input type="password" name="password1" id="password1" placeholder="Create a strong password" required>
-        </div>
-        <div class="form-group">
-          <label for="password2">Confirm Password</label>
-          <input type="password" name="password2" id="password2" placeholder="Repeat your password" required>
-        </div>
-        <button type="submit" class="btn-primary">Sign Up</button>
-      </form>
-      <footer>
-        <p>Already have an account ? <a href="{% url 'login' %}">Log in here</a></p>
-      </footer>
-    </section>
-  </main>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
