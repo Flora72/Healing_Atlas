@@ -100,7 +100,7 @@ from django.shortcuts import render
 from django.utils import timezone
 import json
 from .models import MoodEntry
-from .views import analyze_sentiment  # adjust if analyze_sentiment is in another file
+
 
 @login_required
 def mood_tracker(request):
@@ -313,22 +313,10 @@ def restore_resource(request, resource_id):
 # -------------------------------------------------------
 #                    JOURNAL/MOOD SCORE VIEWS 
 # -------------------------------------------------------
-import requests
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
-
-def analyze_sentiment(entry_text):
-    api_url = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment"
-    headers = {"Authorization": f"Bearer YOUR_HUGGINGFACE_API_KEY"}
-    payload = {"inputs": entry_text}
-
-    response = requests.post(api_url, headers=headers, json=payload)
-    result = response.json()
-
-    sentiment = result[0][0]['label']
-    score = result[0][0]['score']
-    return {"sentiment": sentiment, "score": score}
+from .utils import analyze_sentiment
 
 @csrf_exempt
 def journal_view(request):
