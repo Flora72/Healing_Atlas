@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission, UserManager, User
 from django.conf import settings
 
-
 # Custom User Model
 class CustomUser(AbstractUser):
     role = models.CharField(max_length=20, choices=[
@@ -62,3 +61,15 @@ class MoodEntry(models.Model):
     score = models.FloatField(null=True, blank=True)
     sentiment = models.CharField(max_length=20, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+
+
+class JournalEntry(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField()
+    sentiment_score = models.FloatField(null=True, blank=True)
+    sentiment_label = models.CharField(max_length=20, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.created_at.strftime('%Y-%m-%d')}"
