@@ -90,6 +90,8 @@ def signup_view(request):
 # -------------------------------------------------------
 #                    MOOD TRACKER VIEWS 
 # -------------------------------------------------------
+from .models import MoodEntry
+
 @login_required
 def mood_tracker(request):
     if request.method == 'POST':
