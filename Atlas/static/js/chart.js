@@ -1,17 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+  if (!emotionData || emotionData.length === 0) return;
+
   const ctx = document.getElementById("emotionChart").getContext("2d");
 
-  // Example data — replace with dynamic fetch or template injection
-  const labels = ["Aug 25", "Aug 26", "Aug 27"];
-  const scores = [0.85, 0.42, 0.12];
-  const sentiments = ["positive", "neutral", "negative"];
+  const labels = emotionData.map(item => item.date);
+  const scores = emotionData.map(item => item.score);
+  const sentiments = emotionData.map(item => item.sentiment);
   const colors = scores.map(score => {
-    // positive 
     if (score > 0.6) return "#a3f7bf";
-    // neutral       
-    if (score > 0.3) return "#fdfd96";  
-    // negative    
-    return "#ffb3ba";                       
+    if (score > 0.3) return "#fdfd96";
+    return "#ffb3ba";
   });
 
   new Chart(ctx, {

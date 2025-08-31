@@ -3,98 +3,112 @@
 {% block title %}Journal Space 📓 | Healing Atlas{% endblock %}
 
 {% block content %}
-  <style>
-    .journal-container {
-      max-width: 700px;
-      margin: 3rem auto;
-      padding: 2rem;
-      background-color: #fffaf7;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      font-family: 'Segoe UI', sans-serif;
-      color: #333;
-    }
+<style>
+  .journal-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #fffaf7;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+  }
 
-    h1 {
-      font-size: 2rem;
-      color: #c04e90;
-      margin-bottom: 0.5rem;
-    }
+  h1 {
+    font-size: 2rem;
+    color: #c04e90;
+    margin-bottom: 0.5rem;
+  }
 
-    p {
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
+  p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    label {
-      font-weight: bold;
-      color: #4a2c2a;
-    }
+  label {
+    font-weight: bold;
+    color: #4a2c2a;
+  }
 
-    select, textarea {
-      padding: 0.75rem;
-      border: 2px solid #f4c2c2;
-      border-radius: 8px;
-      font-size: 1rem;
-      background-color: #fff;
-    }
+  select, textarea {
+    padding: 0.75rem;
+    border: 2px solid #f4c2c2;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+  }
 
-    textarea::placeholder {
-      color: #aaa;
-    }
+  textarea::placeholder {
+    color: #aaa;
+  }
 
-    button {
-      align-self: flex-start;
-      padding: 0.75rem 1.5rem;
-      background-color: #d16ba5;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+  button {
+    align-self: flex-start;
+    padding: 0.75rem 1.5rem;
+    background-color: #d16ba5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
 
-    .footer-note {
-      text-align: center;
-      padding-top: 2rem;
-      font-size: 0.9rem;
-      color: #888;
-    }
-  </style>
+  .footer-note {
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 0.9rem;
+    color: #888;
+  }
 
-  <div class="journal-container">
-    <h1>Your Journal 📓</h1>
-    <p>This space is yours — write freely, gently, and without judgment.</p>
+  .chart-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #fef6f9;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+</style>
 
-    <form method="post">
-      {% csrf_token %}
-      <label for="mood">Mood Tag:</label>
-      <select name="mood" id="mood">
-        <option value="calm">🌿 Calm</option>
-        <option value="anxious">🌪️ Anxious</option>
-        <option value="hopeful">🌈 Hopeful</option>
-        <option value="tired">😴 Tired</option>
-        <option value="grateful">💖 Grateful</option>
-      </select>
+<div class="journal-container">
+  <h1>Your Journal 📓</h1>
+  <p>This space is yours — write freely, gently, and without judgment.</p>
 
-      <label for="entry">Journal Entry:</label>
-      <textarea name="entry" id="entry" rows="6" placeholder="Write what’s on your heart..."></textarea>
+  <form method="post">
+    {% csrf_token %}
+    <label for="mood">Mood Tag:</label>
+    <select name="mood" id="mood">
+      <option value="calm">🌿 Calm</option>
+      <option value="anxious">🌪️ Anxious</option>
+      <option value="hopeful">🌈 Hopeful</option>
+      <option value="tired">😴 Tired</option>
+      <option value="grateful">💖 Grateful</option>
+    </select>
 
-      <button type="submit">Save Entry</button>
-    </form>
+    <label for="entry">Journal Entry:</label>
+    <textarea name="entry" id="entry" rows="6" placeholder="Write what’s on your heart..."></textarea>
 
-    <div class="footer-note">© 2025 Healing Atlas. Your words matter here.</div>
+    <button type="submit">Save Entry</button>
+  </form>
+
+  <div class="footer-note">© 2025 Healing Atlas. Your words matter here.</div>
+</div>
+
+{% if show_chart %}
+  <div class="chart-container">
+    <canvas id="emotionChart"></canvas>
   </div>
- {% if show_chart %}
-  <canvas id="emotionChart"></canvas>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="{{ url_for('static', filename='js/emotionChart.js') }}"></script>
+  <script>
+    const emotionData = {{ emotion_data_json|safe }};
+  </script>
+  <script src="{% static 'js/emotionChart.js' %}"></script>
 {% endif %}
-
 {% endblock %}
