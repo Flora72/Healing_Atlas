@@ -237,6 +237,8 @@ def restore_resource(request, resource_id):
 #                    JOURNAL/MOOD SCORE VIEWS 
 # -------------------------------------------------------
 import requests
+import json
+from django.views.decorators.csrf import csrf_exempt
 
 def analyze_sentiment(entry_text):
     api_url = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment"
@@ -246,8 +248,30 @@ def analyze_sentiment(entry_text):
     response = requests.post(api_url, headers=headers, json=payload)
     result = response.json()
 
-    # Extract sentiment score (e.g., positive/neutral/negative)
     sentiment = result[0][0]['label']
     score = result[0][0]['score']
-    
     return {"sentiment": sentiment, "score": score}
+
+@csrf_exempt
+def journal_view(request):
+    emotion_data = []
+    show_chart = False
+
+    if request.method == "POST":
+        mood = request.POST.get("mood")
+        entry = request.POST.get("entry")
+
+        # Analyze sentiment
+        sentiment_result = analyze_sentiment(entry)
+        emotion_data.append({
+            "date": "Today",  
+            "score": sentiment_result["score"],
+            "sentiment": sentiment_result["sentiment"]
+        })
+        show_chart = True
+
+    context = {
+        "show_chart": show_chart,
+        "emotion_data_json": json.dumps(emotion_data)
+    }
+    return render(request, "journal.html", context)
