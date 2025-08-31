@@ -156,39 +156,77 @@ def affirmations(request):
 # -------------------------------------------------------
 #                    JOURNAL VIEWS 
 # -------------------------------------------------------
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.utils.timezone import localtime
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from .models import JournalEntry
+from textblob import TextBlob
+import json
+
+def analyze_sentiment(text):
+    blob = TextBlob(text)
+    polarity = blob.sentiment.polarity  # Range: -1 to +1
+
+    if polarity > 0.4:
+        sentiment = "hopeful"
+    elif polarity > 0.1:
+        sentiment = "grateful"
+    elif polarity < -0.3:
+        sentiment = "anxious"
+    elif polarity < -0.1:
+        sentiment = "tired"
+    else:
+        sentiment = "calm"
+
+    return {
+        "score": round(polarity, 2),
+        "sentiment": sentiment
+    }
+
 @login_required
+@csrf_exempt
 def journal_view(request):
-    if request.method == 'POST':
-        mood = request.POST.get('mood')
-        entry = request.POST.get('entry')
-        if mood and entry:
+    if request.method == "POST":
+        mood = request.POST.get("mood")  # Optional, can be used for user reflection
+        entry = request.POST.get("entry")
+
+        if entry:
+            sentiment_result = analyze_sentiment(entry)
+
             JournalEntry.objects.create(
                 user=request.user,
-                mood_label=mood,
+                mood_label=sentiment_result["sentiment"],
                 content=entry,
-                sentiment_score=0.5  # placeholder until analysis
+                sentiment_score=sentiment_result["score"]
             )
+
             messages.success(request, "Your journal entry has been saved. Thank you for sharing.")
 
-            return redirect('journal')
+            return redirect("journal")
 
-    journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')[:10]
+    # Pull latest entries for chart
+    journal_entries = JournalEntry.objects.filter(user=request.user).order_by("created_at")
     emotion_data = [
         {
             "date": localtime(entry.created_at).strftime("%Y-%m-%d"),
             "score": entry.sentiment_score,
-            "sentiment": entry.mood_label
+            "sentiment": entry.mood_label,
+            "note": entry.content
         }
         for entry in journal_entries
     ]
 
     context = {
         "emotion_data_json": json.dumps(emotion_data),
-        "show_chart": True
+        "show_chart": bool(emotion_data)
     }
 
     return render(request, "journal.html", context)
 
+   
 
 # -------------------------------------------------------
 #                    RESOURCES VIEWS 
@@ -304,7 +342,6 @@ def restore_resource(request, resource_id):
 #                    JOURNAL/MOOD SCORE VIEWS 
 # -------------------------------------------------------
 import json
-from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 from .utils import analyze_sentiment
 
@@ -381,6 +418,39 @@ def test_chart(request):
     }
 
     return render(request, "test_chart.html", context)
+
+
+
+    entries = MoodEntry.objects.filter(user=request.user).order_by('timestamp')
+    emotion_data = [
+        {
+            "date": entry.timestamp.strftime("%Y-%m-%d"),
+            "score": entry.score or 0,
+            "sentiment": entry.sentiment or "neutral",
+            "note": entry.note or ""
+        }
+        for entry in entries
+    ]
+    return render(request, 'test_chart.html', {
+        'emotion_data_json': json.dumps(emotion_data)
+    })
+
+    user = request.user
+    entries = MoodEntry.objects.filter(user=user).order_by('timestamp')
+
+    emotion_data = [
+        {
+            "date": entry.timestamp.strftime("%Y-%m-%d"),
+            "score": entry.score or 0,
+            "sentiment": entry.sentiment or "neutral",
+            "note": entry.note or ""
+        }
+        for entry in entries
+    ]
+
+    return render(request, 'emotional_chart.html', {
+        'emotion_data_json': json.dumps(emotion_data)
+    })
 
     emotion_data = [...]  # your queryset logic here
     context = {
