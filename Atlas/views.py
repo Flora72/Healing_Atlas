@@ -92,24 +92,27 @@ def signup_view(request):
 # -------------------------------------------------------
 @login_required
 def mood_tracker(request):
-    return render(request, 'mood_tracker.html')
+    if request.method == 'POST':
+        mood = request.POST.get('mood')
+        note = request.POST.get('note')
 
+        # Save the check-in
+        MoodEntry.objects.create(user=request.user, mood=mood, note=note)
 
-def mood_tracker_view(request):
+    # Always prepare chart data (even after GET)
+    recent_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:7]
     emotion_data = [
-        {"date": "Aug 30", "score": 0.85, "sentiment": "hopeful"},
-        {"date": "Aug 29", "score": 0.42, "sentiment": "tired"},
-        {"date": "Aug 28", "score": 0.15, "sentiment": "anxious"},
+        {'mood': entry.mood, 'timestamp': entry.timestamp.strftime('%Y-%m-%d')}
+        for entry in recent_entries
     ]
 
     context = {
-        "show_chart": True,
-        "emotion_data": emotion_data,
-        "emotion_data_json": json.dumps(emotion_data)
+        'show_chart': True,
+        'emotion_data': emotion_data,
+        'emotion_data_json': json.dumps(emotion_data)
     }
 
-    return render(request, "journal.html/dashboard_greeting/mood_tracker.html", context)
-
+    return render(request, 'mood_tracker.html', context)
 
 
 # -------------------------------------------------------
