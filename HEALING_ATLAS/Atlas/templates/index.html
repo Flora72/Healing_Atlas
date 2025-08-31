@@ -1,10 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Healing Atlas</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -13,8 +18,8 @@
     <div class="container nav-content">
       <h1 class="logo">Healing Atlas</h1>
       <div class="nav-links">
-        <a href="login.html" class="btn ghost">Login</a>
-        <a href="signup.html" class="btn healing">Sign Up</a>
+        <a href="{% static 'login.html' %}" class="btn ghost">Login</a>
+        <a href="{% static 'signup.html' %}" class="btn healing">Sign Up</a>
       </div>
     </div>
   </nav>
@@ -22,11 +27,11 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-overlay"></div>
-    <div class="hero-bg" style="background-image: url('assets/healing-hero.jpg');"></div>
+    <div class="hero-bg" style="background-image: url('{% static "images/healing-hero.png" %}');"></div>
     <div class="hero-content">
       <h1 class="hero-title">Your Digital Sanctuary <span>Begins Here</span></h1>
       <p class="hero-subtitle">Navigate trauma, substance abuse, and post-addiction healing with compassionate support and professional guidance.</p>
-      <a href="signup.html" class="btn hero-btn">Get Started →</a>
+      <a href="{% static 'signup.html' %}" class="btn hero-btn">Get Started →</a>
     </div>
   </section>
 
@@ -68,11 +73,11 @@
         <div class="price">$0</div>
         <p class="duration">Forever</p>
         <ul>
-          <li>✔ Basic mood tracking</li>
-          <li>✔ Crisis resources</li>
-          <li>✔ Limited journaling</li>
+          <li>Basic mood tracking</li>
+          <li>Crisis resources</li>
+          <li>Limited journaling</li>
         </ul>
-        <a href="signup.html" class="btn tier-btn">Get Started</a>
+        <a href="{% static 'signup.html' %}" class="btn tier-btn">Get Started</a>
       </div>
 
       <!-- Basic Tier -->
@@ -82,12 +87,12 @@
         <div class="price">$19</div>
         <p class="duration">per month</p>
         <ul>
-          <li>✔ Advanced mood analytics</li>
-          <li>✔ Unlimited journaling</li>
-          <li>✔ Resource library access</li>
-          <li>✔ Email support</li>
+          <li>Advanced mood analytics</li>
+          <li>Unlimited journaling</li>
+          <li>Resource library access</li>
+          <li>Email support</li>
         </ul>
-        <a href="signup.html" class="btn tier-btn">Start Free Trial</a>
+        <a href="{% static 'signup.html' %}" class="btn tier-btn">Start Free Trial</a>
       </div>
 
       <!-- Premium Tier -->
@@ -96,12 +101,12 @@
         <div class="price">$49</div>
         <p class="duration">per month</p>
         <ul>
-          <li>✔ 1-on-1 counselor sessions</li>
-          <li>✔ Priority support</li>
-          <li>✔ Custom wellness plans</li>
-          <li>✔ Community access</li>
+          <li>1-on-1 counselor sessions</li>
+          <li>Priority support</li>
+          <li>Custom wellness plans</li>
+          <li>Community access</li>
         </ul>
-        <a href="signup.html" class="btn tier-btn">Start Premium</a>
+        <a href="{% static 'signup.html' %}" class="btn tier-btn">Start Premium</a>
       </div>
     </div>
   </section>
@@ -110,9 +115,10 @@
   <footer class="footer">
     <h3>Healing Atlas</h3>
     <p>Your sanctuary begins here. Every step forward is progress.</p>
-    <a href="signup.html" class="btn healing">Begin Your Journey →</a>
+    <a href="{% static 'signup.html' %}" class="btn healing">Begin Your Journey →</a>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Local JS -->
+  <script src="{% static 'script/script.js' %}"></script>
 </body>
 </html>
