@@ -18,8 +18,8 @@
     <div class="container nav-content">
       <h1 class="logo">Healing Atlas</h1>
       <div class="nav-links">
-        <a href="{% static 'login.html' %}" class="btn ghost">Login</a>
-        <a href="{% static 'signup.html' %}" class="btn healing">Sign Up</a>
+        <a href="{% url 'login' %}">Log in</a class="btn ghost">Login</a>
+        <a href="{% url 'signup' %}">Log in</a class="btn healing">Sign Up</a>
       </div>
     </div>
   </nav>
@@ -31,7 +31,7 @@
     <div class="hero-content">
       <h1 class="hero-title">Your Digital Sanctuary <span>Begins Here</span></h1>
       <p class="hero-subtitle">Navigate trauma, substance abuse, and post-addiction healing with compassionate support and professional guidance.</p>
-      <a href="{% static 'signup.html' %}" class="btn hero-btn">Get Started →</a>
+      <a href="{% url 'login' %}">Log in</a" class="btn hero-btn">Get Started →</a>
     </div>
   </section>
 
