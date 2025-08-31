@@ -4,6 +4,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .models import Resource  
+from django.http import JsonResponse, HttpResponse, Http404
+
+
 # -------------------------------------------------------
 #                    GENERAL VIEWS 
 # -------------------------------------------------------
@@ -91,85 +94,43 @@ def signup_view(request):
 #                    MOOD TRACKER VIEWS 
 # -------------------------------------------------------
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 from django.utils import timezone
-import json
 from .models import MoodEntry
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.utils import timezone
-import json
-from .models import MoodEntry
+from django.contrib import messages
+from .forms import MoodForm
 
 
-@login_required
 def mood_tracker(request):
-    emotion_data = []
+    form = MoodForm()
 
     if request.method == 'POST':
-        mood = request.POST.get('mood')
-        note = request.POST.get('note')
+        form = MoodForm(request.POST)
+        if form.is_valid():
+            mood_entry = form.save(commit=False)
+            mood_entry.user = request.user
+            mood_entry.score = 0.7  # placeholder or calculated
+            mood_entry.sentiment = "hopeful"  # placeholder or analyzed
+            mood_entry.save()
+            messages.success(request, "Your check-in has been saved. You’re doing beautifully.")
+            return redirect('mood_tracker')
 
-        sentiment_result = analyze_sentiment(note)
-        MoodEntry.objects.create(
-            user=request.user,
-            mood=mood,
-            note=note,
-            score=sentiment_result["score"],
-            sentiment=sentiment_result["sentiment"]
-        )
-
-    recent_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:7]
+    mood_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:10]
     emotion_data = [
         {
-            'date': entry.timestamp.strftime('%Y-%m-%d'),
-            'score': entry.score,
-            'sentiment': entry.sentiment
+            "date": localtime(entry.timestamp).strftime("%Y-%m-%d"),
+            "score": entry.score,
+            "sentiment": entry.sentiment
         }
-        for entry in recent_entries if entry.score is not None
+        for entry in mood_entries if entry.score is not None
     ]
 
     context = {
-        'show_chart': True,
-        'emotion_data_json': json.dumps(emotion_data)
+        "form": form,
+        "emotion_data_json": json.dumps(emotion_data),
+        "show_chart": True
     }
 
-    return render(request, 'mood_tracker.html', context)
-
-
-@login_required
-def mood_tracker(request):
-    emotion_data = []
-
-    if request.method == 'POST':
-        mood = request.POST.get('mood')
-        note = request.POST.get('note')
-
-        sentiment_result = analyze_sentiment(note)
-        MoodEntry.objects.create(
-            user=request.user,
-            mood=mood,
-            note=note,
-            score=sentiment_result["score"],
-            sentiment=sentiment_result["sentiment"]
-        )
-
-    recent_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:7]
-    emotion_data = [
-        {
-            'date': entry.timestamp.strftime('%Y-%m-%d'),
-            'score': entry.score,
-            'sentiment': entry.sentiment
-        }
-        for entry in recent_entries if entry.score is not None
-    ]
-
-    context = {
-        'show_chart': True,
-        'emotion_data_json': json.dumps(emotion_data)
-    }
-
-    return render(request, 'mood_tracker.html', context)
+    return render(request, "mood_tracker.html", context)
 
 
 # -------------------------------------------------------
@@ -196,8 +157,37 @@ def affirmations(request):
 #                    JOURNAL VIEWS 
 # -------------------------------------------------------
 @login_required
-def journal_space(request):
-    return render(request, 'journal.html')
+def journal_view(request):
+    if request.method == 'POST':
+        mood = request.POST.get('mood')
+        entry = request.POST.get('entry')
+        if mood and entry:
+            JournalEntry.objects.create(
+                user=request.user,
+                mood_label=mood,
+                content=entry,
+                sentiment_score=0.5  # placeholder until analysis
+            )
+            messages.success(request, "Your journal entry has been saved. Thank you for sharing.")
+
+            return redirect('journal')
+
+    journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')[:10]
+    emotion_data = [
+        {
+            "date": localtime(entry.created_at).strftime("%Y-%m-%d"),
+            "score": entry.sentiment_score,
+            "sentiment": entry.mood_label
+        }
+        for entry in journal_entries
+    ]
+
+    context = {
+        "emotion_data_json": json.dumps(emotion_data),
+        "show_chart": True
+    }
+
+    return render(request, "journal.html", context)
 
 
 # -------------------------------------------------------
@@ -373,6 +363,17 @@ from django.utils.timezone import localtime
 from .models import JournalEntry, MoodEntry
 
 def test_chart(request):
+    mood_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:10]
+    emotion_data = [
+        {
+            "date": localtime(entry.timestamp).strftime("%Y-%m-%d"),
+            "score": entry.score,
+            "sentiment": entry.sentiment
+        }
+        for entry in mood_entries if entry.score is not None
+    ]
+    return JsonResponse({"emotion_data": emotion_data})
+
     journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
     mood_entries = MoodEntry.objects.filter(user=request.user).order_by('-created_at')
 

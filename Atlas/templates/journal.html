@@ -1,12 +1,7 @@
-{% extends 'test_chart.html' %}
+{% extends 'dashboard.html' %}
 {% load static %}
 
 {% block title %}Journal Space | Healing Atlas{% endblock %}
-
-{% block extra_head %}
-  <!-- Any extra head content you need -->
-{% endblock %}
-
 {% block content %}
   <style>
     .journal-container {
@@ -106,9 +101,13 @@
     <div class="footer-note">© 2025 Healing Atlas. Your words matter here.</div>
   </div>
   <pre>{{ emotion_data_json }}</pre>
+  {% if messages %}
+  <div class="confirmation-message">
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
 
 {% endblock %}
 
-{% block chart %}
-  {{ block.super }}
-{% endblock %}

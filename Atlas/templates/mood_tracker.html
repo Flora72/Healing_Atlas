@@ -1,11 +1,8 @@
-{% extends 'test_chart.html' %}
+{% extends 'dashboard.html' %}
 {% load static %}
 
 {% block title %}Mood Tracker | Healing Atlas{% endblock %}
 
-{% block extra_head %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-{% endblock %}
 
 {% block content %}
   <style>
@@ -105,9 +102,15 @@
     <div class="footer-note">© 2025 Healing Atlas. Every feeling is welcome here.</div>
   </div>
   <pre>{{ emotion_data_json }}</pre>
+  {% if messages %}
+  <div class="confirmation-message">
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+
 
 {% endblock %}
 
-{% block chart %}
-  {{ block.super }}
-{% endblock %}
+
