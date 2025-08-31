@@ -1,82 +1,118 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Healing Atlas </title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-image: url("{% static 'images/background.jpg' %}");
-      background-size: cover;
-      background-position: center;
-      font-family: 'Helvetica', sans-serif;
-      color: #333;
-    }
-
-    .glass-box {
-      backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.3);
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: 10vh auto;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    }
-
-    nav {
-      text-align: center;
-      padding: 1rem;
-    }
-
-    nav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: #d16ba5;
-      font-weight: bold;
-    }
-
-    .cta {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #d16ba5;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 2rem;
-      color: #444;
-    }
-
-    .footer a {
-      color: #0077cc;
-      text-decoration: none;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healing Atlas</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter&display=swap" rel="stylesheet">
 </head>
 <body>
-  <nav>
-    <a href="{% url 'index' %}">Home</a>
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'signup' %}">Signup</a>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <h1 class="logo">Healing Atlas</h1>
+      <div class="nav-links">
+        <a href="login.html" class="btn ghost">Login</a>
+        <a href="signup.html" class="btn healing">Sign Up</a>
+      </div>
+    </div>
   </nav>
 
-  <div class="glass-box">
-    <h1>Welcome to Healing Atlas 🌿</h1>
-    <p>This space is built for you — gently, safely, and with care.</p>
-    <a href="{% url 'signup' %}" class="cta">Begin Your Journey</a>
-  </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-bg" style="background-image: url('assets/healing-hero.jpg');"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Your Digital Sanctuary <span>Begins Here</span></h1>
+      <p class="hero-subtitle">Navigate trauma, substance abuse, and post-addiction healing with compassionate support and professional guidance.</p>
+      <a href="signup.html" class="btn hero-btn">Get Started →</a>
+    </div>
+  </section>
 
-  <div class="footer">
-    <p>Need help now? <a href="{% url 'crisis' %}">Click here</a></p>
-  </div>
+  <!-- Features Section -->
+  <section class="features">
+    <div class="section-header">
+      <h2>Your Journey to Healing</h2>
+      <p>Comprehensive tools and support designed for your unique path to recovery and growth.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon heart">❤️</div>
+        <h3>Emotional Support</h3>
+        <p>Track your mood, access crisis resources, and connect with professional support when you need it most.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon shield">🛡️</div>
+        <h3>Safe Space</h3>
+        <p>Private journaling, secure sessions, and confidential support in a judgment-free environment.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon users">👥</div>
+        <h3>Community & Growth</h3>
+        <p>Connect with others on similar journeys and access curated resources for lasting recovery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Membership Tiers -->
+  <section class="tiers">
+    <div class="section-header">
+      <h2>Choose Your Path</h2>
+      <p>Flexible membership options designed to support you at every stage of your healing journey.</p>
+    </div>
+    <div class="tier-grid">
+      <!-- Free Tier -->
+      <div class="tier-card">
+        <h3>Free</h3>
+        <div class="price">$0</div>
+        <p class="duration">Forever</p>
+        <ul>
+          <li>✔ Basic mood tracking</li>
+          <li>✔ Crisis resources</li>
+          <li>✔ Limited journaling</li>
+        </ul>
+        <a href="signup.html" class="btn tier-btn">Get Started</a>
+      </div>
+
+      <!-- Basic Tier -->
+      <div class="tier-card popular">
+        <div class="badge">Most Popular</div>
+        <h3>Basic</h3>
+        <div class="price">$19</div>
+        <p class="duration">per month</p>
+        <ul>
+          <li>✔ Advanced mood analytics</li>
+          <li>✔ Unlimited journaling</li>
+          <li>✔ Resource library access</li>
+          <li>✔ Email support</li>
+        </ul>
+        <a href="signup.html" class="btn tier-btn">Start Free Trial</a>
+      </div>
+
+      <!-- Premium Tier -->
+      <div class="tier-card">
+        <h3>Premium</h3>
+        <div class="price">$49</div>
+        <p class="duration">per month</p>
+        <ul>
+          <li>✔ 1-on-1 counselor sessions</li>
+          <li>✔ Priority support</li>
+          <li>✔ Custom wellness plans</li>
+          <li>✔ Community access</li>
+        </ul>
+        <a href="signup.html" class="btn tier-btn">Start Premium</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <h3>Healing Atlas</h3>
+    <p>Your sanctuary begins here. Every step forward is progress.</p>
+    <a href="signup.html" class="btn healing">Begin Your Journey →</a>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

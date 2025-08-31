@@ -1,411 +1,261 @@
-/* -------------------------------------------------------
- GLOBAL PAGE STYLES
-------------------------------------------------------- */
-
+/* Fonts */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fdf6f9;
-  color: #333;
   margin: 0;
-  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
-header nav {
-  background-color: #ffe6f0;
-  padding: 1rem;
-  text-align: center;
+/* Typography */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  color: #2c2c2c;
 }
 
-header nav a {
-  margin: 0 1rem;
-  text-decoration: none;
-  color: #b30059;
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Containers */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Navigation */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+.logo {
+  font-size: 1.8rem;
   font-weight: bold;
+  color: #4f46e5;
 }
 
-/* -------------------------------------------------------
- CRISIS PAGE STYLES
-------------------------------------------------------- */
-
-.crisis {
-  max-width: 700px;
-  margin: 3rem auto;
-  background-color: #fff0f5;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.nav-links a {
+  margin-left: 1rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
 }
 
-.crisis h1 {
-  color: #b30059;
-  font-size: 2rem;
+.btn.ghost {
+  background: none;
+  color: #4f46e5;
+  border: 1px solid transparent;
+}
+
+.btn.healing {
+  background-color: #4f46e5;
+  color: white;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  padding: 4rem 1rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, #e0e7ff, #fef3c7);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
-.emergency-list {
-  list-style: none;
-  padding: 0;
+.hero-title span {
+  display: block;
+  color: #4f46e5;
+  margin-top: 0.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #666;
   margin-bottom: 2rem;
 }
 
-.emergency-list li {
-  margin-bottom: 1rem;
-  font-weight: bold;
+.hero-btn {
+  background-color: #4f46e5;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.grounding-tools h2 {
-  margin-top: 2rem;
-  color: #660033;
-}
-
-.grounding-tools ul {
-  list-style: disc;
-  margin-left: 1.5rem;
-}
-
-/* -------------------------------------------------------
- FOOTER PAGE STYLES
-------------------------------------------------------- */
-
-footer {
-  background-color: #ffe6f0;
-  padding: 1rem;
+/* Features Section */
+.features {
+  padding: 4rem 1rem;
+  background-color: #f3f4f6;
   text-align: center;
-  font-size: 0.9rem;
 }
-/* -------------------------------------------------------
- DASHBOARD PAGE STYLES
-------------------------------------------------------- */
 
-.dashboard {
-  max-width: 800px;
-  margin: 3rem auto;
+.section-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-header p {
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card {
+  background-color: white;
   padding: 2rem;
-  background-color: #f0fff5;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  width: 300px;
+  transition: transform 0.3s ease;
 }
 
-.dashboard h1 {
-  color: #006644;
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card-icon {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
 
-.dashboard-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.tile {
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
-  color: #333;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-}
-
-.tile:hover {
-  transform: scale(1.03);
-  background-color: #e6fff2;
-}
-
-/* -------------------------------------------------------
- JOURNAL PAGE STYLES
-------------------------------------------------------- */
-
-.journal {
-  max-width: 700px;
-  margin: 3rem auto;
-  background-color: #fef6ff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.journal h1 {
-  color: #9933cc;
-  margin-bottom: 1rem;
-}
-
-.journal form {
-  display: flex;
-  flex-direction: column;
-}
-
-.journal label {
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-.journal select,
-.journal textarea {
-  margin-top: 0.5rem;
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.journal button {
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  background-color: #9933cc;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.journal button:hover {
-  background-color: #7a299e;
-}
-
-/* -------------------------------------------------------
- AFFIRMATION PAGE STYLES
-------------------------------------------------------- */
-
-.affirmation {
-  max-width: 600px;
-  margin: 3rem auto;
-  background-color: #fff9f0;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+/* Membership Tiers */
+.tiers {
+  padding: 4rem 1rem;
   text-align: center;
 }
 
-.affirmation h1 {
-  color: #cc6600;
-  margin-bottom: 1rem;
-}
-
-.affirmation blockquote {
-  font-size: 1.5rem;
-  font-style: italic;
-  color: #444;
-  margin: 2rem 0;
-}
-
-.affirmation button {
-  padding: 0.75rem 1.5rem;
-  background-color: #cc6600;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.affirmation button:hover {
-  background-color: #b35900;
-}
-
-
-/* -------------------------------------------------------
- MOOD PAGE STYLES
-------------------------------------------------------- */
-
-.mood-tracker {
-  max-width: 600px;
-  margin: 3rem auto;
-  background-color: #f0faff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.mood-tracker h1 {
-  color: #0077b6;
-  margin-bottom: 1rem;
-}
-
-.mood-tracker form {
+.tier-grid {
   display: flex;
-  flex-direction: column;
-}
-
-.mood-tracker label {
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-.mood-tracker select,
-.mood-tracker textarea {
-  margin-top: 0.5rem;
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.mood-tracker button {
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  background-color: #0077b6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.mood-tracker button:hover {
-  background-color: #005f8f;
-}
-
-/* -------------------------------------------------------
- RESOURCES PAGE STYLES
-------------------------------------------------------- */
-
-.resources {
-  max-width: 900px;
-  margin: 3rem auto;
-  background-color: #f0fff9;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.resources h1 {
-  color: #006644;
-  margin-bottom: 1rem;
-}
-
-.resource-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
   margin-top: 2rem;
 }
 
-.resource-card {
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.tier-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  width: 280px;
+  border: 1px solid #ddd;
+  position: relative;
 }
 
-.resource-card h2 {
-  color: #004d33;
+.tier-card.popular {
+  border: 2px solid #4f46e5;
+  transform: scale(1.05);
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(to right, #6366f1, #818cf8);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4f46e5;
+}
+
+.duration {
+  font-size: 0.9rem;
+  color: #888;
   margin-bottom: 1rem;
 }
 
-.resource-card ul {
+.tier-card ul {
   list-style: none;
   padding: 0;
+  margin: 1rem 0;
+  text-align: left;
 }
 
-.resource-card li {
-  margin-bottom: 0.75rem;
+.tier-card li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
-.resource-card a {
-  text-decoration: none;
-  color: #007a5e;
-  font-weight: bold;
+/* Footer */
+.footer {
+  background-color: #f3f4f6;
+  padding: 3rem 1rem;
+  text-align: center;
 }
 
-.resource-card a:hover {
-  text-decoration: underline;
-}
-
-/* -------------------------------------------------------
- SETTINGS PAGE STYLES
-------------------------------------------------------- */
-
-.settings {
-  max-width: 700px;
-  margin: 3rem auto;
-  background-color: #fffef5;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.settings h1 {
-  color: #996600;
+.footer h3 {
+  font-size: 1.5rem;
+  color: #4f46e5;
   margin-bottom: 1rem;
 }
 
-.settings form {
-  display: flex;
-  flex-direction: column;
+.footer p {
+  color: #666;
+  margin-bottom: 1.5rem;
 }
 
-.settings label {
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-.settings select {
-  margin-top: 0.5rem;
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.settings button {
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  background-color: #996600;
+.footer .btn {
+  background-color: #4f46e5;
   color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
 }
-
-.settings button:hover {
-  background-color: #7a5900;
-}
-
-/* -------------------------------------------------------
- FORMS  STYLES
-------------------------------------------------------- */
-.form-group select option[value=""] {
-  color: #aaa;
-}
-.form-group select:focus + label,
-.form-group select:valid + label {
-  top: -0.6rem;
-  left: 0.6rem;
-  background-color: #fff;
-  padding: 0 0.3rem;
-  font-size: 0.75rem;
-  color: #c04e90;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 1rem 0.75rem 0.25rem;
-  border: 2px solid #f4c2c2;
-  border-radius: 10px;
-  font-size: 1rem;
-  background-color: #fff;
-}
-.form-group select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%207%205-7z%22%20fill%3D%22%23c04e90%22/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 10px 7px;
-  padding-right: 2rem;
-  color: #333;
-}
-
-
-/* -------------------------------------------------------
- RESOURCES PAGE STYLES
-------------------------------------------------------- */
-/* -------------------------------------------------------
- RESOURCES PAGE STYLES
-------------------------------------------------------- */
