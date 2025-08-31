@@ -290,32 +290,10 @@ def journal_view(request):
             "sentiment": sentiment_result["sentiment"]
         })
         request.session["emotion_data"] = emotion_data
-        show_chart = True  # Ensure chart shows after POST
-
-    context = {
-        "show_chart": show_chart,
-        "emotion_data_json": json.dumps(emotion_data)
-    }
-    return render(request, "journal.html", context)
-
-    emotion_data = request.session.get("emotion_data", [])
-    show_chart = False
-
-    if request.method == "POST":
-        mood = request.POST.get("mood")
-        entry = request.POST.get("entry")
-
-        sentiment_result = analyze_sentiment(entry)
-        emotion_data.append({
-            "date": "Today",
-            "score": sentiment_result["score"],
-            "sentiment": sentiment_result["sentiment"]
-        })
-        request.session["emotion_data"] = emotion_data  # Save it
         show_chart = True
 
     context = {
-        "show_chart": show_chart or bool(emotion_data),
+        "show_chart": show_chart,
         "emotion_data_json": json.dumps(emotion_data)
     }
     return render(request, "journal.html", context)
