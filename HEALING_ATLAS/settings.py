@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Atlas'
+    'Healing_Atlas.Atlas'
 ]
 
 MIDDLEWARE = [
@@ -52,7 +52,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'HEALING_ATLAS.urls'
+ROOT_URLCONF = 'Healing_Atlas.urls'
+
 
 TEMPLATES = [
     {
@@ -80,9 +81,10 @@ WSGI_APPLICATION = 'HEALING_ATLAS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'Atlas/static'),
