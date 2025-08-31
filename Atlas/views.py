@@ -90,8 +90,6 @@ def signup_view(request):
 # -------------------------------------------------------
 #                    MOOD TRACKER VIEWS 
 # -------------------------------------------------------
-from django.contrib.auth.decorators import login_required
-
 @login_required
 def mood_tracker(request):
     return render(request, 'mood_tracker.html')
@@ -101,7 +99,6 @@ def mood_tracker(request):
 #                    AFFIRMATION VIEWS 
 # -------------------------------------------------------
 import random
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def affirmations(request):
@@ -121,8 +118,6 @@ def affirmations(request):
 # -------------------------------------------------------
 #                    JOURNAL VIEWS 
 # -------------------------------------------------------
-from django.contrib.auth.decorators import login_required
-
 @login_required
 def journal_space(request):
     return render(request, 'journal.html')
@@ -239,5 +234,20 @@ def restore_resource(request, resource_id):
 
 
 # -------------------------------------------------------
-#                    AFFIRMATION VIEWS 
+#                    JOURNAL/MOOD SCORE VIEWS 
 # -------------------------------------------------------
+import requests
+
+def analyze_sentiment(entry_text):
+    api_url = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment"
+    headers = {"Authorization": f"Bearer YOUR_HUGGINGFACE_API_KEY"}
+    payload = {"inputs": entry_text}
+
+    response = requests.post(api_url, headers=headers, json=payload)
+    result = response.json()
+
+    # Extract sentiment score (e.g., positive/neutral/negative)
+    sentiment = result[0][0]['label']
+    score = result[0][0]['score']
+    
+    return {"sentiment": sentiment, "score": score}
