@@ -275,3 +275,17 @@ def journal_view(request):
         "emotion_data_json": json.dumps(emotion_data)
     }
     return render(request, "journal.html", context)
+
+def dashboard_view(request):
+    emotion_data = [
+        {"date": "2025-08-30", "score": 0.85, "sentiment": "positive"},
+        {"date": "2025-08-29", "score": 0.42, "sentiment": "neutral"},
+        {"date": "2025-08-28", "score": 0.15, "sentiment": "low"},
+    ]
+
+    context = {
+        "show_chart": True,
+        "emotion_data_json": json.dumps(emotion_data)
+    }
+
+    return render(request, "your_template.html", context)
