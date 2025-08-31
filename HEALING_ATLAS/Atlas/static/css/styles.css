@@ -73,6 +73,9 @@ p {
   text-align: center;
   overflow: hidden;
 }
+.hero-bg {
+  background-image: url("/static/images/healing-hero.png");
+}
 
 .hero-overlay {
   position: absolute;
