@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .models import Resource  
-from django.http import JsonResponse, HttpResponse, Http404
+from django.http import JsonResponse
 
 
 # -------------------------------------------------------
@@ -363,6 +363,32 @@ from django.utils.timezone import localtime
 from .models import JournalEntry, MoodEntry
 
 def test_chart(request):
+    entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:20]
+
+    emotion_data = [
+        {
+            "date": localtime(entry.timestamp).strftime("%Y-%m-%d"),
+            "score": entry.score,
+            "sentiment": entry.sentiment,
+            "note": entry.note or ""
+        }
+        for entry in entries
+    ]
+
+    context = {
+        "emotion_data_json": json.dumps(emotion_data),
+        "show_chart": True
+    }
+
+    return render(request, "test_chart.html", context)
+
+    emotion_data = [...]  # your queryset logic here
+    context = {
+        "emotion_data_json": json.dumps(emotion_data),
+        "show_chart": True
+    }
+    return render(request, "test_chart.html", context)
+
     mood_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:10]
     emotion_data = [
         {
