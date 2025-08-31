@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const labels = emotionData.map(item => item.date);
   const scores = emotionData.map(item => item.score);
+  console.log("Chart script loaded");
+
 
   new Chart(ctx, {
     type: "line",
