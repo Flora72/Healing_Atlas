@@ -62,9 +62,9 @@ def login_view(request):
             if role == 'admin':
                 return redirect('admin_dashboard')
             elif role == 'survivor':
-                return redirect('user_dashboard')  
+                return redirect('dashboard')  
             else:
-                return redirect('user_dashboard')  
+                return redirect('dashboard')  
 
         else:
             messages.error(request, "Invalid login credentials.")
