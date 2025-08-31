@@ -120,6 +120,25 @@
   <script>
   console.log("emotionData:", emotionData);
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="testChart"></canvas>
+<script>
+  const ctx = document.getElementById('testChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Today'],
+      datasets: [{
+        label: 'Sentiment Score',
+        data: [0.75],
+        borderColor: '#d16ba5',
+        backgroundColor: 'rgba(209,107,165,0.2)',
+        fill: true
+      }]
+    }
+  });
+</script>
+
 
 {% endif %}
 
