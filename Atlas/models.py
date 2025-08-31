@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission, UserManager
+from django.conf import settings
 
-# 🌿 Custom User Model
+
+# Custom User Model
 class CustomUser(AbstractUser):
     role = models.CharField(max_length=20, choices=[
         ('survivor', 'Survivor'),
@@ -52,3 +54,14 @@ class Resource(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
+class MoodEntry(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    mood = models.CharField(max_length=50)
+    note = models.TextField(blank=True, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user} - {self.mood} ({self.timestamp.strftime('%Y-%m-%d')})"
