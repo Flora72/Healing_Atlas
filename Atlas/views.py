@@ -320,6 +320,7 @@ from .utils import analyze_sentiment
 
 @csrf_exempt
 def journal_view(request):
+    # Retrieve existing emotion data from session
     emotion_data = request.session.get("emotion_data", [])
     show_chart = bool(emotion_data)
 
@@ -327,14 +328,21 @@ def journal_view(request):
         mood = request.POST.get("mood")
         entry = request.POST.get("entry")
 
-        if entry:  # Only analyze if there's content
+        if entry:
+            # Analyze sentiment only if there's content
             sentiment_result = analyze_sentiment(entry)
+
+            # Append new emotional data
             emotion_data.append({
-                "date": timezone.now().strftime('%Y-%m-%d'),
+                "date": timezone.now().strftime('%b %d'),  # e.g., "Aug 31"
                 "score": sentiment_result["score"],
-                "sentiment": sentiment_result["sentiment"]
+                "sentiment": sentiment_result["sentiment"],
+                "mood": mood
             })
+
+            # Save updated data to session
             request.session["emotion_data"] = emotion_data
+            request.session.modified = True
             show_chart = True
 
     context = {
@@ -342,7 +350,8 @@ def journal_view(request):
         "emotion_data_json": json.dumps(emotion_data)
     }
     return render(request, "journal.html", context)
-  
+
+   
 
 def dashboard_view(request):
     emotion_data = [
@@ -359,7 +368,40 @@ def dashboard_view(request):
     return render(request, "your_template.html", context)
 
 
+import json
+from django.utils.timezone import localtime
+from .models import JournalEntry, MoodEntry
+
 def test_chart(request):
+    journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
+    mood_entries = MoodEntry.objects.filter(user=request.user).order_by('-created_at')
+
+    combined_data = []
+
+    for entry in journal_entries:
+        combined_data.append({
+            "date": localtime(entry.created_at).strftime("%Y-%m-%d"),
+            "score": entry.sentiment_score,  # assuming you store this
+            "sentiment": entry.sentiment_label  # e.g. "positive", "low"
+        })
+
+    for mood in mood_entries:
+        combined_data.append({
+            "date": localtime(mood.created_at).strftime("%Y-%m-%d"),
+            "score": mood.mood_score / 100,  # normalize if needed
+            "sentiment": mood.mood_label
+        })
+
+    # Optional: sort by date
+    combined_data.sort(key=lambda x: x["date"])
+
+    context = {
+        "show_chart": True,
+        "emotion_data_json": json.dumps(combined_data)
+    }
+
+    return render(request, "sentiment_chart.html", context)
+
     emotion_data = [
         {"date": "2025-08-30", "score": 0.85, "sentiment": "positive"},
         {"date": "2025-08-29", "score": 0.42, "sentiment": "neutral"},
