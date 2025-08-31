@@ -1,6 +1,11 @@
-{% extends 'dashboard.html' %}
+{% extends 'test_chart.html' %}
 {% load static %}
-{% block title %}Mood Tracker 🌤️ | Healing Atlas{% endblock %}
+
+{% block title %}Mood Tracker | Healing Atlas{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock %}
 
 {% block content %}
   <style>
@@ -78,17 +83,17 @@
   </style>
 
   <div class="mood-tracker-container">
-    <h1>How are you feeling today? 🌤️</h1>
+    <h1>How are you feeling today? </h1>
     <form method="post">
       {% csrf_token %}
       <label for="mood">Select your mood:</label>
       <select name="mood" id="mood">
-        <option value="calm">🌿 Calm</option>
-        <option value="anxious">🌪️ Anxious</option>
-        <option value="hopeful">🌈 Hopeful</option>
-        <option value="tired">😴 Tired</option>
-        <option value="angry">🔥 Angry</option>
-        <option value="grateful">💖 Grateful</option>
+        <option value="calm"> Calm</option>
+        <option value="anxious"> Anxious</option>
+        <option value="hopeful"> Hopeful</option>
+        <option value="tired"> Tired</option>
+        <option value="angry"> Angry</option>
+        <option value="grateful"> Grateful</option>
       </select>
 
       <label for="note">Would you like to share more?</label>
@@ -99,26 +104,10 @@
 
     <div class="footer-note">© 2025 Healing Atlas. Every feeling is welcome here.</div>
   </div>
+  <pre>{{ emotion_data_json }}</pre>
 
-  {% if show_chart %}
-  <div class="chart-container" style="max-width: 700px; margin: 3rem auto;">
-    <canvas id="emotionChart"></canvas>
-  </div>
-
-  <!-- Load Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Load your custom chart logic -->
-  <script src="{% static 'js/emotionChart.js' %}"></script>
-
-  {% if emotion_data %}
-    <script>
-      const sentiment = emotionData[context.dataIndex].sentiment;
-    </script>
-  {% endif %}
-{% endif %}
 {% endblock %}
 
-{% block extra_head %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% block chart %}
+  {{ block.super }}
 {% endblock %}

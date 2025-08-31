@@ -90,27 +90,82 @@ def signup_view(request):
 # -------------------------------------------------------
 #                    MOOD TRACKER VIEWS 
 # -------------------------------------------------------
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.utils import timezone
+import json
 from .models import MoodEntry
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.utils import timezone
+import json
+from .models import MoodEntry
+from .views import analyze_sentiment  # adjust if analyze_sentiment is in another file
 
 @login_required
 def mood_tracker(request):
+    emotion_data = []
+
     if request.method == 'POST':
         mood = request.POST.get('mood')
         note = request.POST.get('note')
 
-        # Save the check-in
-        MoodEntry.objects.create(user=request.user, mood=mood, note=note)
+        sentiment_result = analyze_sentiment(note)
+        MoodEntry.objects.create(
+            user=request.user,
+            mood=mood,
+            note=note,
+            score=sentiment_result["score"],
+            sentiment=sentiment_result["sentiment"]
+        )
 
-    # Always prepare chart data (even after GET)
     recent_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:7]
     emotion_data = [
-        {'mood': entry.mood, 'timestamp': entry.timestamp.strftime('%Y-%m-%d')}
-        for entry in recent_entries
+        {
+            'date': entry.timestamp.strftime('%Y-%m-%d'),
+            'score': entry.score,
+            'sentiment': entry.sentiment
+        }
+        for entry in recent_entries if entry.score is not None
     ]
 
     context = {
         'show_chart': True,
-        'emotion_data': emotion_data,
+        'emotion_data_json': json.dumps(emotion_data)
+    }
+
+    return render(request, 'mood_tracker.html', context)
+
+
+@login_required
+def mood_tracker(request):
+    emotion_data = []
+
+    if request.method == 'POST':
+        mood = request.POST.get('mood')
+        note = request.POST.get('note')
+
+        sentiment_result = analyze_sentiment(note)
+        MoodEntry.objects.create(
+            user=request.user,
+            mood=mood,
+            note=note,
+            score=sentiment_result["score"],
+            sentiment=sentiment_result["sentiment"]
+        )
+
+    recent_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:7]
+    emotion_data = [
+        {
+            'date': entry.timestamp.strftime('%Y-%m-%d'),
+            'score': entry.score,
+            'sentiment': entry.sentiment
+        }
+        for entry in recent_entries if entry.score is not None
+    ]
+
+    context = {
+        'show_chart': True,
         'emotion_data_json': json.dumps(emotion_data)
     }
 
@@ -261,6 +316,7 @@ def restore_resource(request, resource_id):
 import requests
 import json
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 
 def analyze_sentiment(entry_text):
     api_url = "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment"
@@ -277,27 +333,28 @@ def analyze_sentiment(entry_text):
 @csrf_exempt
 def journal_view(request):
     emotion_data = request.session.get("emotion_data", [])
-    show_chart = bool(emotion_data)  # Show chart if there's any data
+    show_chart = bool(emotion_data)
 
     if request.method == "POST":
         mood = request.POST.get("mood")
         entry = request.POST.get("entry")
 
-        sentiment_result = analyze_sentiment(entry)
-        emotion_data.append({
-            "date": "Today",
-            "score": sentiment_result["score"],
-            "sentiment": sentiment_result["sentiment"]
-        })
-        request.session["emotion_data"] = emotion_data
-        show_chart = True
+        if entry:  # Only analyze if there's content
+            sentiment_result = analyze_sentiment(entry)
+            emotion_data.append({
+                "date": timezone.now().strftime('%Y-%m-%d'),
+                "score": sentiment_result["score"],
+                "sentiment": sentiment_result["sentiment"]
+            })
+            request.session["emotion_data"] = emotion_data
+            show_chart = True
 
     context = {
         "show_chart": show_chart,
         "emotion_data_json": json.dumps(emotion_data)
     }
     return render(request, "journal.html", context)
-
+  
 
 def dashboard_view(request):
     emotion_data = [
@@ -313,3 +370,17 @@ def dashboard_view(request):
 
     return render(request, "your_template.html", context)
 
+
+def test_chart(request):
+    emotion_data = [
+        {"date": "2025-08-30", "score": 0.85, "sentiment": "positive"},
+        {"date": "2025-08-29", "score": 0.42, "sentiment": "neutral"},
+        {"date": "2025-08-28", "score": 0.15, "sentiment": "low"},
+    ]
+
+    context = {
+        "show_chart": True,
+        "emotion_data_json": json.dumps(emotion_data)
+    }
+
+    return render(request, "test_chart.html", context)

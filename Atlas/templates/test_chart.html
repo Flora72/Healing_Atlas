@@ -1,0 +1,46 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+
+{% block extra_head %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+{% endblock %}
+
+{% block chart %}
+  {% if show_chart %}
+    <div class="chart-container">
+      <canvas id="emotionChart" width="600" height="400"></canvas>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const emotionData = JSON.parse('{{ emotion_data_json|safe }}');
+        if (!emotionData || emotionData.length === 0) return;
+
+        const ctx = document.getElementById('emotionChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: emotionData.map(d => d.date),
+            datasets: [{
+              label: 'Sentiment Score',
+              data: emotionData.map(d => d.score),
+              borderColor: '#d16ba5',
+              backgroundColor: 'rgba(209,107,165,0.2)',
+              fill: true,
+              tension: 0.3
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 1
+              }
+            }
+          }
+        });
+      });
+    </script>
+  {% endif %}
+{% endblock %}

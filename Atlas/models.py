@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, Group, Permission, UserManager
+from django.contrib.auth.models import AbstractUser, Group, Permission, UserManager, User
 from django.conf import settings
 
 
@@ -58,10 +58,9 @@ class Resource(models.Model):
 
 
 class MoodEntry(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     mood = models.CharField(max_length=50)
-    note = models.TextField(blank=True, null=True)
+    note = models.TextField(blank=True)
+    score = models.FloatField(null=True, blank=True)
+    sentiment = models.CharField(max_length=20, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.user} - {self.mood} ({self.timestamp.strftime('%Y-%m-%d')})"
