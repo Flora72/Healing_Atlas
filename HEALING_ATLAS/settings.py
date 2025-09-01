@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-
+import dj_database_url
 load_dotenv()
 
 HUGGINGFACE_API_KEY = os.getenv("HF_TOKEN")
@@ -31,9 +31,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-tl#wwi*w*_na&cy4b+%#v%44fdio_(y7ra9e&h0mn-&=_8i+3+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['healingatlas.onrender.com']  
+DEBUG = False  
 
 
 # Application definition
@@ -85,12 +84,19 @@ WSGI_APPLICATION = 'Healing_Atlas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': str(BASE_DIR / 'db.sqlite3'),
+#     }
+# }
+
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
+
 
 STATIC_URL = '/static/'
 
