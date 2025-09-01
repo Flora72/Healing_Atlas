@@ -279,3 +279,106 @@ p {
   margin-bottom: 1.5rem;
   color: #555;
 }
+
+/* MOBILE RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .nav-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-links {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-links a {
+    margin: 0.5rem 0;
+  }
+
+  .hero {
+    padding: 4rem 1rem 2rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .card-grid,
+  .tier-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card,
+  .tier-card {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .features,
+  .tiers {
+    padding: 2rem 1rem;
+  }
+
+  .footer {
+    padding: 2rem 1rem;
+  }
+
+  .footer h3 {
+    font-size: 1.3rem;
+  }
+
+  .footer p {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-title {
+    font-size: 1.7rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .tier-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .price {
+    font-size: 1.7rem;
+  }
+
+  .tier-note,
+  .tier-card li {
+    font-size: 0.9rem;
+  }
+
+  .tier-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+  }
+}

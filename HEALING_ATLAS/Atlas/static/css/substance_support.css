@@ -66,3 +66,74 @@
   background-color: #fff0f0;
   border-left: 4px solid #ff6b6b;
 }
+
+/* MOBILE RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+  .substance-bg {
+    padding: 1.5rem;
+    border-radius: 6px;
+  }
+
+  .container {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
+
+  .section {
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .section h1,
+  .section h2 {
+    font-size: 1.4rem;
+  }
+
+  .section p {
+    font-size: 1rem;
+  }
+
+  .section ul li {
+    font-size: 0.95rem;
+  }
+
+  .quote {
+    font-size: 0.95rem;
+    padding-left: 0.75rem;
+  }
+
+  .emergency {
+    padding: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 1rem;
+    margin: 1.5rem 0.5rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .section h1,
+  .section h2 {
+    font-size: 1.25rem;
+  }
+
+  .section p,
+  .section ul li {
+    font-size: 0.9rem;
+  }
+
+  .quote {
+    font-size: 0.9rem;
+  }
+
+  .section ul li i {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+}

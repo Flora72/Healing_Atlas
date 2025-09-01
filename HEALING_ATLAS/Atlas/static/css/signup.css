@@ -233,3 +233,111 @@ button[type="submit"]:hover {
 .link a:hover {
   text-decoration: underline;
 }
+
+/* MOBILE RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+  body {
+    height: auto;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    background-size: cover;
+  }
+
+  .container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    margin: 2rem auto;
+  }
+
+  .left-panel {
+    display: none; /* Hide background panel on smaller screens */
+  }
+
+  .right-panel {
+    padding: 2rem 1.5rem;
+    flex: none;
+  }
+
+  .form-container {
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .subtext {
+    font-size: 0.85rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+  }
+
+  button[type="submit"] {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .separator {
+    font-size: 0.8rem;
+    margin: 1.5rem 0 1rem;
+  }
+
+  .social-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .social-buttons button {
+    justify-content: center;
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .link {
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .right-panel {
+    padding: 1.5rem 1rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+
+  button[type="submit"] {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .social-buttons img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .link {
+    font-size: 0.8rem;
+  }
+}

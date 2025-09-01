@@ -159,9 +159,69 @@ form button:active {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Layout */
+/* MOBILE RESPONSIVENESS */
 @media screen and (max-width: 768px) {
   .journal-container {
     padding: 1rem;
   }
 }
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 1rem;
+  }
+
+  .journal-container {
+    padding: 1rem 0.75rem;
+    border-radius: 12px;
+  }
+
+  .journal-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .journal-container p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  form {
+    gap: 1rem;
+  }
+
+  form select,
+  form textarea {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  form button {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .view-entries-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  .confirmation-message {
+    top: 10px;
+    right: 10px;
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    max-width: 90%;
+  }
+
+  .footer-note {
+    font-size: 0.85rem;
+    margin-top: 1.5rem;
+  }
+}
+
