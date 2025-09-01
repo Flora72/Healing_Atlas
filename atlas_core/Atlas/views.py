@@ -1,14 +1,20 @@
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
-from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
-from .models import Resource  
-from django.http import JsonResponse, HttpResponse, Http404
-from .models import Tag, Resource
-from .forms import ResourceForm
-
-
+from django.shortcuts import render, get_object_or_404,redirect
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout
+from django.shortcuts import redirect,render
+from django.urls import reverse
+import requests
+from django.conf import settings
+from django.contrib.auth.decorators import login_required 
+from django.http import JsonResponse
+from .forms import CustomUserCreationForm
+from django.contrib import messages
+from .models import JournalEntry, MoodEntry
+from .forms import MoodForm
+import random,json
+from django.utils.timezone import localtime
+from .forms import JournalForm
+from .utils import analyze_sentiment
 
 
 # -------------------------------------------------------
@@ -42,19 +48,9 @@ def logout_view(request):
     logout(request)
     return redirect('index')  
 
-def resource_detail(request, id):
-    resource = get_object_or_404(Resource, id=id)
-    return render(request, 'resource_detail.html', {'resource': resource})
-
 # -------------------------------------------------------
 #                    AUTH VIEWS 
 # -------------------------------------------------------
-from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .forms import CustomUserCreationForm
 
 @login_required
 def user_dashboard(request):
@@ -90,13 +86,6 @@ def login_view(request):
 # -------------------------------------------------------
 #                    MOOD TRACKER VIEWS 
 # -------------------------------------------------------
-from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from .models import MoodEntry
-from django.contrib import messages
-from .forms import MoodForm
-
-
 def mood_tracker(request):
     form = MoodForm()
 
@@ -129,11 +118,9 @@ def mood_tracker(request):
 
     return render(request, "mood_tracker.html", context)
 
-
 # -------------------------------------------------------
 #                    AFFIRMATION VIEWS 
 # -------------------------------------------------------
-import random
 
 @login_required
 def affirmations(request):
@@ -153,15 +140,6 @@ def affirmations(request):
 # -------------------------------------------------------
 #                    JOURNAL VIEWS 
 # -------------------------------------------------------
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.utils.timezone import localtime
-from atlas_core.Atlas.models import JournalEntry
-from .forms import JournalForm
-import json
-from .utils import analyze_sentiment
-
 @login_required
 def journal_view(request):
     journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
@@ -189,10 +167,6 @@ def journal_view(request):
     }
     return render(request, "journal.html", context)
 
-from django.utils.timezone import localtime
-from django.http import JsonResponse
-from .models import JournalEntry
-
 @login_required
 def journal_entries_view(request):
     journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
@@ -217,8 +191,6 @@ def journal_entries_view(request):
 # -------------------------------------------------------
 #                    RESOURCES VIEWS 
 # -------------------------------------------------------
-from django.contrib.auth.decorators import login_required
-
 @login_required
 def resources_page(request):
 
@@ -228,14 +200,6 @@ def resources_page(request):
 # -------------------------------------------------------
 #                    JOURNAL/MOOD SCORE VIEWS 
 # -------------------------------------------------------
-import json
-from django.utils import timezone
-from .utils import analyze_sentiment
-
-
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-
 @login_required
 def dashboard_view(request):
     user = request.user
@@ -248,16 +212,6 @@ def dashboard_view(request):
     }
     return render(request, 'dashboard.html', context)
 
-
-from django.http import JsonResponse
-from django.utils.timezone import localtime
-from django.contrib.auth.decorators import login_required
-from .models import JournalEntry, MoodEntry
-
-from django.http import JsonResponse
-from django.utils.timezone import localtime
-from django.contrib.auth.decorators import login_required
-from .models import JournalEntry, MoodEntry
 
 @login_required
 def test_chart(request):
@@ -288,20 +242,9 @@ def test_chart(request):
     })
 
  
-
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from .decorators import basic_required 
-
-
 @login_required
 def emotion_chart(request):
     return render(request, 'emotion_chart.html')
-
-     
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import JournalEntry
-
 
 def edit_entry(request, entry_id):
     entry = get_object_or_404(JournalEntry, id=entry_id)
@@ -322,15 +265,14 @@ def delete_entry(request, entry_id):
         return redirect('journal_entries')
     return render(request, 'confirm_delete.html', {'entry': entry})
 
-from .models import MoodEntry 
-
-
 @login_required
 def view_checkins(request):
     checkins = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')
     return render(request, 'view_checkins.html', {'checkins': checkins})
 
-
+# -------------------------------------------------------
+#                    PAYMENTS VIEWS 
+# -------------------------------------------------------
 @login_required
 def verify_payment(request):
     reference = request.GET.get('reference')
@@ -377,8 +319,6 @@ def paystack_checkout(request):
 
     return render(request, 'checkout.html', context)
 
-import requests
-from django.conf import settings
 
 def payment_confirmation(request):
     reference = request.GET.get('reference')
@@ -415,7 +355,7 @@ def premium_insights(request):
         return redirect('dashboard')
     return render(request, 'premium_insights.html')
 
-from django.urls import reverse
+
 
 def initiate_payment(request):
     callback_url = request.build_absolute_uri(reverse('payment_confirmation'))
