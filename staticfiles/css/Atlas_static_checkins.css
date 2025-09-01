@@ -1,0 +1,134 @@
+body {
+  background-color: #f8f5fc;
+  font-family: 'Segoe UI', sans-serif;
+  color: #4a2c2a;
+  padding: 2rem;
+  line-height: 1.6;
+}
+
+.checkins-archive {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.checkins-archive h1 {
+  text-align: center;
+  color: #6a1b9a;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.checkin-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fdfaff;
+  border: 1px solid #e0d7f5;
+  border-left: 6px solid #7c4dff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.checkin-card:hover {
+  transform: scale(1.01);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.checkin-date,
+.checkin-mood {
+  font-weight: 600;
+  color: #4a2c2a;
+  font-size: 1rem;
+}
+
+.checkin-mood i {
+  margin-right: 0.4rem;
+  color: #7c4dff;
+}
+
+.card-body {
+  padding-left: 0.5rem;
+}
+
+.checkin-note {
+  color: #6a4a48;
+  font-style: italic;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+}
+
+.no-checkins {
+  text-align: center;
+  font-size: 1rem;
+  color: #a38c8b;
+  margin-top: 2rem;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+  .checkins-archive {
+    padding: 1rem;
+  }
+
+  .checkin-card {
+    font-size: 0.95rem;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media screen and (max-width: 480px) {
+  body {
+    padding: 1rem;
+  }
+
+  .checkins-archive {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .checkins-archive h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .checkin-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .checkin-date,
+  .checkin-mood {
+    font-size: 0.95rem;
+  }
+
+  .checkin-note {
+    font-size: 0.9rem;
+  }
+
+  .no-checkins {
+    font-size: 0.95rem;
+    margin-top: 1.5rem;
+  }
+}

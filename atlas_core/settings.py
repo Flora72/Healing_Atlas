@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import dj_database_url
 
+
 # Load environment variables
 load_dotenv()
 
@@ -100,3 +101,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'atlas.CustomUser'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Optional: for extra clarity
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'atlas_core', 'Atlas', 'static'),
+]

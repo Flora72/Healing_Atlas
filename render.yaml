@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: healingatlas
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn atlas_core.wsgi:application
+    staticPublishPath: staticfiles
