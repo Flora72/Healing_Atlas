@@ -68,6 +68,12 @@ DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 }
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3'  
+    )
+}
+
 # Static files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'atlas_core', 'Atlas', 'static')]
@@ -90,4 +96,6 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom user model
-AUTH_USER_MODEL = 'atlas_core.Atlas.CustomUser'
+AUTH_USER_MODEL = 'atlas.CustomUser'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
