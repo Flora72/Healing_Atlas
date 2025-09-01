@@ -52,7 +52,7 @@ from django.contrib import messages
 
 @login_required
 def user_dashboard(request):
-    return render(request, 'dashboard.html')
+    return render(request, 'dashboard_greeting.html')
 
 def signup_view(request):
     if request.method == 'POST':
