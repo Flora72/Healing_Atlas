@@ -1,0 +1,227 @@
+/* Shared Base Styling */
+body {
+  background-color: #f8f5fc;
+  font-family: 'Segoe UI', sans-serif;
+  color: #4a2c2a;
+  padding: 2rem;
+  line-height: 1.6;
+}
+
+/* Journal Container */
+.journal-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.journal-container h1 {
+  text-align: center;
+  color: #6a1b9a;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.journal-container p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #5a3c3a;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+form label {
+  font-weight: bold;
+  color: #5e35b1;
+}
+
+form select,
+form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #d1c4e9;
+  background-color: #f9f6ff;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+form textarea::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+form select:focus,
+form textarea:focus {
+  border-color: #7c4dff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.1);
+}
+
+form button {
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  background-color: #7c4dff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+  background-color: #5e35b1;
+  transform: translateY(-1px);
+}
+
+form button:active {
+  transform: scale(0.98);
+}
+
+/* View Entries Button */
+.view-entries-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #7c4dff;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.view-entries-button:hover {
+  background-color: #5e35b1;
+}
+
+.view-entries-button:active {
+  transform: scale(0.98);
+}
+
+/* Confirmation Message */
+.confirmation-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  z-index: 999;
+  animation: fadeIn 0.6s ease-out;
+  font-size: 0.95rem;
+  font-weight: 500;
+  max-width: 300px;
+  line-height: 1.4;
+}
+
+/* Success Message */
+.confirmation-message.success {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+  border-left: 6px solid #66bb6a;
+}
+
+/* Error Message */
+.confirmation-message.error {
+  background-color: #ffcdd2;
+  color: #c62828;
+  border-left: 6px solid #ef5350;
+}
+
+/* Info Message */
+.confirmation-message.info {
+  background-color: #bbdefb;
+  color: #1565c0;
+  border-left: 6px solid #42a5f5;
+}
+
+/* Footer Note */
+.footer-note {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #a38c8b;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* MOBILE RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+  .journal-container {
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: 1rem;
+  }
+
+  .journal-container {
+    padding: 1rem 0.75rem;
+    border-radius: 12px;
+  }
+
+  .journal-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .journal-container p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  form {
+    gap: 1rem;
+  }
+
+  form select,
+  form textarea {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  form button {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .view-entries-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  .confirmation-message {
+    top: 10px;
+    right: 10px;
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    max-width: 90%;
+  }
+
+  .footer-note {
+    font-size: 0.85rem;
+    margin-top: 1.5rem;
+  }
+}
+
