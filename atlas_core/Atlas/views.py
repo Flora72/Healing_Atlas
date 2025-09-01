@@ -15,6 +15,7 @@ import random,json
 from django.utils.timezone import localtime
 from .forms import JournalForm
 from .utils import analyze_sentiment
+from .decorators import basic_required
 
 
 # -------------------------------------------------------
