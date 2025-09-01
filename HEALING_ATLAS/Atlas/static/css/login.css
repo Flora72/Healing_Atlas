@@ -2,9 +2,9 @@
 body {
   margin: 0;
   font-family: 'Inter', 'Segoe UI', sans-serif;
-  background-color: #f6f7fb;
   display: flex;
   justify-content: center;
+  background: url("/static/images/background.jpg") no-repeat center center fixed;
   align-items: center;
   height: 100vh;
   color: #3a3a3a;

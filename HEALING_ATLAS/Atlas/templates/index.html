@@ -6,11 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Healing Atlas</title>
 
-  <!-- Local CSS -->
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter&display=swap" rel="stylesheet">
+
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 </head>
 <body>
   <!-- Navigation -->
@@ -26,8 +29,6 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-bg"></div>
     <div class="hero-content">
       <h1 class="hero-title">Your Digital Sanctuary <span>Begins Here</span></h1>
       <p class="hero-subtitle">Navigate trauma, substance abuse, and post-addiction healing with compassionate support and professional guidance.</p>
@@ -43,17 +44,17 @@
     </div>
     <div class="card-grid">
       <div class="card">
-        <div class="card-icon heart">❤️</div>
+        <div class="card-icon"><i class="fas fa-hand-holding-heart"></i></div>
         <h3>Emotional Support</h3>
         <p>Track your mood, access crisis resources, and connect with professional support when you need it most.</p>
       </div>
       <div class="card">
-        <div class="card-icon shield">🛡️</div>
+        <div class="card-icon"><i class="fas fa-user-shield"></i></div>
         <h3>Safe Space</h3>
         <p>Private journaling, secure sessions, and confidential support in a judgment-free environment.</p>
       </div>
       <div class="card">
-        <div class="card-icon users">👥</div>
+        <div class="card-icon"><i class="fas fa-people-group"></i></div>
         <h3>Community & Growth</h3>
         <p>Connect with others on similar journeys and access curated resources for lasting recovery.</p>
       </div>
@@ -67,7 +68,6 @@
       <p>Flexible membership options designed to support you at every stage of your healing journey.</p>
     </div>
     <div class="tier-grid">
-      <!-- Free Tier -->
       <div class="tier-card">
         <h3>Free</h3>
         <div class="price">$0</div>
@@ -80,7 +80,6 @@
         <a href="{% url 'signup' %}" class="btn tier-btn">Get Started</a>
       </div>
 
-      <!-- Basic Tier -->
       <div class="tier-card popular">
         <div class="badge">Most Popular</div>
         <h3>Basic</h3>
@@ -95,7 +94,6 @@
         <a href="{% url 'signup' %}" class="btn tier-btn">Start Free Trial</a>
       </div>
 
-      <!-- Premium Tier -->
       <div class="tier-card">
         <h3>Premium</h3>
         <div class="price">$49</div>

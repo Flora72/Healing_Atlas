@@ -31,7 +31,7 @@ body {
 /* Left Panel */
 .left-panel {
   flex: 1;
-  background: url("/static/images/signup.png") center/cover no-repeat;
+  background: url("/static/images/background.jpg") center/cover no-repeat;
 }
 
 /* Right Panel */
