@@ -1,9 +1,12 @@
-<!-- resource_detail.html -->
 {% extends 'dashboard.html' %}
+{% load static %}
 {% block title %}{{ resource.title }} | Healing Atlas{% endblock %}
+
 {% block content %}
+  <link rel="stylesheet" href="{% static 'css/resource_detail.css' %}">
+
   <div class="resource-detail-container">
-    <h1>{{ resource.title }} 🌼</h1>
+    <h1>{{ resource.title }}</h1>
     <p><strong>Emotional Tone:</strong> {{ resource.emotional_tone }}</p>
     <p><strong>Tags:</strong>
       {% for tag in resource.tags.all %}
@@ -16,14 +19,117 @@
       <a href="{{ resource.file.url }}" target="_blank" class="download-button">📥 Download Resource</a>
     {% endif %}
 
-    <div class="reflection-box">
-      <h3>Reflective Prompt 💭</h3>
-      <p>How does this resource resonate with your current emotional state?</p>
-      <form method="post">
-        {% csrf_token %}
-        <textarea name="reflection" rows="4" placeholder="Write gently..."></textarea>
-        <button type="submit">Save Reflection</button>
-      </form>
+    <div class="quote-box">
+      <h3>Gentle Quote</h3>
+      <blockquote>
+        “Healing doesn’t mean the damage never existed. It means the damage no longer controls our lives.”<br>
+        <span class="quote-author">— Akshay Dubey</span>
+      </blockquote>
+    </div>
+    <div class="image-gallery">
+  <h3>Healing Imagery</h3>
+  <p>Visuals that evoke calm, clarity, and emotional safety:</p>
+  <div class="image-grid">
+    <div class="image-card">
+      <a href="https://www.unh.edu/health/wellbeing-wheel" target="_blank">
+        <img src="{% static 'images/well-being.png' %}" alt="Well-Being Wheel">
+      </a>
+      <p class="image-description">
+        This article explores the <strong>Well-Being Wheel</strong>, a self-check tool that helps you reflect on eight dimensions of wellness—emotional, physical, social, spiritual, financial, intellectual, occupational, and environmental. A gentle guide for holistic balance.
+      </p>
+    </div>
+
+    <div class="image-card">
+      <a href="https://www.jcu.edu/steps-emotional-wellness" target="_blank">
+        <img src="{% static 'images/emotional-wellness.png' %}" alt="Emotional Wellness Steps">
+      </a>
+      <p class="image-description">
+        This resource from John Carroll University outlines <strong>seven steps to emotional wellness</strong>, including self-care, community support, and skill-building. Ideal for anyone navigating transitions or seeking emotional clarity.
+      </p>
+    </div>
+
+    <div class="image-card">
+      <a href="https://www.mdpi.com/2075-5309/14/2/472" target="_blank">
+        <img src="{% static 'images/mentalgoals.png' %}" alt="Healing Spaces Design">
+      </a>
+      <p class="image-description">
+        This research article investigates how <strong>healing spaces</strong>—through light, color, nature, and design—can support emotional regulation for individuals with mood disorders. A beautiful intersection of architecture and mental health.
+      </p>
+    </div>
+  </div>
+</div>
+    <div class="video-resources">
+      <h3> Healing Videos</h3>
+      <p>Explore these gentle guides to emotional wellness, reflection, and growth:</p>
+      <ul class="video-list">
+        <li>
+          <a href="https://www.youtube.com/watch?v=sgpEZm5anlo" target="_blank">
+            Emotional Wellness
+          </a>
+          <p>A soft introduction to emotional health and why it matters—ideal for grounding and gentle reflection.</p>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=NQcYZplTXnQ" target="_blank">
+            Mental Health Wellness Tips
+          </a>
+          <p>Quick, practical strategies like gratitude, physical care, and seeking support—perfect for daily emotional clarity.</p>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=afq5NTcg4Xg" target="_blank">
+            Free Mental Health Workshops at the Dolton Resource Hub
+          </a>
+          <p>Community-centered healing with free workshops, wellness kits, and peer support—uplifting and inclusive.</p>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=CjZODb4ostY" target="_blank">
+            Healing in Motion: A Day of Mental Wellness for Youth & Adults
+          </a>
+          <p>A vibrant look at how movement, community, and storytelling foster emotional growth and resilience.</p>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=Ayg582X3Gnw" target="_blank">
+            11 Powerful Rituals for Emotional Healing You Need Now
+          </a>
+          <p>Dr. Dawn-Elise Snipes shares rituals like journaling, vagus nerve activation, and forgiveness to support deep healing.</p>
+        </li>
+        <li>
+          <a href="https://www.tiktok.com/@iamyouthyear/video/7535893087063690527" target="_blank">
+            Healing Journey: Steps to Mental Wellness
+          </a>
+          <p>Short, affirming steps to reclaim emotional wellness—ideal for users seeking gentle momentum and clarity.</p>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=5px8DHjvkss" target="_blank">
+            Mental Wellness Chat—Managing Complicated Emotions
+          </a>
+          <p>Dr. Tracey Marks explores emotional triggers, affirmations, and mindfulness—perfect for navigating emotional complexity.</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="article-resources">
+      <h3> Healing Articles</h3>
+      <p>Gentle reads to support your emotional journey:</p>
+      <ul class="article-list">
+        <li>
+          <a href="https://www.medicalnewstoday.com/articles/emotional-wellbeing" target="_blank">
+            Emotional Wellness and Well-being: What It Is, Causes, How to Improve
+          </a>
+          <p>Explore how emotional health affects your body, relationships, and resilience.</p>
+        </li>
+        <li>
+          <a href="https://mercyassistedcare.org/healing-through-connection-the-role-of-emotional-support-in-wellness/" target="_blank">
+            Healing Through Connection: The Role of Emotional Support in Wellness
+          </a>
+          <p>Learn how meaningful relationships foster healing, safety, and emotional clarity.</p>
+        </li>
+        <li>
+          <a href="https://www.nih.gov/health-information/your-healthiest-self-wellness-toolkits/emotional-wellness-toolkit/emotional-wellness-toolkit-more-resources" target="_blank">
+            NIH Emotional Wellness Toolkit
+          </a>
+          <p>Practical tools for navigating stress, change, and emotional growth.</p>
+        </li>
+      </ul>
     </div>
   </div>
 {% endblock %}
