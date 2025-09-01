@@ -11,7 +11,8 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Healing_Atlas.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'atlas_core.settings')
+
 
 
 application = get_asgi_application()
