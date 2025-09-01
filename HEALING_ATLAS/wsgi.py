@@ -11,7 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Healing_Atlas.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HEALING_ATLAS.settings')
 
 
 application = get_wsgi_application()
