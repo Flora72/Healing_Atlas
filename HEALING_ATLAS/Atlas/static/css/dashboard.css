@@ -1,19 +1,30 @@
+:root {
+  --primary-purple: #7c4dff;
+  --soft-lavender: #f3e8ff;
+  --deep-rose: #c04e90;
+  --text-dark: #3a2c4a;
+  --sidebar-bg: #e8d6f7;
+  --tile-bg: #ffffff;
+  --tile-border: #d3b4f0;
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #fdfbff, #fef8f4);
-  color: #333;
+  background: linear-gradient(to bottom right, var(--soft-lavender), #fff);
+  color: var(--text-dark);
   display: flex;
   min-height: 100vh;
 }
 
 .sidebar {
-  width: 220px;
-  background-color: #f4c2c2;
+  width: 240px;
+  background-color: var(--sidebar-bg);
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar nav {
@@ -24,78 +35,84 @@ body {
 
 .sidebar a {
   text-decoration: none;
-  color: #4a2c2a;
-  font-weight: bold;
+  color: var(--text-dark);
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
   transition: background-color 0.2s ease;
 }
 
 .sidebar a:hover {
-  background-color: #fbeaea;
+  background-color: #f0e4ff;
+}
+
+.sidebar i {
+  font-size: 1.2rem;
+  color: var(--primary-purple);
 }
 
 .main-content {
   flex: 1;
-  padding: 2rem;
+  padding: 3rem;
+  background-color: #faf7ff;
 }
 
 .frosted-welcome {
-  max-width: 700px;
+  max-width: 720px;
   margin: 2rem auto;
   padding: 2rem;
   text-align: center;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #4a2c2a;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--text-dark);
   animation: fadeIn 0.8s ease-in-out;
 }
 
 .frosted-welcome h1 {
-  font-size: 2rem;
-  color: #c04e90;
-  margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+  color: var(--deep-rose);
+  margin-bottom: 0.75rem;
 }
 
 .frosted-welcome p {
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1.15rem;
+  line-height: 1.7;
 }
 
 .dashboard-tiles {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .tile {
-  background-color: #fff;
-  border: 2px solid #f4c2c2;
-  border-radius: 10px;
-  padding: 1rem;
+  background-color: var(--tile-bg);
+  border: 2px solid var(--tile-border);
+  border-radius: 12px;
+  padding: 1.2rem;
   text-align: center;
   text-decoration: none;
-  font-weight: bold;
-  color: #4a2c2a;
+  font-weight: 600;
+  color: var(--text-dark);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .tile i {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-bottom: 0.5rem;
-  color: #c04e90;
+  color: var(--primary-purple);
 }
 
 .tile:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 @keyframes fadeIn {
