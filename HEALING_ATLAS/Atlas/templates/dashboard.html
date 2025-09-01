@@ -4,111 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Healing Atlas{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fef8f4;
-      color: #333;
-      display: flex;
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      width: 220px;
-      background-color: #f4c2c2;
-      padding: 2rem 1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .sidebar nav {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .sidebar a {
-      text-decoration: none;
-      color: #4a2c2a;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0.75rem;
-      border-radius: 8px;
-      transition: background-color 0.2s ease;
-    }
-
-    .sidebar a:hover {
-      background-color: #fbeaea;
-    }
-
-    .main-content {
-      flex: 1;
-      padding: 2rem;
-    }
-
-    .frosted-welcome {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #4a2c2a;
-      transition: opacity 0.6s ease;
-    }
-
-    .frosted-welcome h1 {
-      font-size: 2rem;
-      color: #c04e90;
-      margin-bottom: 0.5rem;
-    }
-
-    .frosted-welcome p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
-    .dashboard-tiles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-    }
-
-    .tile {
-      display: block;
-      background-color: #fff;
-      border: 2px solid #f4c2c2;
-      border-radius: 10px;
-      padding: 1rem;
-      text-align: center;
-      text-decoration: none;
-      font-weight: bold;
-      color: #4a2c2a;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .tile:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 2rem;
-    }
-  </style>
 </head>
 <body>
   <aside class="sidebar">
@@ -118,7 +15,7 @@
       <a href="{% url 'substance_support' %}"><i class="fas fa-leaf"></i> Substance Support</a>
       <a href="{% url 'mood_tracker' %}"><i class="fas fa-chart-line"></i> Mood Tracker</a>
       <a href="{% url 'journal' %}"><i class="fas fa-book"></i> Journal</a>
-      <a href="{% url 'test_chart' %}"><i class="fas fa-heart-rate"></i> Sentiment Chart</a> 
+      <a href="{% url 'test_chart' %}"><i class="fas fa-heart-rate"></i> Sentiment Chart</a>
       <a href="{% url 'resources' %}"><i class="fas fa-folder-open"></i> Resources</a>
       <a href="{% url 'affirmations' %}"><i class="fas fa-comment-dots"></i> Affirmations</a>
       <a href="{% url 'settings' %}"><i class="fas fa-cog"></i> Settings</a>
@@ -126,10 +23,10 @@
     </nav>
   </aside>
 
+  <main class="main-content">
     {% block content %}
     <!-- Page-specific content goes here -->
     {% endblock %}
   </main>
-
 </body>
 </html>
