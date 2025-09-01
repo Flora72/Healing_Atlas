@@ -1,5 +1,11 @@
 {% extends 'dashboard.html' %}
+{% load static %}
 {% block title %}Mental Health | Healing Atlas{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/mental_health.css' %}">
+{% endblock %}
+
 {% block content %}
   <div class="container mental-health-bg">
     <section class="section intro">

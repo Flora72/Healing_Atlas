@@ -1,0 +1,23 @@
+/* emotion_chart.css */
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff7f4;
+  color: #4a2c2a;
+  padding: 2rem;
+}
+
+.chart-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #c04e90;
+}

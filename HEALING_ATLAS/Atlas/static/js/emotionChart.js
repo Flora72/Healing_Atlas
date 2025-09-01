@@ -1,53 +1,91 @@
-document.addEventListener("DOMContentLoaded", function () {
-  if (!emotionData || emotionData.length === 0) return;
+fetch('/emotion-data/')
+  .then(response => response.json())
+  .then(data => {
+    const emotionData = data.emotion_data;  // ✅ Accessing the correct key
 
-  const ctx = document.getElementById("emotionChart").getContext("2d");
+    const moodColors = {
+      hopeful: '#f7b7a3',
+      positive: '#a3f7bf',
+      anxious: '#f7d6a3',
+      tired: '#d1d1d1',
+      grateful: '#f7a3e0',
+      calm: '#a3d1f7'
+    };
 
-  const labels = emotionData.map(item => item.date);
-  const scores = emotionData.map(item => item.score);
-  console.log("Chart script loaded");
-
-
-  new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: labels,
-      datasets: [{
-        label: "Emotional Score",
-        data: scores,
-        borderColor: "#6A5ACD",
-        backgroundColor: "rgba(106, 90, 205, 0.2)",
-        fill: true,
-        tension: 0.3,
-        pointRadius: 4,
-        pointHoverRadius: 6
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        title: {
-          display: true,
-          text: "Emotional Resonance Over Time",
-          font: {
-            size: 18
+    const ctx = document.getElementById('emotionChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: emotionData.map(d => d.date),
+        datasets: [{
+          label: 'Sentiment Score',
+          data: emotionData.map(d => d.score),
+          borderColor: '#d16ba5',
+          backgroundColor: 'rgba(209,107,165,0.2)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+          pointBackgroundColor: emotionData.map(d => moodColors[d.sentiment] || '#d16ba5')
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: {
+          duration: 1200,
+          easing: 'easeOutQuart'
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Emotional Landscape',
+            font: {
+              size: 18,
+              weight: 'bold'
+            },
+            color: '#c04e90'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const index = context.dataIndex;
+                const sentiment = emotionData[index].sentiment;
+                const note = emotionData[index].note || '';
+                return `Score: ${context.formattedValue} (${sentiment})\n${note}`;
+              }
+            }
+          },
+          legend: {
+            display: true,
+            labels: {
+              color: '#4a2c2a'
+            }
           }
         },
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              const sentiment = emotionData[context.dataIndex].sentiment;
-              return `Score: ${context.raw} (${sentiment})`;
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Date',
+              color: '#4a2c2a'
+            },
+            ticks: {
+              color: '#4a2c2a'
+            }
+          },
+          y: {
+            beginAtZero: true,
+            max: 1,
+            title: {
+              display: true,
+              text: 'Sentiment Score',
+              color: '#4a2c2a'
+            },
+            ticks: {
+              color: '#4a2c2a'
             }
           }
         }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 1
-        }
       }
-    }
+    });
   });
-});

@@ -361,7 +361,8 @@ def dashboard_view(request):
 import json
 from django.utils.timezone import localtime
 from .models import JournalEntry, MoodEntry
-
+from django.contrib.auth.decorators import login_required
+@login_required
 def test_chart(request):
     mood_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:10]
     emotion_data = [
