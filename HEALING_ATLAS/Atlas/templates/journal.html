@@ -9,42 +9,26 @@
 {% endblock %}
 
 {% block content %}
-  <div class="journal-container">
-    <h1><i class="fas fa-book"></i> Your Journal</h1>
-    <p>This space is yours — write freely, gently, and without judgment.</p>
+<div class="journal-container">
+  <h1><i class="fas fa-book"></i> Your Journal</h1>
+  <p>This space is yours — write freely, gently, and without judgment.</p>
 
-    <form method="post">
-      {% csrf_token %}
-      <label for="mood">Mood Tag:</label>
-      <select name="mood" id="mood">
-        <option value="calm">Calm</option>
-        <option value="anxious">Anxious</option>
-        <option value="hopeful">Hopeful</option>
-        <option value="tired">Tired</option>
-        <option value="grateful">Grateful</option>
-      </select>
+  <form method="post">
+    {% csrf_token %}
+    <label for="mood">Mood Tag:</label>
+    <select name="mood" id="mood">
+      <option value="calm">Calm</option>
+      <option value="anxious">Anxious</option>
+      <option value="hopeful">Hopeful</option>
+      <option value="tired">Tired</option>
+      <option value="grateful">Grateful</option>
+    </select>
 
-      <label for="entry">Journal Entry:</label>
-      <textarea name="entry" id="entry" rows="6" placeholder="Write what’s on your heart..."></textarea>
+    <label for="entry">Journal Entry:</label>
+    <textarea name="entry" id="entry" rows="6" placeholder="Write what’s on your heart..."></textarea>
 
-      <button type="submit">Save Entry</button>
-    </form>
-
-    <div class="footer-note">© 2025 Healing Atlas. Your words matter here.</div>
-  </div>
-
-  {% if journal_entries %}
-    <div class="chart-container">
-      <h2><i class="fas fa-chart-area"></i> Emotional Reflections</h2>
-      {% for entry in journal_entries %}
-        <div class="journal-card">
-          <div class="journal-date"><i class="fas fa-calendar-day"></i> {{ entry.date }}</div>
-          <div class="journal-mood"><strong>Mood:</strong> {{ entry.mood|title }}</div>
-          <div class="journal-text">{{ entry.text }}</div>
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
+    <button type="submit">Save Entry</button>
+  </form>
 
   {% if messages %}
     <div class="confirmation-message">
@@ -53,4 +37,31 @@
       {% endfor %}
     </div>
   {% endif %}
+</div>
+
+{% if journal_entries %}
+<div class="chart-container">
+  <h2><i class="fas fa-chart-area"></i> Emotional Reflections</h2>
+  {% for entry in journal_entries %}
+    <div class="journal-card">
+      <div class="journal-date">
+        <i class="fas fa-calendar-day"></i> {{ entry.created_at|date:"M d, Y H:i" }}
+      </div>
+      <div class="journal-mood">
+        <strong>Mood:</strong> {{ entry.sentiment_label|title }}
+      </div>
+      <div class="journal-sentiment">
+        <strong>Sentiment Score:</strong> {{ entry.sentiment_score|floatformat:2 }}
+      </div>
+      <div class="journal-text">
+        {{ entry.content }}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+  <p class="no-entries">No journal entries yet. Your story begins here.</p>
+{% endif %}
+
+<div class="footer-note">© 2025 Healing Atlas. Your words matter here.</div>
 {% endblock %}

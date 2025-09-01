@@ -156,33 +156,44 @@ def affirmations(request):
 # -------------------------------------------------------
 #                    JOURNAL VIEWS 
 # -------------------------------------------------------
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.utils.timezone import localtime
+from Healing_Atlas.Atlas.models import JournalEntry
+import json
+
 @login_required
 def journal_view(request):
     if request.method == 'POST':
         mood = request.POST.get('mood')
         entry = request.POST.get('entry')
+
         if mood and entry:
             JournalEntry.objects.create(
                 user=request.user,
-                mood_label=mood,
+                sentiment_label=mood,       
                 content=entry,
-                sentiment_score=0.5  # placeholder until analysis
+                sentiment_score=0.5         
             )
             messages.success(request, "Your journal entry has been saved. Thank you for sharing.")
+            return redirect('journal')    
 
-            return redirect('journal')
-
+    # Fetch latest entries for the logged-in user
     journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')[:10]
+
+    # Prepare emotion data for charting or future visualizations
     emotion_data = [
         {
             "date": localtime(entry.created_at).strftime("%Y-%m-%d"),
             "score": entry.sentiment_score,
-            "sentiment": entry.mood_label
+            "sentiment": entry.sentiment_label
         }
         for entry in journal_entries
     ]
 
     context = {
+        "journal_entries": journal_entries,
         "emotion_data_json": json.dumps(emotion_data),
         "show_chart": True
     }

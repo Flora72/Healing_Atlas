@@ -18,6 +18,7 @@ load_dotenv()
 
 HUGGINGFACE_API_KEY = os.getenv("HF_TOKEN")
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
