@@ -61,64 +61,66 @@
     </div>
   </section>
 
-  <!-- Membership Tiers -->
-  <section class="tiers">
-    <div class="section-header">
-      <h2>Choose Your Path</h2>
-      <p>Flexible membership options designed to support you at every stage of your healing journey.</p>
+<!-- Membership Tiers -->
+<section class="tiers">
+  <div class="section-header">
+    <h2>Choose Your Path</h2>
+    <p>Flexible membership options designed to support you at every stage of your healing journey.</p>
+  </div>
+  <div class="tier-grid">
+    
+    <!-- Free Tier -->
+    <div class="tier-card free">
+      <h3>Free</h3>
+      <div class="price">KES 0</div>
+      <p class="duration">Forever</p>
+      <p class="tier-note">Begin your journey with essential tools for grounding and support.</p>
+      <ul>
+        <li>Basic mood tracking</li>
+        <li>Crisis resources</li>
+        <li>Limited journaling</li>
+      </ul>
+      <a href="{% url 'signup' %}" class="btn tier-btn">Get Started</a>
     </div>
-    <div class="tier-grid">
-      <!-- Free Tier -->
-      <div class="tier-card">
-        <h3>Free</h3>
-        <div class="price">KES 0</div>
-        <p class="duration">Forever</p>
-        <ul>
-          <li>Basic mood tracking</li>
-          <li>Crisis resources</li>
-          <li>Limited journaling</li>
-        </ul>
-        <a href="{% url 'signup' %}" class="btn tier-btn">Get Started</a>
-      </div>
 
-      <!-- Basic Tier -->
-      <div class="tier-card popular">
-        <div class="badge">Most Popular</div>
-        <h3>Basic</h3>
-        <div class="price">KES 500</div>
-        <p class="duration">per month</p>
-        <ul>
-          <li>Advanced mood analytics</li>
-          <li>Unlimited journaling</li>
-          <li>Resource library access</li>
-          <li>Email support</li>
-        </ul>
-        <p class="tier-note">Gentle support, curated tools, and space to grow—one step at a time.</p>
-        <a href="https://paystack.shop/pay/ug8d6z8u3x" class="btn tier-btn">Subscribe</a>
-      </div>
-
-      <!-- Premium Tier -->
-      <div class="tier-card">
-        <h3>Premium</h3>
-        <div class="price">KES 1,500</div>
-        <p class="duration">per month</p>
-        <ul>
-          <li>1-on-1 counselor sessions</li>
-          <li>Priority support</li>
-          <li>Custom wellness plans</li>
-          <li>Community access</li>
-        </ul>
-        <p class="tier-note">Step into deeper healing with full access to therapeutic tools and personalized care.</p>
-        <a href="hhttps://paystack.shop/pay/7rscp754gf" class="btn tier-btn">Subscribe</a>
-      </div>
+    <!-- Basic Tier -->
+    <div class="tier-card basic popular">
+      <div class="badge">Most Popular</div>
+      <h3>Basic</h3>
+      <div class="price">KES 500</div>
+      <p class="duration">per month</p>
+      <p class="tier-note">Grow gently with curated resources, journaling, and emotional insights.</p>
+      <ul>
+        <li>Expanded journaling tools</li>
+        <li>Weekly emotional check-ins</li>
+        <li>Access to curated healing content</li>
+      </ul>
+      <a href="https://paystack.shop/pay/ug8d6z8u3x?redirect_url=http://127.0.0.1:8000/payment_confirmation/" class="btn tier-btn">Get Started</a>
     </div>
-  </section>
+
+    <!-- Premium Tier -->
+    <div class="tier-card premium">
+      <h3>Premium</h3>
+      <div class="price">KES 1,500</div>
+      <p class="duration">per month</p>
+      <p class="tier-note">Step into deeper healing with personalized care and full access.</p>
+      <ul>
+        <li>Full access to all tools</li>
+        <li>Personalized therapeutic guidance</li>
+        <li>Priority support & private sessions</li>
+      </ul>
+      <a href="https://paystack.shop/pay/7rscp754gf?redirect_url=http://127.0.0.1:8000/payment_confirmation/" class="btn tier-btn">Get Started</a>
+    </div>
+
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer class="footer">
     <h3>Healing Atlas</h3>
     <p>Your sanctuary begins here. Every step forward is progress.</p>
-    <a href="{% url 'signup' %}" class="btn healing">Begin Your Journey →</a>
+    <a href="{% url 'signup' %}" class="btn healing">Begin Your Journey</a>
   </footer>
 
   <!-- Local JS -->

@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
 
 body {
@@ -138,6 +137,7 @@ p {
 .card-icon {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #6b5ec4;
 }
 
 /* Tiers Section */
@@ -163,20 +163,9 @@ p {
   position: relative;
 }
 
-.tier-card.popular {
-  border: 2px solid #6b5ec4;
-}
-
-.badge {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #6b5ec4;
-  color: white;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
+.tier-card h3 {
+  font-size: 1.5rem;
+  color: #4b3ca7;
 }
 
 .price {
@@ -191,6 +180,12 @@ p {
   margin-bottom: 1rem;
 }
 
+.tier-note {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
 .tier-card ul {
   list-style: none;
   padding: 0;
@@ -199,15 +194,73 @@ p {
 
 .tier-card li {
   margin-bottom: 0.5rem;
+  font-size: 0.95rem;
 }
 
-.tier-btn {
+/* Affirmation */
+.tier-affirmation {
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* Badge */
+.badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #6b5ec4;
   color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+/* Tier Buttons */
+.tier-btn {
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+/* Free Tier */
+.tier-card.free .tier-btn {
+  background-color: #a3d2ca;
+  color: white;
+}
+
+.tier-card.free .tier-btn:hover {
+  background-color: #8bbcb3;
+}
+
+/* Basic Tier */
+.tier-card.basic .tier-btn {
+  background-color: #6b5ec4;
+  color: white;
+}
+
+.tier-card.basic .tier-btn:hover {
+  background-color: #594bb0;
+}
+
+/* Premium Tier */
+.tier-card.premium .tier-btn {
+  background-color: #4b3ca7;
+  color: white;
+}
+
+.tier-card.premium .tier-btn:hover {
+  background-color: #3a2f8c;
+}
+
+/* Popular Border */
+.tier-card.popular {
+  border: 2px solid #6b5ec4;
 }
 
 /* Footer */
@@ -225,9 +278,4 @@ p {
 .footer p {
   margin-bottom: 1.5rem;
   color: #555;
-}
-.card-icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #6b5ec4;
 }
