@@ -3,62 +3,21 @@
 {% block title %}Affirmation Generator | Healing Atlas{% endblock %}
 
 {% block content %}
-  <style>
-    .affirmation-background {
-      background-image: url("{% static 'images/affirmation-bg.jpg' %}");
-      background-size: cover;
-      background-position: center;
-      padding: 10vh 0;
-    }
-
-    .affirmation-box {
-      backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.4);
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: auto;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      font-family: 'Helvetica', sans-serif;
-      color: #333;
-    }
-
-    h1 {
-      font-size: 2rem;
-      color: #d16ba5;
-      margin-bottom: 1rem;
-    }
-
-    blockquote {
-      font-size: 1.2rem;
-      font-style: italic;
-      margin: 1rem 0;
-      color: #444;
-    }
-
-    button {
-      padding: 0.75rem 1.5rem;
-      background-color: #d16ba5;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #c04e90;
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'css/affirmation_generator.css' %}">
 
   <div class="affirmation-background">
     <div class="affirmation-box">
-      <h1>Your Affirmation 🌸</h1>
-      <blockquote>{{ affirmation }}</blockquote>
+      <div class="affirmation-header">
+        <h1>Daily Affirmation</h1>
+        <p class="subtitle">A gentle reminder for your heart and mind</p>
+      </div>
+
+      <div class="affirmation-content">
+        <blockquote>{{ affirmation }}</blockquote>
+      </div>
+
       <form method="get">
-        <button type="submit">Give Me Another</button>
+        <button type="submit" class="refresh-button">Give Me Another</button>
       </form>
     </div>
   </div>

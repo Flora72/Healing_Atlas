@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  background-color: #f9f7fc;
+  color: #3a2c3b;
+}
+
+.affirmation-background {
+  padding: 8vh 0;
+  background-color: #f4f0fa;
+}
+
+.affirmation-box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.affirmation-header h1 {
+  font-size: 1.8rem;
+  color: #6a4c93;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #7e6c9c;
+  margin-bottom: 2rem;
+}
+
+.affirmation-content blockquote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #4b3b5a;
+  background-color: #f6f2fc;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid #b39ddb;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.refresh-button {
+  background-color: #6a4c93;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.refresh-button:hover {
+  background-color: #5a3d7d;
+}
+
+@media screen and (max-width: 600px) {
+  .affirmation-box {
+    padding: 2rem;
+  }
+
+  .affirmation-content blockquote {
+    font-size: 1rem;
+  }
+}
