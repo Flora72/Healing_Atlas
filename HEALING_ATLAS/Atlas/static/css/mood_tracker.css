@@ -1,12 +1,13 @@
-/* mood_tracker.css */
-
+/* Shared Base Styling */
 body {
-  background-color: #fff7f4;
+  background-color: #f8f5fc;
   font-family: 'Segoe UI', sans-serif;
   color: #4a2c2a;
   padding: 2rem;
+  line-height: 1.6;
 }
 
+/* Mood Tracker Container */
 .mood-tracker-container {
   max-width: 700px;
   margin: 0 auto;
@@ -18,14 +19,16 @@ body {
 
 .mood-tracker-container h1 {
   text-align: center;
-  color: #c04e90;
+  color: #6a1b9a; /* Deep purple */
   margin-bottom: 1.5rem;
 }
 
+/* Form Styling */
 form label {
   display: block;
   margin-top: 1rem;
   font-weight: bold;
+  color: #5e35b1;
 }
 
 form select,
@@ -34,13 +37,13 @@ form textarea {
   padding: 0.75rem;
   margin-top: 0.5rem;
   border-radius: 8px;
-  border: 1px solid #ddd;
-  background-color: #fffaf8;
+  border: 1px solid #d1c4e9;
+  background-color: #f9f6ff;
 }
 
 form button {
   margin-top: 1.5rem;
-  background-color: #c04e90;
+  background-color: #7c4dff;
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -50,7 +53,7 @@ form button {
 }
 
 form button:hover {
-  background-color: #a03b75;
+  background-color: #5e35b1;
 }
 
 .footer-note {
@@ -60,7 +63,7 @@ form button:hover {
   color: #a38c8b;
 }
 
-/* Floating Emotion Cards */
+/* Emotion Cards */
 .chart-container {
   margin-top: 3rem;
   display: grid;
@@ -69,132 +72,13 @@ form button:hover {
 
 .chart-container h2 {
   text-align: center;
-  color: #c04e90;
+  color: #6a1b9a;
   margin-bottom: 1rem;
 }
 
-.chart-container pre {
-  background-color: #fffaf8;
-  border-left: 6px solid #c04e90;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-/* Confirmation Popup */
-.confirmation-message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #a3f7bf;
-  color: #2a4a2a;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-  z-index: 999;
-  animation: fadeIn 0.6s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-/* mental_health.css */
-
-body {
-  background-color: #fff7f4;
-  font-family: 'Segoe UI', sans-serif;
-  color: #4a2c2a;
-  line-height: 1.6;
-}
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-}
-
-.section {
-  margin-bottom: 3rem;
-}
-
-.section h1,
-.section h2 {
-  color: #c04e90;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-.section p {
-  font-size: 1rem;
-  color: #5a3c3a;
-}
-
-.section ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.section ul li {
-  background-color: #fffaf8;
-  margin-bottom: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-left: 6px solid #c04e90;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.section ul li i {
-  color: #c04e90;
-  font-size: 1.2rem;
-}
-
-.section a {
-  color: #c04e90;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.section a:hover {
-  text-decoration: underline;
-}
-
-.emergency {
-  background-color: #fff0f0;
-  padding: 1.5rem;
-  border-radius: 12px;
-  border-left: 6px solid #e05c5c;
-}
-
-.emergency h2 {
-  color: #e05c5c;
-}
-
-.emergency ul li {
-  border-left-color: #e05c5c;
-}
-
-@media screen and (max-width: 768px) {
-  .container {
-    padding: 1rem;
-  }
-
-  .section ul li {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
 .emotion-card {
-  background-color: #fffaf8;
-  border-left: 6px solid #c04e90;
+  background-color: #f9f6ff;
+  border-left: 6px solid #7c4dff;
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -212,4 +96,109 @@ body {
 .emotion-card .emotion-score,
 .emotion-card .emotion-sentiment {
   color: #6a4a48;
+}
+
+/* Confirmation Popup */
+.confirmation-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #d1c4e9;
+  color: #4a2c2a;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  z-index: 999;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mental Health Cards */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.section h1,
+.section h2 {
+  color: #6a1b9a;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.section p {
+  font-size: 1rem;
+  color: #5a3c3a;
+}
+
+.section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.section ul li {
+  background-color: #f9f6ff;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-left: 6px solid #7c4dff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section ul li i {
+  color: #7c4dff;
+  font-size: 1.2rem;
+}
+
+.section a {
+  color: #5e35b1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.section a:hover {
+  text-decoration: underline;
+}
+
+/* Emergency Section */
+.emergency {
+  background-color: #fce4ec;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 6px solid #ba68c8;
+}
+
+.emergency h2 {
+  color: #ba68c8;
+}
+
+.emergency ul li {
+  border-left-color: #ba68c8;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .section ul li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

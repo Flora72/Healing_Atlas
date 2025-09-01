@@ -1,62 +1,71 @@
-/* journal.css */
+/* Shared Base Styling */
+body {
+  background-color: #f8f5fc;
+  font-family: 'Segoe UI', sans-serif;
+  color: #4a2c2a;
+  padding: 2rem;
+  line-height: 1.6;
+}
 
+/* Journal Container */
 .journal-container {
   max-width: 700px;
-  margin: 3rem auto;
+  margin: 0 auto;
+  background: #ffffff;
   padding: 2rem;
-  background-color: #f7f4fb;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  font-family: 'Segoe UI', sans-serif;
-  color: #333;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
 .journal-container h1 {
-  font-size: 2rem;
-  color: #7c4dff;
-  margin-bottom: 1rem;
+  text-align: center;
+  color: #6a1b9a;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .journal-container p {
   font-size: 1rem;
   margin-bottom: 2rem;
-  color: #555;
+  color: #5a3c3a;
 }
 
+/* Form Styling */
 form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-label {
-  font-weight: 600;
+form label {
+  font-weight: bold;
   color: #5e35b1;
 }
 
-select,
-textarea {
-  padding: 0.75rem 1rem;
-  border: 2px solid #d1c4e9;
+form select,
+form textarea {
+  width: 100%;
+  padding: 0.75rem;
   border-radius: 8px;
+  border: 1px solid #d1c4e9;
+  background-color: #f9f6ff;
   font-size: 1rem;
-  background-color: #fff;
   transition: border-color 0.3s ease;
 }
 
-select:focus,
-textarea:focus {
+form textarea::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+form select:focus,
+form textarea:focus {
   border-color: #7c4dff;
   outline: none;
   box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.1);
 }
 
-textarea::placeholder {
-  color: #aaa;
-  font-style: italic;
-}
-
-button[type="submit"] {
+form button {
   align-self: flex-start;
   padding: 0.75rem 1.5rem;
   background-color: #7c4dff;
@@ -69,21 +78,27 @@ button[type="submit"] {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
+form button:hover {
   background-color: #5e35b1;
   transform: translateY(-1px);
 }
 
+/* Footer Note */
 .footer-note {
   text-align: center;
-  padding-top: 2rem;
+  margin-top: 2rem;
   font-size: 0.9rem;
-  color: #888;
+  color: #a38c8b;
 }
 
+/* Emotional Reflections Section */
 .chart-container {
+  margin-top: 3rem;
+  display: grid;
+  gap: 1rem;
   max-width: 700px;
-  margin: 3rem auto;
+  margin-left: auto;
+  margin-right: auto;
   padding: 2rem;
   background-color: #f3e5f5;
   border-radius: 12px;
@@ -91,6 +106,75 @@ button:hover {
 }
 
 .chart-container h2 {
+  text-align: center;
   color: #6a1b9a;
   margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+/* Journal Entry Cards */
+.journal-card {
+  background-color: #f9f6ff;
+  border-left: 6px solid #7c4dff;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.journal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.journal-date {
+  font-weight: bold;
+  color: #4a2c2a;
+  font-size: 0.95rem;
+}
+
+.journal-mood {
+  color: #5e35b1;
+  font-weight: 500;
+}
+
+.journal-text {
+  color: #6a4a48;
+  font-style: italic;
+  white-space: pre-wrap;
+}
+
+/* Confirmation Popup */
+.confirmation-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #d1c4e9;
+  color: #4a2c2a;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  z-index: 999;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Layout */
+@media screen and (max-width: 768px) {
+  .journal-container,
+  .chart-container {
+    padding: 1rem;
+  }
+
+  .journal-card {
+    font-size: 0.9rem;
+  }
 }

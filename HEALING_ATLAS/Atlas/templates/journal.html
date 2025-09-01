@@ -5,6 +5,7 @@
 
 {% block extra_head %}
   <link rel="stylesheet" href="{% static 'css/journal.css' %}">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block content %}
@@ -32,10 +33,16 @@
     <div class="footer-note">© 2025 Healing Atlas. Your words matter here.</div>
   </div>
 
-  {% if emotion_data_json %}
+  {% if journal_entries %}
     <div class="chart-container">
       <h2><i class="fas fa-chart-area"></i> Emotional Reflections</h2>
-      <pre>{{ emotion_data_json }}</pre>
+      {% for entry in journal_entries %}
+        <div class="journal-card">
+          <div class="journal-date"><i class="fas fa-calendar-day"></i> {{ entry.date }}</div>
+          <div class="journal-mood"><strong>Mood:</strong> {{ entry.mood|title }}</div>
+          <div class="journal-text">{{ entry.text }}</div>
+        </div>
+      {% endfor %}
     </div>
   {% endif %}
 
