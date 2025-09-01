@@ -1,0 +1,132 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #f5f0ec;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .checkout-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    min-height: 80vh;
+  }
+
+  .checkout-card {
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .checkout-title {
+    font-size: 2rem;
+    color: #3e3e3e;
+    margin-bottom: 1rem;
+  }
+
+  .checkout-tier {
+    font-size: 1.2rem;
+    color: #5eaaa8;
+    margin-bottom: 0.5rem;
+  }
+
+  .checkout-price {
+    font-size: 1.5rem;
+    color: #a3d2ca;
+    margin-bottom: 1.5rem;
+  }
+
+  .checkout-features {
+    text-align: left;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+  }
+
+  .checkout-features li {
+    margin-bottom: 0.5rem;
+    color: #666;
+  }
+
+  .btn-paystack {
+    background-color: #5eaaa8;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin-top: 1rem;
+  }
+
+  .btn-paystack:hover {
+    background-color: #489b99;
+  }
+
+  .checkout-note {
+    font-size: 0.95rem;
+    color: #888;
+    margin-top: 2rem;
+  }
+
+  .btn-dashboard {
+    background-color: #a3d2ca;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 1rem;
+    display: inline-block;
+  }
+
+  .btn-dashboard:hover {
+    background-color: #8bbcb3;
+  }
+</style>
+
+<div class="checkout-wrapper">
+  <div class="checkout-card">
+    {% if tier == 'premium' and user.subscription_status == 'active' %}
+      <h2 class="checkout-title">You're already on the Premium Tier</h2>
+      <p class="checkout-tier">Thank you for supporting Healing Atlas</p>
+      <p class="checkout-price">KES 1,500 / monthly</p>
+      <p class="checkout-note">
+        Your subscription is active and includes full access to all healing tools, emotion charts, journaling, and priority support.
+      </p>
+      <a href="{% url 'dashboard' %}" class="btn-dashboard">Return to Dashboard</a>
+    {% else %}
+      <h2 class="checkout-title">Upgrade to {{ tier|title }} Tier</h2>
+      <p class="checkout-tier">Your healing tools await</p>
+      <p class="checkout-price">{{ price }}</p>
+
+      <ul class="checkout-features">
+        {% for feature in features %}
+          <li>✓ {{ feature }}</li>
+        {% endfor %}
+      </ul>
+
+      <a href="https://paystack.shop/pay/7rscp754gf" class="btn-paystack">
+        {% if tier == 'premium' %}Subscribe to Premium{% else %}Subscribe to Basic{% endif %}
+      </a>
+
+      <p class="checkout-note">
+        Your healing journey is valid, and this space is here to support you.
+      </p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

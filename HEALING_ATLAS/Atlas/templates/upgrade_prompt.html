@@ -1,0 +1,110 @@
+{% extends 'dashboard.html' %}
+{%load static%}
+
+{% block content %}
+<style>
+  body {
+    background-color: #f5f0ec;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .upgrade-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+  }
+
+  .upgrade-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .upgrade-title {
+    font-size: 2rem;
+    color: #3e3e3e;
+    margin-bottom: 1rem;
+  }
+
+  .upgrade-message {
+    font-size: 1.1rem;
+    color: #666666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .upgrade-options {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .upgrade-options a {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-basic {
+    background-color: #a3d2ca;
+    color: #fff;
+  }
+
+  .btn-basic:hover {
+    background-color: #8bbcb3;
+  }
+
+  .btn-premium {
+    background-color: #5eaaa8;
+    color: #fff;
+  }
+
+  .btn-premium:hover {
+    background-color: #489b99;
+  }
+
+  .upgrade-note {
+    font-size: 0.9rem;
+    color: #999999;
+  }
+
+  .upgrade-note a {
+    color: #5eaaa8;
+    text-decoration: underline;
+  }
+</style>
+
+<div class="upgrade-wrapper">
+  <div class="upgrade-card">
+    <h2 class="upgrade-title">This feature is part of your healing journey</h2>
+    <p class="upgrade-message">
+      To access emotion charts, journaling, and personalized insights, please upgrade your membership.<br>
+      Healing Atlas is built to support you—each tier unlocks deeper tools for reflection and growth.
+    </p>
+
+    <div class="upgrade-options">
+      <a href="{% url 'paystack_checkout' %}?tier=basic" class="btn-basic">Upgrade to Basic</a>
+      <a href="{% url 'paystack_checkout' %}?tier=premium" class="btn-premium">Upgrade to Premium</a>
+    </div>
+
+    <p class="upgrade-note">
+      Already upgraded? <a href="{% url 'dashboard' %}">Return to your dashboard</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

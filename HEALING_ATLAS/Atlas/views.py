@@ -385,6 +385,8 @@ def test_chart(request):
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from .decorators import basic_required 
+
 
 @login_required
 def emotion_chart(request):
@@ -414,14 +416,114 @@ def delete_entry(request, entry_id):
         return redirect('journal_entries')
     return render(request, 'confirm_delete.html', {'entry': entry})
 
-
-from django.shortcuts import render
 from .models import MoodEntry 
-from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def view_checkins(request):
     checkins = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')
     return render(request, 'view_checkins.html', {'checkins': checkins})
 
+
+@login_required
+def verify_payment(request):
+    reference = request.GET.get('reference')
+    headers = {
+        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"
+    }
+    url = f"https://api.paystack.co/transaction/verify/{reference}"
+    response = requests.get(url, headers=headers)
+    data = response.json()
+
+    if data['status'] and data['data']['status'] == 'success':
+        amount = data['data']['amount'] 
+        user = request.user
+
+        # Assign membership tier based on amount
+        if amount == 500:
+            user.membership = 'basic'
+        elif amount == 1500:
+            user.membership = 'premium'
+        user.save()
+
+        return render(request, 'payment_success.html', {'tier': user.membership})
+    else:
+        return render(request, 'payment_failed.html')
+
+
+def upgrade_prompt(request):
+    return render(request, 'upgrade_prompt.html')
+
+
+def paystack_checkout(request):
+    tier = request.GET.get('tier', 'basic')
+    context = {
+        'tier': tier,
+        'price': 'KES 500' if tier == 'basic' else 'KES 1200',
+        'features': [
+            'Emotion charts',
+            'Journaling tools',
+            'Mood tracking',
+            'Resource library',
+            'Priority support' if tier == 'premium' else 'Standard support'
+        ]
+    }
+
+    return render(request, 'checkout.html', context)
+
+import requests
+from django.conf import settings
+
+def payment_confirmation(request):
+    reference = request.GET.get('reference')
+    tier = request.GET.get('tier', 'basic')
+
+    headers = {
+        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"
+    }
+
+    url = f"https://api.paystack.co/transaction/verify/{reference}"
+    response = requests.get(url, headers=headers)
+    result = response.json()
+
+    if result['status'] and result['data']['status'] == 'success':
+        # You can update user's subscription status here
+        return render(request, 'payment_confirmation.html', {
+            'tier': tier,
+            'status': 'success',
+            'amount': result['data']['amount'] / 100,  
+            'reference': reference
+        })
+    else:
+        return render(request, 'payment_confirmation.html', {
+            'tier': tier,
+            'status': 'failed',
+            'reference': reference
+        })
+    
+@login_required
+@basic_required
+def premium_insights(request):
+    if not request.user.profile.is_premium:
+        messages.warning(request, "This feature is available to premium members.")
+        return redirect('dashboard')
+    return render(request, 'premium_insights.html')
+
+from django.urls import reverse
+
+def initiate_payment(request):
+    callback_url = request.build_absolute_uri(reverse('payment_confirmation'))
+    headers = {
+        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "email": request.user.email,
+        "amount": 5000 * 100,  # amount in kobo
+        "callback_url": callback_url
+    }
+    response = requests.post("https://api.paystack.co/transaction/initialize", 
+                             headers=headers, json=data)
+    res_data = response.json()
+    return redirect(res_data['data']['authorization_url'])
 

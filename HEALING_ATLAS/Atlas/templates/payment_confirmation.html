@@ -1,0 +1,14 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+<div style="padding: 4rem; text-align: center;">
+  <h2 style="color: #5eaaa8;">Subscription Successful </h2>
+  <p style="font-size: 1.1rem; color: #666;">
+    Thank you for upgrading your Healing Atlas membership.<br>
+    You now have full access to all healing tools and resources.
+  </p>
+  <a href="{% url 'dashboard' %}" style="margin-top: 2rem; display: inline-block; background-color: #5eaaa8; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none;">
+    Return to Dashboard
+  </a>
+</div>
+{% endblock %}

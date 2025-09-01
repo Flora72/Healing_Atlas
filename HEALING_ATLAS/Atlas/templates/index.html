@@ -7,7 +7,7 @@
   <title>Healing Atlas</title>
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter&display=swap" rel="stylesheet">
@@ -68,9 +68,10 @@
       <p>Flexible membership options designed to support you at every stage of your healing journey.</p>
     </div>
     <div class="tier-grid">
+      <!-- Free Tier -->
       <div class="tier-card">
         <h3>Free</h3>
-        <div class="price">$0</div>
+        <div class="price">KES 0</div>
         <p class="duration">Forever</p>
         <ul>
           <li>Basic mood tracking</li>
@@ -80,10 +81,11 @@
         <a href="{% url 'signup' %}" class="btn tier-btn">Get Started</a>
       </div>
 
+      <!-- Basic Tier -->
       <div class="tier-card popular">
         <div class="badge">Most Popular</div>
         <h3>Basic</h3>
-        <div class="price">$19</div>
+        <div class="price">KES 500</div>
         <p class="duration">per month</p>
         <ul>
           <li>Advanced mood analytics</li>
@@ -91,12 +93,14 @@
           <li>Resource library access</li>
           <li>Email support</li>
         </ul>
-        <a href="{% url 'signup' %}" class="btn tier-btn">Start Free Trial</a>
+        <p class="tier-note">Gentle support, curated tools, and space to grow—one step at a time.</p>
+        <a href="https://paystack.shop/pay/ug8d6z8u3x" class="btn tier-btn">Subscribe</a>
       </div>
 
+      <!-- Premium Tier -->
       <div class="tier-card">
         <h3>Premium</h3>
-        <div class="price">$49</div>
+        <div class="price">KES 1,500</div>
         <p class="duration">per month</p>
         <ul>
           <li>1-on-1 counselor sessions</li>
@@ -104,7 +108,8 @@
           <li>Custom wellness plans</li>
           <li>Community access</li>
         </ul>
-        <a href="{% url 'signup' %}" class="btn tier-btn">Start Premium</a>
+        <p class="tier-note">Step into deeper healing with full access to therapeutic tools and personalized care.</p>
+        <a href="hhttps://paystack.shop/pay/7rscp754gf" class="btn tier-btn">Subscribe</a>
       </div>
     </div>
   </section>
