@@ -5,11 +5,13 @@
 
 {% block extra_head %}
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'css/mood_tracker.css' %}">
 {% endblock %}
 
 {% block content %}
   <div class="mood-tracker-container">
     <h1><i class="fas fa-face-smile-beam"></i> How are you feeling today?</h1>
+    
     <form method="post">
       {% csrf_token %}
       <label for="mood">Select your mood:</label>
@@ -27,6 +29,10 @@
 
       <button type="submit">Save Check-In</button>
     </form>
+
+    <a href="{% url 'checkins' %}" class="view-checkins-button">
+      <i class="fas fa-book-heart"></i> View All Check-Ins
+    </a>
 
     <div class="footer-note">© 2025 Healing Atlas. Every feeling is welcome here.</div>
   </div>

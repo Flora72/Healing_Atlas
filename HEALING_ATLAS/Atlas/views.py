@@ -108,8 +108,8 @@ def mood_tracker(request):
         if form.is_valid():
             mood_entry = form.save(commit=False)
             mood_entry.user = request.user
-            mood_entry.score = 0.7  # placeholder or calculated
-            mood_entry.sentiment = "hopeful"  # placeholder or analyzed
+            mood_entry.score = 0.7  
+            mood_entry.sentiment = "hopeful" 
             mood_entry.save()
             messages.success(request, "Your check-in has been saved. You’re doing beautifully.")
             return redirect('mood_tracker')
@@ -391,3 +391,11 @@ def delete_entry(request, entry_id):
         entry.delete()
         return redirect('journal_entries')
     return render(request, 'confirm_delete.html', {'entry': entry})
+
+
+from django.shortcuts import render
+from .models import MoodEntry 
+
+def view_checkins(request):
+    checkins = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')
+    return render(request, 'view_checkins.html', {'checkins': checkins})

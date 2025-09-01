@@ -25,6 +25,7 @@ urlpatterns = [
     path('substance_support/', views.substance_support, name='substance_support'),
     path('journal_entries/edit/<int:entry_id>/', views.edit_entry, name='edit_entry'),
     path('journal_entries/delete/<int:entry_id>/', views.delete_entry, name='delete_entry'),
+    path('checkins/', views.view_checkins, name='checkins'),
     path('test_chart/', views.test_chart, name='test_chart'),
     path('logout/', views.logout_view, name='logout'), 
 
