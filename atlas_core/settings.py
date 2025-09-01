@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Healing_Atlas.Atlas'
+    'atlas_core.Atlas'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Healing_Atlas.urls'
+ROOT_URLCONF = 'atlas_core.urls'
 
 
 TEMPLATES = [
@@ -77,7 +77,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'Healing_Atlas.wsgi.application'
+WSGI_APPLICATION = 'atlas_core.wsgi.application'
 
 
 
