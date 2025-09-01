@@ -7,4 +7,4 @@ gunicorn
 python-dotenv
 dj-database-url==3.0.1
 requests>=2.0.0
-DATABASE_URL=sqlite:///db.sqlite3
+
