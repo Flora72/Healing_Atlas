@@ -2,7 +2,7 @@
   --healing-purple: #7c4dff;
   --healing-purple-dark: #5e35b1;
   --soft-lavender: #ede7f6;
-  --accent-pink: #8e3e63;
+  --accent-pink:#7c4dff;
 }
 
 /* Base Layout */
@@ -14,6 +14,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: url("/static/images/background.jpg") no-repeat center center fixed;
 }
 
 /* Container */
