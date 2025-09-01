@@ -94,7 +94,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom user model
-AUTH_USER_MODEL = 'Atlas.CustomUser'
+AUTH_USER_MODEL = 'atlas.CustomUser'
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
