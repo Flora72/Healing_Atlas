@@ -1,3 +1,4 @@
+/* Base Layout */
 body {
   margin: 0;
   font-family: 'Inter', 'Segoe UI', sans-serif;
@@ -8,21 +9,24 @@ body {
   height: 100vh;
 }
 
+/* Container */
 .container {
   display: flex;
   width: 880px;
   height: 680px;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
   background-color: #ffffff;
 }
 
+/* Left Panel */
 .left-panel {
   flex: 1;
   background: url("/static/images/signup.png") center/cover no-repeat;
 }
 
+/* Right Panel */
 .right-panel {
   flex: 1;
   display: flex;
@@ -32,16 +36,18 @@ body {
   background-color: #fefefe;
 }
 
+/* Form Container */
 .form-container {
   width: 100%;
   max-width: 420px;
 }
 
+/* Headings */
 h1 {
   text-align: center;
   font-size: 24px;
   font-weight: 600;
-  color: #4b2e4a;
+  color: #6b5ec4;
   margin-bottom: 0.5rem;
 }
 
@@ -58,12 +64,13 @@ h1 {
   font-weight: 500;
 }
 
+/* Messages */
 .messages {
   margin-bottom: 1rem;
   padding: 0.75rem;
-  background-color: #f3dce3;
+  background-color: #f3e8ff;
   border-radius: 8px;
-  color: #4b2e4a;
+  color: #6b5ec4;
   font-weight: 500;
   text-align: center;
   animation: fadeIn 0.6s ease-in-out;
@@ -74,6 +81,7 @@ h1 {
   to { opacity: 1; }
 }
 
+/* Form */
 form {
   display: flex;
   flex-direction: column;
@@ -123,6 +131,7 @@ form {
   color: #8e3e63;
 }
 
+/* Select Styling */
 .form-group select {
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%207%205-7z%22%20fill%3D%22%238e3e63%22/%3E%3C/svg%3E");
@@ -137,12 +146,14 @@ form {
   color: #aaa;
 }
 
+/* Error Message */
 .error {
   margin-top: 0.3rem;
   font-size: 0.85rem;
   color: #8e3e63;
 }
 
+/* Submit Button */
 button[type="submit"] {
   padding: 0.75rem;
   background-color: #8e3e63;
@@ -159,6 +170,7 @@ button[type="submit"]:hover {
   background-color: #6c2e4a;
 }
 
+/* Separator */
 .separator {
   text-align: center;
   margin: 2rem 0 1rem;
@@ -166,6 +178,7 @@ button[type="submit"]:hover {
   color: #999;
 }
 
+/* Social Buttons */
 .social-buttons {
   display: flex;
   gap: 1rem;
@@ -193,3 +206,18 @@ button[type="submit"]:hover {
   width: 20px;
   height: 20px;
 }
+/* Link to Login */
+.link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+.link a {
+  color: #8e3e63;
+  text-decoration: none;
+  font-weight: 500;
+}
+.link a:hover {
+  text-decoration: underline;
+} 

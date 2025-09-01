@@ -2,14 +2,14 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: #f6f7fb;
+  color: #3a3a3a;
 }
 
 /* Typography */
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
-  color: #2c2c2c;
+  color: #2e2e2e;
 }
 
 p {
@@ -28,7 +28,7 @@ p {
 .navbar {
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e2e8f0;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -44,7 +44,7 @@ p {
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #4f46e5;
+  color: #6b5ec4;
 }
 
 .nav-links a {
@@ -57,12 +57,12 @@ p {
 
 .btn.ghost {
   background: none;
-  color: #4f46e5;
+  color: #6b5ec4;
   border: 1px solid transparent;
 }
 
 .btn.healing {
-  background-color: #4f46e5;
+  background-color: #6b5ec4;
   color: white;
 }
 
@@ -73,25 +73,23 @@ p {
   text-align: center;
   overflow: hidden;
 }
+
 .hero-bg {
   background-image: url("/static/images/healing-hero.png");
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  z-index: 0;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, #e0e7ff, #fef3c7);
+  background: linear-gradient(to bottom right, #e8eaf6, #fff7ed);
   opacity: 0.5;
   z-index: 1;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.2;
-  z-index: 0;
 }
 
 .hero-content {
@@ -108,7 +106,7 @@ p {
 
 .hero-title span {
   display: block;
-  color: #4f46e5;
+  color: #6b5ec4;
   margin-top: 0.5rem;
 }
 
@@ -119,7 +117,7 @@ p {
 }
 
 .hero-btn {
-  background-color: #4f46e5;
+  background-color: #6b5ec4;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
@@ -130,7 +128,7 @@ p {
 /* Features Section */
 .features {
   padding: 4rem 1rem;
-  background-color: #f3f4f6;
+  background-color: #f0f4f8;
   text-align: center;
 }
 
@@ -156,7 +154,7 @@ p {
   background-color: white;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   width: 300px;
   transition: transform 0.3s ease;
 }
@@ -188,14 +186,14 @@ p {
   background-color: white;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   width: 280px;
-  border: 1px solid #ddd;
+  border: 1px solid #e2e8f0;
   position: relative;
 }
 
 .tier-card.popular {
-  border: 2px solid #4f46e5;
+  border: 2px solid #6b5ec4;
   transform: scale(1.05);
 }
 
@@ -204,7 +202,7 @@ p {
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(to right, #6366f1, #818cf8);
+  background: linear-gradient(to right, #6b5ec4, #8b7cf0);
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
@@ -215,7 +213,7 @@ p {
 .price {
   font-size: 2rem;
   font-weight: bold;
-  color: #4f46e5;
+  color: #6b5ec4;
 }
 
 .duration {
@@ -238,14 +236,14 @@ p {
 
 /* Footer */
 .footer {
-  background-color: #f3f4f6;
+  background-color: #f0f4f8;
   padding: 3rem 1rem;
   text-align: center;
 }
 
 .footer h3 {
   font-size: 1.5rem;
-  color: #4f46e5;
+  color: #6b5ec4;
   margin-bottom: 1rem;
 }
 
@@ -255,7 +253,7 @@ p {
 }
 
 .footer .btn {
-  background-color: #4f46e5;
+  background-color: #6b5ec4;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;

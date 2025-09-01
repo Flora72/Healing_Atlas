@@ -2,13 +2,11 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission, UserManager, User
 from django.conf import settings
 
-# Custom User Model
 class CustomUser(AbstractUser):
-    role = models.CharField(max_length=20, choices=[
-        ('survivor', 'Survivor'),
-        ('ally', 'Ally'),
+    ROLE_CHOICES = (
         ('admin', 'Admin'),
-    ])
+        ('survivor', 'Survivor'),
+    )
     emotional_tone = models.CharField(max_length=20, choices=[
         ('soft', 'Soft'),
         ('neutral', 'Neutral'),
@@ -19,7 +17,7 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
-# 🧶 Survivor Profile
+# Survivor Profile
 class SurvivorProfile(models.Model):
     name = models.CharField(max_length=100)
     story = models.TextField()

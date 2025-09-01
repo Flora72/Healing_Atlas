@@ -18,7 +18,6 @@ class CustomUserCreationForm(UserCreationForm):
         choices=[
             ('', 'Select your role'),
             ('survivor', 'Survivor'),
-            ('ally', 'Ally'),
             ('admin', 'Admin')
         ],
         widget=forms.Select(attrs={
@@ -29,10 +28,10 @@ class CustomUserCreationForm(UserCreationForm):
     )
 
     class Meta:
-        model = CustomUser  # This line is what was missing
+        model = CustomUser  
         fields = ['username', 'email', 'password1', 'password2', 'role']
 
 class MoodForm(forms.ModelForm):
     class Meta:
         model = MoodEntry
-        fields = ['mood', 'note']  # You’ll calculate score/sentiment later
+        fields = ['mood', 'note'] 
