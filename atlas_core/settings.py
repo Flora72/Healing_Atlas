@@ -67,12 +67,8 @@ WSGI_APPLICATION = 'atlas_core.wsgi.application'
 
 # Database
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-}
-
-DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3'  
+        default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
     )
 }
 
@@ -98,7 +94,8 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom user model
-AUTH_USER_MODEL = 'atlas.CustomUser'
+AUTH_USER_MODEL = 'Atlas.CustomUser'
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
