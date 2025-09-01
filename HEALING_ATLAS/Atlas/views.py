@@ -270,14 +270,6 @@ def upload_resource(request):
     })
 
 
-# -------------------------------------------------------
-#                    SETTINGS VIEWS 
-# -------------------------------------------------------
-from django.contrib.auth.decorators import login_required
-
-@login_required
-def settings_page(request):
-    return render(request, 'settings.html')
 
 # -------------------------------------------------------
 #                  USER MANAGEMENT VIEWS 

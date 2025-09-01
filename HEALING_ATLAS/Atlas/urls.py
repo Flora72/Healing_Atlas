@@ -15,7 +15,6 @@ urlpatterns = [
     path('journal_entries/', views.journal_entries_view, name='journal_entries'),
     path('resources/', views.resources_page, name='resources'),
     path('emotion-data/', views.test_chart, name='emotion_data'),
-    path('settings/', views.settings_page, name='settings'),
     path('admin/users/', views.manage_users, name='manage_users'),
     path('emotion_chart/', views.emotion_chart, name='emotion_chart'),
     path('dashboard_greeting/', views.dashboard_greeting, name='dashboard_greeting'),
