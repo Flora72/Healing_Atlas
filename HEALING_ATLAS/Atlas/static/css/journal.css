@@ -1,0 +1,96 @@
+/* journal.css */
+
+.journal-container {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #f7f4fb;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.journal-container h1 {
+  font-size: 2rem;
+  color: #7c4dff;
+  margin-bottom: 1rem;
+}
+
+.journal-container p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+label {
+  font-weight: 600;
+  color: #5e35b1;
+}
+
+select,
+textarea {
+  padding: 0.75rem 1rem;
+  border: 2px solid #d1c4e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+select:focus,
+textarea:focus {
+  border-color: #7c4dff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.1);
+}
+
+textarea::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+button[type="submit"] {
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  background-color: #7c4dff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #5e35b1;
+  transform: translateY(-1px);
+}
+
+.footer-note {
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.chart-container {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #f3e5f5;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.chart-container h2 {
+  color: #6a1b9a;
+  margin-bottom: 1rem;
+}
