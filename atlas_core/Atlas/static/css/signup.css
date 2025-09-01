@@ -14,7 +14,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url("/static/images/background.jpg") no-repeat center center fixed;
+  background: url("/static/images/signup.png") no-repeat center center fixed;
 }
 
 /* Container */
