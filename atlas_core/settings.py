@@ -66,11 +66,10 @@ TEMPLATES = [
 # WSGI
 WSGI_APPLICATION = 'atlas_core.wsgi.application'
 
-# Database
+
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
-    )
+    'default': dj_database_url.config(default='postgresql://healingatlas_db_user:GId7zYl4FO3d30lqWLugMLW0uLVFGgVv@dpg-d2qtt1qdbo4c73ck06rg-a.oregon-postgres.render.com/healingatlas_db')
 }
 
 # Static files
