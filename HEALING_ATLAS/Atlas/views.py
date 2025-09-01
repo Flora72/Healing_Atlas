@@ -351,14 +351,22 @@ def dashboard_view(request):
     return render(request, "your_template.html", context)
 
 
-import json
+from django.http import JsonResponse
 from django.utils.timezone import localtime
-from .models import JournalEntry, MoodEntry
 from django.contrib.auth.decorators import login_required
+from .models import JournalEntry, MoodEntry
+
+from django.http import JsonResponse
+from django.utils.timezone import localtime
+from django.contrib.auth.decorators import login_required
+from .models import JournalEntry, MoodEntry
+
 @login_required
 def test_chart(request):
     mood_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:10]
-    emotion_data = [
+    journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')[:10]
+
+    mood_data = [
         {
             "date": localtime(entry.timestamp).strftime("%Y-%m-%d"),
             "score": entry.score,
@@ -366,9 +374,31 @@ def test_chart(request):
         }
         for entry in mood_entries if entry.score is not None
     ]
-    return JsonResponse({"emotion_data": emotion_data})
 
+    journal_data = [
+        {
+            "date": localtime(entry.created_at).strftime("%Y-%m-%d"),
+            "score": entry.sentiment_score,
+            "sentiment": entry.sentiment_label
+        }
+        for entry in journal_entries if entry.sentiment_score is not None
+    ]
 
+    return JsonResponse({
+        "mood_data": mood_data,
+        "journal_data": journal_data
+    })
+
+ 
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+@login_required
+def emotion_chart(request):
+    return render(request, 'emotion_chart.html')
+
+     
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import JournalEntry
 
@@ -401,3 +431,5 @@ from django.contrib.auth.decorators import login_required
 def view_checkins(request):
     checkins = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')
     return render(request, 'view_checkins.html', {'checkins': checkins})
+
+

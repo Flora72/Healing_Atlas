@@ -17,6 +17,7 @@ urlpatterns = [
     path('emotion-data/', views.test_chart, name='emotion_data'),
     path('settings/', views.settings_page, name='settings'),
     path('admin/users/', views.manage_users, name='manage_users'),
+    path('emotion_chart/', views.emotion_chart, name='emotion_chart'),
     path('dashboard_greeting/', views.dashboard_greeting, name='dashboard_greeting'),
     path('admin/resources/', views.resource_gallery, name='resource_gallerry'),
     path('resource/<int:id>/', views.resource_detail, name='resource_detail'),
