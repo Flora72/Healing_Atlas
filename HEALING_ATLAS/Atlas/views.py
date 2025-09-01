@@ -49,10 +49,12 @@ def resource_detail(request, id):
 # -------------------------------------------------------
 #                    AUTH VIEWS 
 # -------------------------------------------------------
-from .forms import CustomUserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect
 from django.contrib import messages
-
+from .forms import CustomUserCreationForm
 
 @login_required
 def user_dashboard(request):
@@ -77,12 +79,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-
-            role = getattr(user, 'role', None)
-            if role == 'admin':
-                return redirect('admin_dashboard')
-            else:
-                return redirect('dashboard')
+            return redirect('dashboard') 
         else:
             messages.error(request, "Invalid login credentials.")
     else:
@@ -192,7 +189,6 @@ def journal_view(request):
     }
     return render(request, "journal.html", context)
 
-# Journal Entries Chart View (optional if separated)
 from django.utils.timezone import localtime
 from django.http import JsonResponse
 from .models import JournalEntry
@@ -228,97 +224,6 @@ def resources_page(request):
 
     return render(request, 'resources.html')
 
-@login_required
-def resource_gallery(request):
-    tone_filter = request.GET.get('tone')
-    tag_filter = request.GET.get('tag')
-
-    resources = Resource.objects.filter(is_archived=False)  # Start with only active ones
-
-    if tone_filter:
-        resources = resources.filter(emotional_tone=tone_filter)
-    if tag_filter:
-        resources = resources.filter(tags__name=tag_filter)
-
-    tags = Tag.objects.all()
-    return render(request, 'resource_gallery.html', {
-        'resources': resources,
-        'tags': tags,
-        'selected_tag': tag_filter,
-        'selected_tone': tone_filter,
-    })
-
-
-from .utils import suggest_tone
-
-@login_required
-def upload_resource(request):
-    suggested_tone = None
-    if request.method == 'POST':
-        form = ResourceForm(request.POST, request.FILES)
-        if form.is_valid():
-            resource = form.save(commit=False)
-            suggested_tone = suggest_tone(resource.description)
-            resource.emotional_tone = suggested_tone
-            resource.save()
-            return redirect('resources')
-    else:
-        form = ResourceForm()
-    return render(request, 'upload_resource.html', {
-        'form': form,
-        'suggested_tone': suggested_tone
-    })
-
-
-
-# -------------------------------------------------------
-#                  USER MANAGEMENT VIEWS 
-# -------------------------------------------------------
-from django.contrib.auth.decorators import login_required
-from .models import CustomUser
-
-@login_required
-def manage_users(request):
-    users = CustomUser.objects.all().order_by('-date_joined')
-    return render(request, 'manage_users.html', {'users': users})
-
-
-# -------------------------------------------------------
-#                    EDITING,DELETING RESOURCES VIEWS 
-# -------------------------------------------------------
-from django.shortcuts import get_object_or_404
-
-@login_required
-def edit_resource(request, resource_id):
-    resource = get_object_or_404(Resource, id=resource_id)
-    if request.method == 'POST':
-        form = ResourceForm(request.POST, request.FILES, instance=resource)
-        if form.is_valid():
-            updated = form.save(commit=False)
-            updated.emotional_tone = suggest_tone(updated.description)  # Optional re-check
-            updated.save()
-            form.save_m2m()
-            return redirect('resources')
-    else:
-        form = ResourceForm(instance=resource)
-    return render(request, 'edit_resource.html', {'form': form, 'resource': resource})
-
-@login_required
-def delete_resource(request, resource_id):
-    resource = get_object_or_404(Resource, id=resource_id)
-    if request.method == 'POST':
-        resource.is_archived = True
-        resource.save()
-        return redirect('resources')
-    return render(request, 'confirm_delete.html', {'resource': resource})
-
-@login_required
-def restore_resource(request, resource_id):
-    resource = get_object_or_404(Resource, id=resource_id)
-    resource.is_archived = False
-    resource.save()
-    return redirect('resources')
-
 
 # -------------------------------------------------------
 #                    JOURNAL/MOOD SCORE VIEWS 
@@ -328,19 +233,20 @@ from django.utils import timezone
 from .utils import analyze_sentiment
 
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+@login_required
 def dashboard_view(request):
-    emotion_data = [
-        {"date": "2025-08-30", "score": 0.85, "sentiment": "positive"},
-        {"date": "2025-08-29", "score": 0.42, "sentiment": "neutral"},
-        {"date": "2025-08-28", "score": 0.15, "sentiment": "low"},
-    ]
-
+    user = request.user
     context = {
-        "show_chart": True,
-        "emotion_data_json": json.dumps(emotion_data)
+        'username': user.username,
+        'role': user.role,
+        'membership': user.membership,
+        'emotional_tone': user.emotional_tone,
+        'safety_flag': user.safety_flag,
     }
-
-    return render(request, "your_template.html", context)
+    return render(request, 'dashboard.html', context)
 
 
 from django.http import JsonResponse
@@ -519,7 +425,7 @@ def initiate_payment(request):
     }
     data = {
         "email": request.user.email,
-        "amount": 5000 * 100,  # amount in kobo
+        "amount": 5000 * 100,  
         "callback_url": callback_url
     }
     response = requests.post("https://api.paystack.co/transaction/initialize", 

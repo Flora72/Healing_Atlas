@@ -1,9 +1,6 @@
 from django import forms
-from .models import Resource, CustomUser
+from .models import Resource, CustomUser, MoodEntry, JournalEntry
 from django.contrib.auth.forms import UserCreationForm
-from .models import MoodEntry
-from .models import JournalEntry
-
 
 class ResourceForm(forms.ModelForm):
     class Meta:
@@ -11,29 +8,24 @@ class ResourceForm(forms.ModelForm):
         fields = ['title', 'description', 'file', 'emotional_tone', 'tags']
 
 
-
 class CustomUserCreationForm(UserCreationForm):
-    role = forms.ChoiceField(
-        choices=[
-            ('', 'Select your role'),
-            ('survivor', 'Survivor'),
-            ('admin', 'Admin')
-        ],
-        widget=forms.Select(attrs={
-            'id': 'id_role',
-            'class': 'form-control',
-            'required': True
-        })
-    )
-
     class Meta:
         model = CustomUser  
-        fields = ['username', 'email', 'password1', 'password2', 'role']
+        fields = ['username', 'email', 'password1', 'password2']
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.role = 'survivor'  
+        if commit:
+            user.save()
+        return user
+
 
 class MoodForm(forms.ModelForm):
     class Meta:
         model = MoodEntry
-        fields = ['mood', 'note'] 
+        fields = ['mood', 'note']
+
 
 class JournalForm(forms.ModelForm):
     class Meta:
@@ -50,4 +42,4 @@ class JournalForm(forms.ModelForm):
                 'placeholder': "Write what’s on your heart...",
                 'class': 'form-control'
             })
-        }  
+        }

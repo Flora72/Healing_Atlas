@@ -15,10 +15,6 @@ class CustomUser(AbstractUser):
         default='free'
     )
 
-    ROLE_CHOICES = [
-        ('admin', 'Admin'),
-        ('survivor', 'Survivor'),
-    ]
     emotional_tone = models.CharField(
         max_length=20,
         choices=[

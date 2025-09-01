@@ -230,12 +230,12 @@ p {
 
 /* Free Tier */
 .tier-card.free .tier-btn {
-  background-color: #a3d2ca;
+ background-color: #6b5ec4;
   color: white;
 }
 
 .tier-card.free .tier-btn:hover {
-  background-color: #8bbcb3;
+ background-color: #6b5ec4;
 }
 
 /* Basic Tier */
