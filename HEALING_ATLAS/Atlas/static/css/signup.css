@@ -1,3 +1,10 @@
+:root {
+  --healing-purple: #7c4dff;
+  --healing-purple-dark: #5e35b1;
+  --soft-lavender: #ede7f6;
+  --accent-pink: #8e3e63;
+}
+
 /* Base Layout */
 body {
   margin: 0;
@@ -47,7 +54,7 @@ h1 {
   text-align: center;
   font-size: 24px;
   font-weight: 600;
-  color: #6b5ec4;
+  color: var(--healing-purple);
   margin-bottom: 0.5rem;
 }
 
@@ -59,7 +66,7 @@ h1 {
 }
 
 .subtext a {
-  color: #8e3e63;
+  color: var(--accent-pink);
   text-decoration: none;
   font-weight: 500;
 }
@@ -68,9 +75,9 @@ h1 {
 .messages {
   margin-bottom: 1rem;
   padding: 0.75rem;
-  background-color: #f3e8ff;
+  background-color: var(--soft-lavender);
   border-radius: 8px;
-  color: #6b5ec4;
+  color: var(--healing-purple);
   font-weight: 500;
   text-align: center;
   animation: fadeIn 0.6s ease-in-out;
@@ -105,7 +112,7 @@ form {
 
 .form-group input:focus,
 .form-group select:focus {
-  border-color: #8e3e63;
+  border-color: var(--accent-pink);
   outline: none;
 }
 
@@ -128,7 +135,7 @@ form {
   background-color: #fff;
   padding: 0 0.3rem;
   font-size: 0.75rem;
-  color: #8e3e63;
+  color: var(--accent-pink);
 }
 
 /* Select Styling */
@@ -150,13 +157,13 @@ form {
 .error {
   margin-top: 0.3rem;
   font-size: 0.85rem;
-  color: #8e3e63;
+  color: var(--accent-pink);
 }
 
 /* Submit Button */
 button[type="submit"] {
   padding: 0.75rem;
-  background-color: #8e3e63;
+  background-color: var(--accent-pink);
   color: white;
   border: none;
   border-radius: 8px;
@@ -164,10 +171,11 @@ button[type="submit"] {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  box-shadow: 0 0 10px rgba(124, 77, 255, 0.2);
 }
 
 button[type="submit"]:hover {
-  background-color: #6c2e4a;
+  background-color: var(--healing-purple-dark);
 }
 
 /* Separator */
@@ -206,6 +214,7 @@ button[type="submit"]:hover {
   width: 20px;
   height: 20px;
 }
+
 /* Link to Login */
 .link {
   text-align: center;
@@ -213,11 +222,13 @@ button[type="submit"]:hover {
   font-size: 0.9rem;
   color: #666;
 }
+
 .link a {
-  color: #8e3e63;
+  color: var(--accent-pink);
   text-decoration: none;
   font-weight: 500;
 }
+
 .link a:hover {
   text-decoration: underline;
-} 
+}
