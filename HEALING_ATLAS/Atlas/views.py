@@ -161,7 +161,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.timezone import localtime
 from Healing_Atlas.Atlas.models import JournalEntry
-
 import json
 
 @login_required
@@ -170,25 +169,33 @@ def journal_view(request):
         mood = request.POST.get('mood')
         entry = request.POST.get('entry')
 
-        print("Received mood:", mood)
-        print("Received entry:", entry)
-        print("User:", request.user)
-        print("Authenticated:", request.user.is_authenticated)
+        print("📥 POST received")
+        print("🧠 Mood:", mood)
+        print("📝 Entry:", entry)
+        print("👤 User authenticated:", request.user.is_authenticated)
 
         if mood and entry and request.user.is_authenticated:
             JournalEntry.objects.create(
                 user=request.user,
                 sentiment_label=mood,
                 content=entry,
-                sentiment_score=0.5  # Placeholder for future analysis
+                sentiment_score=0.5
             )
-            messages.success(request, "Your journal entry has been saved. Thank you for sharing.")
-            return redirect('journal')
-        else:
-            messages.error(request, "Please fill out both mood and entry before submitting.")
+            print("✅ Entry saved for:", request.user.username)
+            messages.success(request, "Your journal entry has been saved.")
+            return redirect('/journal/journal_entries/')
 
-    journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')[:10]
-    print("Entries passed to template:", journal_entries.count())
+
+        print("⚠️ Form incomplete or user not authenticated")
+        messages.error(request, "Please fill out both mood and entry before submitting.")
+
+    print("📄 Rendering journal.html for:", request.user.username)
+    return render(request, "journal.html")
+
+    
+@login_required
+def journal_entries_view(request):
+    journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
 
     emotion_data = [
         {
@@ -205,8 +212,7 @@ def journal_view(request):
         "show_chart": True
     }
 
-    return render(request, "journal.html", context)
-
+    return render(request, "journal_entries.html", context)
 
 # -------------------------------------------------------
 #                    RESOURCES VIEWS 

@@ -5,7 +5,6 @@
 
 {% block extra_head %}
   <link rel="stylesheet" href="{% static 'css/journal.css' %}">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block content %}
@@ -38,32 +37,6 @@
     </div>
   {% endif %}
 </div>
-
-<p>Total entries: {{ journal_entries|length }}</p>
-
-{% if journal_entries %}
-<div class="chart-container">
-  <h2><i class="fas fa-chart-area"></i> Emotional Reflections</h2>
-  {% for entry in journal_entries %}
-    <div class="journal-card">
-      <div class="journal-date">
-        <i class="fas fa-calendar-day"></i> {{ entry.created_at|date:"M d, Y H:i" }}
-      </div>
-      <div class="journal-mood">
-        <strong>Mood:</strong> {{ entry.sentiment_label|title }}
-      </div>
-      <div class="journal-sentiment">
-        <strong>Sentiment Score:</strong> {{ entry.sentiment_score|floatformat:2 }}
-      </div>
-      <div class="journal-text">
-        {{ entry.content }}
-      </div>
-    </div>
-  {% endfor %}
-</div>
-{% else %}
-  <p class="no-entries">No journal entries yet. Your story begins here.</p>
-{% endif %}
 
 <div class="footer-note">© 2025 Healing Atlas. Your words matter here.</div>
 {% endblock %}

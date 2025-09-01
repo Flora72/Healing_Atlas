@@ -1,0 +1,37 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+
+{% block title %}Your Reflections | Healing Atlas{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/journal.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="entries-container">
+  <h1><i class="fas fa-chart-area"></i> Emotional Reflections</h1>
+
+  {% if journal_entries %}
+    {% for entry in journal_entries %}
+      <div class="journal-card">
+        <div class="journal-date">
+          <i class="fas fa-calendar-day"></i> {{ entry.created_at|date:"M d, Y H:i" }}
+        </div>
+        <div class="journal-mood">
+          <strong>Mood:</strong> {{ entry.sentiment_label|title }}
+        </div>
+        <div class="journal-sentiment">
+          <strong>Sentiment Score:</strong> {{ entry.sentiment_score|floatformat:2 }}
+        </div>
+        <div class="journal-text">
+          {{ entry.content }}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="no-entries">No journal entries yet. Your story begins here.</p>
+  {% endif %}
+</div>
+
+<div class="footer-note">© 2025 Healing Atlas. Your reflections are safe here.</div>
+{% endblock %}

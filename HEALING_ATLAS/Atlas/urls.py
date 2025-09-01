@@ -12,6 +12,7 @@ urlpatterns = [
     path('affirmations/', views.affirmations, name='affirmations'),
     path('mental-health/', views.mental_health, name='mental_health'),
     path('journal/', views.journal_view, name='journal'),
+    path('journal_entries/', views.journal_entries_view, name='journal_entries'),
     path('resources/', views.resources_page, name='resources'),
     path('emotion-data/', views.test_chart, name='emotion_data'),
     path('settings/', views.settings_page, name='settings'),
