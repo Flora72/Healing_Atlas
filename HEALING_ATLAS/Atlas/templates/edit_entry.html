@@ -1,0 +1,115 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+
+{% block title %}Edit Reflection | Healing Atlas{% endblock %}
+
+{% block extra_head %}
+  <style>
+    body {
+      background-color: #f8f5fc;
+      font-family: 'Segoe UI', sans-serif;
+      color: #4a2c2a;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .edit-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .edit-container h1 {
+      text-align: center;
+      color: #6a1b9a;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    form label {
+      font-weight: bold;
+      color: #5e35b1;
+    }
+
+    form select,
+    form textarea,
+    form input[type="file"] {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #d1c4e9;
+      background-color: #f9f6ff;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    form textarea::placeholder {
+      color: #aaa;
+      font-style: italic;
+    }
+
+    form select:focus,
+    form textarea:focus,
+    form input[type="file"]:focus {
+      border-color: #7c4dff;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.1);
+    }
+
+    form button {
+      align-self: flex-start;
+      padding: 0.75rem 1.5rem;
+      background-color: #7c4dff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    form button:hover {
+      background-color: #5e35b1;
+      transform: translateY(-1px);
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #a38c8b;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="edit-container">
+  <h1><i class="fas fa-edit"></i> Edit Your Reflection</h1>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="mood">Mood Tag:</label>
+    {{ form.mood }}
+
+    <label for="content">Journal Entry:</label>
+    {{ form.content }}
+
+    <label for="image">Optional Image:</label>
+    {{ form.image }}
+
+    <button type="submit">Update Entry</button>
+  </form>
+</div>
+
+<div class="footer-note">© 2025 Healing Atlas. Editing is a form of healing.</div>
+{% endblock %}

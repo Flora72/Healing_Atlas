@@ -83,6 +83,68 @@ form button:hover {
   transform: translateY(-1px);
 }
 
+form button:active {
+  transform: scale(0.98);
+}
+
+/* View Entries Button */
+.view-entries-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #7c4dff;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.view-entries-button:hover {
+  background-color: #5e35b1;
+}
+
+.view-entries-button:active {
+  transform: scale(0.98);
+}
+
+/* Confirmation Message */
+.confirmation-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  z-index: 999;
+  animation: fadeIn 0.6s ease-out;
+  font-size: 0.95rem;
+  font-weight: 500;
+  max-width: 300px;
+  line-height: 1.4;
+}
+
+/* Success Message */
+.confirmation-message.success {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+  border-left: 6px solid #66bb6a;
+}
+
+/* Error Message */
+.confirmation-message.error {
+  background-color: #ffcdd2;
+  color: #c62828;
+  border-left: 6px solid #ef5350;
+}
+
+/* Info Message */
+.confirmation-message.info {
+  background-color: #bbdefb;
+  color: #1565c0;
+  border-left: 6px solid #42a5f5;
+}
+
 /* Footer Note */
 .footer-note {
   text-align: center;
@@ -91,84 +153,7 @@ form button:hover {
   color: #a38c8b;
 }
 
-/* Emotional Reflections Section */
-.chart-container {
-  margin-top: 3rem;
-  display: grid;
-  gap: 1rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 2rem;
-  background-color: #f3e5f5;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-}
-
-.chart-container h2 {
-  text-align: center;
-  color: #6a1b9a;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
-
-/* Journal Entry Cards */
-.journal-card {
-  background-color: #f9f6ff;
-  border-left: 6px solid #7c4dff;
-  padding: 1rem 1.25rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.journal-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-}
-
-.journal-date {
-  font-weight: bold;
-  color: #4a2c2a;
-  font-size: 0.95rem;
-}
-
-.journal-mood {
-  color: #5e35b1;
-  font-weight: 500;
-}
-
-.journal-text {
-  color: #6a4a48;
-  font-style: italic;
-  white-space: pre-wrap;
-}
-
-/* Confirmation Popup */
-.confirmation-message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #d1c4e9;
-  color: #4a2c2a;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-  z-index: 999;
-  animation: fadeIn 0.6s ease-out;
-}
-
-.journal-sentiment {
-  color: #8e24aa;
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-
+/* Animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -176,12 +161,7 @@ form button:hover {
 
 /* Responsive Layout */
 @media screen and (max-width: 768px) {
-  .journal-container,
-  .chart-container {
+  .journal-container {
     padding: 1rem;
-  }
-
-  .journal-card {
-    font-size: 0.9rem;
   }
 }

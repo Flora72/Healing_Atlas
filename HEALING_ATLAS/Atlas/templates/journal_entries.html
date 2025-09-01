@@ -4,7 +4,7 @@
 {% block title %}Your Reflections | Healing Atlas{% endblock %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="{% static 'css/journal.css' %}">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block content %}
@@ -14,6 +14,12 @@
   {% if journal_entries %}
     {% for entry in journal_entries %}
       <div class="journal-card">
+        {% if entry.image %}
+          <div class="journal-image">
+            <img src="{{ entry.image.url }}" alt="Journal image">
+          </div>
+        {% endif %}
+
         <div class="journal-date">
           <i class="fas fa-calendar-day"></i> {{ entry.created_at|date:"M d, Y H:i" }}
         </div>
@@ -25,6 +31,11 @@
         </div>
         <div class="journal-text">
           {{ entry.content }}
+        </div>
+
+        <div class="journal-actions">
+          <a href="{% url 'edit_entry' entry.id %}" class="edit-btn"><i class="fas fa-edit"></i> Edit</a>
+          <a href="{% url 'delete_entry' entry.id %}" class="delete-btn"><i class="fas fa-trash-alt"></i> Delete</a>
         </div>
       </div>
     {% endfor %}

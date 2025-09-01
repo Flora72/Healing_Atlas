@@ -161,55 +161,59 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.timezone import localtime
 from Healing_Atlas.Atlas.models import JournalEntry
+from .forms import JournalForm
 import json
+from .utils import analyze_sentiment
 
 @login_required
 def journal_view(request):
+    journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
+
     if request.method == 'POST':
         mood = request.POST.get('mood')
         entry = request.POST.get('entry')
 
-        print("📥 POST received")
-        print("🧠 Mood:", mood)
-        print("📝 Entry:", entry)
-        print("👤 User authenticated:", request.user.is_authenticated)
+        if mood and entry:
+            sentiment_result = analyze_sentiment(entry)
 
-        if mood and entry and request.user.is_authenticated:
             JournalEntry.objects.create(
                 user=request.user,
                 sentiment_label=mood,
                 content=entry,
-                sentiment_score=0.5
+                sentiment_score=sentiment_result["score"]
             )
-            print("✅ Entry saved for:", request.user.username)
-            messages.success(request, "Your journal entry has been saved.")
-            return redirect('/journal/journal_entries/')
+            messages.success(request, "Your journal entry has been saved. Your emotions have been gently reflected.")
+            return redirect('/journal/')
+        else:
+            messages.error(request, "Please fill out both fields before submitting.")
 
+    context = {
+        'journal_entries': journal_entries
+    }
+    return render(request, "journal.html", context)
 
-        print("⚠️ Form incomplete or user not authenticated")
-        messages.error(request, "Please fill out both mood and entry before submitting.")
+# Journal Entries Chart View (optional if separated)
+from django.utils.timezone import localtime
+from django.http import JsonResponse
+from .models import JournalEntry
 
-    print("📄 Rendering journal.html for:", request.user.username)
-    return render(request, "journal.html")
-
-    
 @login_required
 def journal_entries_view(request):
     journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
 
     emotion_data = [
         {
-            "date": localtime(entry.created_at).strftime("%Y-%m-%d"),
-            "score": entry.sentiment_score,
-            "sentiment": entry.sentiment_label
+            "date": localtime(entry.created_at).strftime("%Y-%m-%d %H:%M"),
+            "mood": entry.sentiment_label,
+            "note": entry.content,
+            "score": entry.sentiment_score
         }
         for entry in journal_entries
     ]
 
     context = {
         "journal_entries": journal_entries,
-        "emotion_data_json": json.dumps(emotion_data),
-        "show_chart": True
+        "emotion_data": emotion_data
     }
 
     return render(request, "journal_entries.html", context)
@@ -328,44 +332,9 @@ def restore_resource(request, resource_id):
 #                    JOURNAL/MOOD SCORE VIEWS 
 # -------------------------------------------------------
 import json
-from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 from .utils import analyze_sentiment
 
-@csrf_exempt
-def journal_view(request):
-    # Retrieve existing emotion data from session
-    emotion_data = request.session.get("emotion_data", [])
-    show_chart = bool(emotion_data)
-
-    if request.method == "POST":
-        mood = request.POST.get("mood")
-        entry = request.POST.get("entry")
-
-        if entry:
-            # Analyze sentiment only if there's content
-            sentiment_result = analyze_sentiment(entry)
-
-            # Append new emotional data
-            emotion_data.append({
-                "date": timezone.now().strftime('%b %d'),  # e.g., "Aug 31"
-                "score": sentiment_result["score"],
-                "sentiment": sentiment_result["sentiment"],
-                "mood": mood
-            })
-
-            # Save updated data to session
-            request.session["emotion_data"] = emotion_data
-            request.session.modified = True
-            show_chart = True
-
-    context = {
-        "show_chart": show_chart,
-        "emotion_data_json": json.dumps(emotion_data)
-    }
-    return render(request, "journal.html", context)
-
-   
 
 def dashboard_view(request):
     emotion_data = [
@@ -399,44 +368,26 @@ def test_chart(request):
     ]
     return JsonResponse({"emotion_data": emotion_data})
 
-    journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
-    mood_entries = MoodEntry.objects.filter(user=request.user).order_by('-created_at')
 
-    combined_data = []
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import JournalEntry
 
-    for entry in journal_entries:
-        combined_data.append({
-            "date": localtime(entry.created_at).strftime("%Y-%m-%d"),
-            "score": entry.sentiment_score,  # assuming you store this
-            "sentiment": entry.sentiment_label  # e.g. "positive", "low"
-        })
 
-    for mood in mood_entries:
-        combined_data.append({
-            "date": localtime(mood.created_at).strftime("%Y-%m-%d"),
-            "score": mood.mood_score / 100,  # normalize if needed
-            "sentiment": mood.mood_label
-        })
+def edit_entry(request, entry_id):
+    entry = get_object_or_404(JournalEntry, id=entry_id)
+    if request.method == 'POST':
+        form = JournalForm(request.POST, request.FILES, instance=entry)
+        if form.is_valid():
+            form.save()
+            return redirect('journal_entries')
+    else:
+        form = JournalForm(instance=entry)
+    return render(request, 'edit_entry.html', {'form': form, 'entry': entry})
 
-    # Optional: sort by date
-    combined_data.sort(key=lambda x: x["date"])
 
-    context = {
-        "show_chart": True,
-        "emotion_data_json": json.dumps(combined_data)
-    }
-
-    return render(request, "sentiment_chart.html", context)
-
-    emotion_data = [
-        {"date": "2025-08-30", "score": 0.85, "sentiment": "positive"},
-        {"date": "2025-08-29", "score": 0.42, "sentiment": "neutral"},
-        {"date": "2025-08-28", "score": 0.15, "sentiment": "low"},
-    ]
-
-    context = {
-        "show_chart": True,
-        "emotion_data_json": json.dumps(emotion_data)
-    }
-
-    return render(request, "test_chart.html", context)
+def delete_entry(request, entry_id):
+    entry = get_object_or_404(JournalEntry, id=entry_id)
+    if request.method == 'POST':
+        entry.delete()
+        return redirect('journal_entries')
+    return render(request, 'confirm_delete.html', {'entry': entry})

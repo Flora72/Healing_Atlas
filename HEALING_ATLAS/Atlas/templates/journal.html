@@ -4,7 +4,7 @@
 {% block title %}Journal Space | Healing Atlas{% endblock %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="{% static 'css/journal.css' %}">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block content %}
@@ -36,6 +36,12 @@
       {% endfor %}
     </div>
   {% endif %}
+
+  <div class="reflection-link">
+    <a href="{% url 'journal_entries' %}" class="view-entries-button">
+      <i class="fas fa-chart-area"></i> View Emotional Reflections
+    </a>
+  </div>
 </div>
 
 <div class="footer-note">© 2025 Healing Atlas. Your words matter here.</div>
