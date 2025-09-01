@@ -5,5 +5,5 @@ services:
     buildCommand: |
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
-    startCommand: gunicorn atlas_core.wsgi:application
+    startCommand: python manage.py migrate && gunicorn atlas_core.wsgi:application
     staticPublishPath: staticfiles
