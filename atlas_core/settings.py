@@ -75,7 +75,7 @@ DATABASES = {
 }
 
 # Static files
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'atlas_core', 'Atlas', 'static')]
 
 # Password validation
