@@ -5,6 +5,10 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from .models import Resource  
 from django.http import JsonResponse, HttpResponse, Http404
+from .models import Tag, Resource
+from .forms import ResourceForm
+
+
 
 
 # -------------------------------------------------------
