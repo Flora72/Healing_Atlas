@@ -395,7 +395,9 @@ def delete_entry(request, entry_id):
 
 from django.shortcuts import render
 from .models import MoodEntry 
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def view_checkins(request):
     checkins = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')
     return render(request, 'view_checkins.html', {'checkins': checkins})

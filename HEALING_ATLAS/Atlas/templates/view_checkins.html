@@ -1,0 +1,40 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+
+{% block title %}All Check-Ins | Healing Atlas{% endblock %}
+
+{% block extra_head %}
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="checkins-archive">
+    <h1><i class="fas fa-book-heart"></i> Your Emotional Check-Ins</h1>
+
+    {% if checkins %}
+      {% for entry in checkins %}
+        <div class="checkin-card">
+          <div class="card-header">
+            <span class="checkin-date">
+              <i class="fas fa-calendar-day"></i> {{ entry.date }}
+            </span>
+            <span class="checkin-mood">
+              <i class="fas fa-smile-beam"></i> {{ entry.mood|title }}
+            </span>
+          </div>
+          {% if entry.note %}
+            <div class="card-body">
+              <p class="checkin-note">
+                <i class="fas fa-quote-left"></i> {{ entry.note }}
+              </p>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="no-checkins">
+        <p>No check-ins yet. Your emotional journey starts with your first reflection 💜</p>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
