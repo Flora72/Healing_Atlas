@@ -1,4 +1,1 @@
-web: gunicorn HEALING_ATLAS.wsgi
-
-
-
+web: gunicorn atlas_core.wsgi:application
