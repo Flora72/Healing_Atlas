@@ -1,23 +1,38 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, Group, Permission, UserManager, User
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.conf import settings
 
+#  Custom User Model
 class CustomUser(AbstractUser):
-    ROLE_CHOICES = (
+    MEMBERSHIP_CHOICES = [
+        ('free', 'Free'),
+        ('basic', 'Basic'),
+        ('premium', 'Premium'),
+    ]
+    membership = models.CharField(
+        max_length=10,
+        choices=MEMBERSHIP_CHOICES,
+        default='free'
+    )
+
+    ROLE_CHOICES = [
         ('admin', 'Admin'),
         ('survivor', 'Survivor'),
+    ]
+    emotional_tone = models.CharField(
+        max_length=20,
+        choices=[
+            ('soft', 'Soft'),
+            ('neutral', 'Neutral'),
+            ('alert', 'Alert'),
+        ]
     )
-    emotional_tone = models.CharField(max_length=20, choices=[
-        ('soft', 'Soft'),
-        ('neutral', 'Neutral'),
-        ('alert', 'Alert'),
-    ])
     safety_flag = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username
 
-# Survivor Profile
+#  Survivor Profile
 class SurvivorProfile(models.Model):
     name = models.CharField(max_length=100)
     story = models.TextField()
@@ -26,23 +41,26 @@ class SurvivorProfile(models.Model):
     def __str__(self):
         return self.name
 
-# 🪷 Tag Model
+#  Tag Model
 class Tag(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
 
-# 📚 Resource Model
+# Resource Model
 class Resource(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     file = models.FileField(upload_to='resources/')
-    emotional_tone = models.CharField(max_length=20, choices=[
-        ('soft', '🌸 Soft'),
-        ('neutral', '🌿 Neutral'),
-        ('alert', '⚠️ Alert'),
-    ])
+    emotional_tone = models.CharField(
+        max_length=20,
+        choices=[
+            ('soft', ' Soft'),
+            ('neutral', ' Neutral'),
+            ('alert', 'Alert'),
+        ]
+    )
     tags = models.ManyToManyField(Tag, blank=True)
     is_archived = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -52,6 +70,7 @@ class Resource(models.Model):
     def __str__(self):
         return self.title
 
+#  Mood Entry Model
 class MoodEntry(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     mood = models.CharField(max_length=50)
@@ -60,8 +79,10 @@ class MoodEntry(models.Model):
     sentiment = models.CharField(max_length=20, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.user.username} - {self.mood} ({self.timestamp.strftime('%Y-%m-%d')})"
 
-
+# Journal Entry Model
 class JournalEntry(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField()
@@ -71,3 +92,12 @@ class JournalEntry(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.created_at.strftime('%Y-%m-%d')}"
+
+
+class UserProfile(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    tier = models.CharField(max_length=20, choices=[
+        ('free', 'Free'),
+        ('basic', 'Basic'),
+        ('premium', 'Premium'),
+    ], default='free')

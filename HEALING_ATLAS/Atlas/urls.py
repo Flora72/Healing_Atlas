@@ -23,10 +23,13 @@ urlpatterns = [
     path('admin/resources/edit/<int:resource_id>/', views.edit_resource, name='edit_resource'),
     path('admin/resources/delete/<int:resource_id>/', views.delete_resource, name='delete_resource'),
     path('substance_support/', views.substance_support, name='substance_support'),
+    path('upgrade/', views.upgrade_prompt, name='upgrade_prompt'),
+    path('payment_confirmation/', views.payment_confirmation, name='payment_confirmation'),
+    path('checkout/', views.paystack_checkout, name='paystack_checkout'),
     path('journal_entries/edit/<int:entry_id>/', views.edit_entry, name='edit_entry'),
     path('journal_entries/delete/<int:entry_id>/', views.delete_entry, name='delete_entry'),
+    path('premium_insights', views.premium_insights, name='premium_insights'),
     path('checkins/', views.view_checkins, name='checkins'),
     path('test_chart/', views.test_chart, name='test_chart'),
     path('logout/', views.logout_view, name='logout'), 
-
 ]

@@ -17,6 +17,7 @@ import os
 load_dotenv()
 
 HUGGINGFACE_API_KEY = os.getenv("HF_TOKEN")
+PAYSTACK_SECRET_KEY = os.getenv("PAYSTACK_SECRET_KEY")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
