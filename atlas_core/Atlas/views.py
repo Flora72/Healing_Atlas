@@ -157,7 +157,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.timezone import localtime
-from Healing_Atlas.Atlas.models import JournalEntry
+from atlas_core.Atlas.models import JournalEntry
 from .forms import JournalForm
 import json
 from .utils import analyze_sentiment
