@@ -161,6 +161,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.timezone import localtime
 from Healing_Atlas.Atlas.models import JournalEntry
+
 import json
 
 @login_required
@@ -169,20 +170,26 @@ def journal_view(request):
         mood = request.POST.get('mood')
         entry = request.POST.get('entry')
 
-        if mood and entry:
+        print("Received mood:", mood)
+        print("Received entry:", entry)
+        print("User:", request.user)
+        print("Authenticated:", request.user.is_authenticated)
+
+        if mood and entry and request.user.is_authenticated:
             JournalEntry.objects.create(
                 user=request.user,
-                sentiment_label=mood,       
+                sentiment_label=mood,
                 content=entry,
-                sentiment_score=0.5         
+                sentiment_score=0.5  # Placeholder for future analysis
             )
             messages.success(request, "Your journal entry has been saved. Thank you for sharing.")
-            return redirect('journal')    
+            return redirect('journal')
+        else:
+            messages.error(request, "Please fill out both mood and entry before submitting.")
 
-    # Fetch latest entries for the logged-in user
     journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')[:10]
+    print("Entries passed to template:", journal_entries.count())
 
-    # Prepare emotion data for charting or future visualizations
     emotion_data = [
         {
             "date": localtime(entry.created_at).strftime("%Y-%m-%d"),
