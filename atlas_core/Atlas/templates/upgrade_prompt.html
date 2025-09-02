@@ -1,5 +1,5 @@
 {% extends 'dashboard.html' %}
-{%load static%}
+{% load static %}
 
 {% block content %}
 <style>
@@ -47,22 +47,48 @@
 
   .upgrade-options {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 1.5rem;
     margin-bottom: 2rem;
   }
 
-  .upgrade-options a {
+  .tier-block {
+    background-color: #f0f9f8;
+    border: 1px dashed #a3d2ca;
+    border-radius: 12px;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .tier-block:hover {
+    transform: scale(1.02);
+  }
+
+  .tier-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #3e3e3e;
+    margin-bottom: 0.5rem;
+  }
+
+  .tier-description {
+    font-size: 0.95rem;
+    color: #777;
+    margin-bottom: 1rem;
+  }
+
+  .btn-basic, .btn-premium {
+    display: inline-block;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     font-weight: bold;
     text-decoration: none;
+    color: #fff;
     transition: background-color 0.3s ease;
   }
 
   .btn-basic {
     background-color: #a3d2ca;
-    color: #fff;
   }
 
   .btn-basic:hover {
@@ -71,7 +97,6 @@
 
   .btn-premium {
     background-color: #5eaaa8;
-    color: #fff;
   }
 
   .btn-premium:hover {
@@ -98,8 +123,17 @@
     </p>
 
     <div class="upgrade-options">
-      <a href="{% url 'paystack_checkout' %}?tier=basic" class="btn-basic">Upgrade to Basic</a>
-      <a href="{% url 'paystack_checkout' %}?tier=premium" class="btn-premium">Upgrade to Premium</a>
+      <div class="tier-block">
+        <div class="tier-title">Basic Tier</div>
+        <div class="tier-description">Includes journaling, emotion charts, and access to curated resources.</div>
+        <a href="{% url 'paystack_checkout' %}?tier=basic" class="btn-basic">Upgrade to Basic</a>
+      </div>
+
+      <div class="tier-block">
+        <div class="tier-title">Premium Tier</div>
+        <div class="tier-description">Unlocks full healing toolkit, priority support, and personalized insights.</div>
+        <a href="{% url 'paystack_checkout' %}?tier=premium" class="btn-premium">Upgrade to Premium</a>
+      </div>
     </div>
 
     <p class="upgrade-note">
