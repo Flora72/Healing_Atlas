@@ -123,9 +123,10 @@
         {% if tier == 'premium' %}Subscribe to Premium{% else %}Subscribe to Basic{% endif %}
       </a>
 
-      <p class="checkout-note">
-        Your healing journey is valid, and this space is here to support you.
-      </p>
+      <a href="{% url 'initialize_payment' %}?tier={{ tier }}" class="btn-paystack">
+  {% if tier == 'premium' %}Subscribe to Premium{% else %}Subscribe to Basic{% endif %}
+</a>
+
     {% endif %}
   </div>
 </div>

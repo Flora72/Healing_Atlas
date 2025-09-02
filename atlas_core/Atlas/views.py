@@ -375,3 +375,33 @@ def initiate_payment(request):
     res_data = response.json()
     return redirect(res_data['data']['authorization_url'])
 
+
+def initialize_payment(request):
+    tier = request.GET.get('tier', 'basic')
+    email = request.user.email
+    amount = 50000 if tier == 'basic' else 120000  # Amount in kobo
+
+    headers = {
+        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    data = {
+        "email": email,
+        "amount": amount,
+        "callback_url": request.build_absolute_uri(f"/payment-confirmation/?tier={tier}")
+    }
+
+    response = requests.post("https://api.paystack.co/transaction/initialize", json=data, headers=headers)
+    result = response.json()
+
+    if result['status']:
+        return redirect(result['data']['authorization_url'])
+    else:
+        return render(request, 'checkout.html', {
+            'tier': tier,
+            'price': 'KES 500' if tier == 'basic' else 'KES 1200',
+            'features': [...],
+            'error': 'Unable to initiate payment. Please try again.'
+        })
+
