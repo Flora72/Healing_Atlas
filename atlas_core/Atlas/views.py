@@ -57,6 +57,7 @@ def logout_view(request):
 def user_dashboard(request):
     return render(request, 'dashboard_greeting.html')
 
+
 def signup_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
