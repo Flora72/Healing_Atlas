@@ -57,17 +57,19 @@ Watch the full walkthrough here:
 ##  Deployed Link
 
 Explore the live site:  
-👉 [Healing Atlas](https://your-deployed-link.com)
+👉 [Healing Atlas](https://healingatlas.onrender.com/)
 
 ---
 
-##  Tech Stack
-
+## Tech Stack
+- **Type**: Web Application  
+  _Note: Healing Atlas is optimized for desktop browsers. Mobile access is possible, but the experience may feel visually compressed or less spacious. For the most emotionally clear and structured experience, we recommend using a laptop or desktop device._
 - **Backend**: Django (Python)  
-- **Frontend**: HTML, CSS JavaScript  
-- **Database**: SQL (initially SQLite, scalable to PostgreSQL)  
-- **Version Control**: GitHub  
-- **Methodology**: Vibe Coding (emotionally paced prompting)
+- **Frontend**: HTML, CSS, JavaScript  
+- **Database**: SQLite (initially), scalable to PostgreSQL  
+- **Version Control**: Git & GitHub  
+- **Deployment**: Render (automated builds from GitHub)  
+- **Methodology**: Vibe Coding — emotionally paced prompting and healing-centered development
 
 ---
 
@@ -97,7 +99,7 @@ Explore the live site:
 
 6. **Deployment**  
    - Versioned with GitHub  
-   - Deployed via [Netlify/Vercel/Render/Other]
+   - Deployed via [Render]
 
 ---
 
@@ -117,11 +119,10 @@ Each prompt led to design and dev decisions that centered emotional safety. The 
 ##  How to Run Locally
 
 ```bash
-git clone https://github.com/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/Flora72/Healing_Atlas
+cd Healing_Atlas
 python -m venv env
 source env/bin/activate
- # or env\Scripts\activate on Windows
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
