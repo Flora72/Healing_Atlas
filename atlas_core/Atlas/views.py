@@ -400,7 +400,7 @@ def initialize_payment(request):
     else:
         return render(request, 'checkout.html', {
             'tier': tier,
-            'price': 'KES 500' if tier == 'basic' else 'KES 1200',
+            'price': 'KES 500' if tier == 'basic' else 'KES 1500',
             'features': [...],
             'error': 'Unable to initiate payment. Please try again.'
         })
