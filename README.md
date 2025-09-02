@@ -42,8 +42,7 @@ This deck outlines the emotional logic, survivor-first design principles, and st
 
 ## Demo Video
 
-W[Watch the Demo](https://www.youtube.com/watch?v=9vgu9MREbIA)  
-*(Silent walkthrough — no voiceover, no captions. Just the interface, unfolding.)*
+[Watch the Demo](https://www.youtube.com/watch?v=9vgu9MREbIA)  (Silent walkthrough — no voiceover, no captions. Just the interface, unfolding.)
 
 ---
 
