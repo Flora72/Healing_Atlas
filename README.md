@@ -42,9 +42,28 @@ This deck outlines the emotional logic, survivor-first design principles, and st
 
 ## Demo Video
 
-Watch the full walkthrough here:  
-👉 [Healing Atlas Demo](https://your-demo-video-link.com)
+W[Watch the Demo](https://www.youtube.com/watch?v=9vgu9MREbIA)  
+*(Silent walkthrough — no voiceover, no captions. Just the interface, unfolding.)*
 
+---
+
+## Flow
+
+- **Landing Page**: Gentle hero image, soft palette, clear CTA  
+- **Signup/Login**: Survivor-centered onboarding, tiered membership (Free, Basic, Premium)  
+- **User Dashboard**:  
+  - Mood tracker  
+  - Journaling space  
+  - Resource cards  
+  - Membership status  
+- **Admin Dashboard**:  
+  - User management  
+  - Membership tiers  
+  - Resource uploads  
+- **Paystack Integration**: Seamless, secure, emotionally clear  
+- **Design Intent**: Every element is paced for emotional safety, clarity, and trust
+
+---
 ---
 
 ## Screenshots
