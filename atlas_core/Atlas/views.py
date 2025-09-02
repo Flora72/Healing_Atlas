@@ -265,7 +265,7 @@ def delete_entry(request, entry_id):
     if request.method == 'POST':
         entry.delete()
         return redirect('journal_entries')
-    return render(request, 'confirm_delete.html', {'entry': entry})
+    return render(request, 'confirm-delete.html', {'entry': entry})
 
 @login_required
 def view_checkins(request):
