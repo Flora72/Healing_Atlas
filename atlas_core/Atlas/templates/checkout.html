@@ -119,10 +119,6 @@
         {% endfor %}
       </ul>
 
-      <a href="https://paystack.shop/pay/7rscp754gf" class="btn-paystack">
-        {% if tier == 'premium' %}Subscribe to Premium{% else %}Subscribe to Basic{% endif %}
-      </a>
-
       <a href="{% url 'initialize_payment' %}?tier={{ tier }}" class="btn-paystack">
   {% if tier == 'premium' %}Subscribe to Premium{% else %}Subscribe to Basic{% endif %}
 </a>

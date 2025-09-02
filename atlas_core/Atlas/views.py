@@ -389,7 +389,7 @@ def initialize_payment(request):
     data = {
         "email": email,
         "amount": amount,
-        "callback_url": request.build_absolute_uri(f"/payment-confirmation/?tier={tier}")
+        "callback_url": request.build_absolute_uri(f"/payment_confirmation/?tier={tier}")
     }
 
     response = requests.post("https://api.paystack.co/transaction/initialize", json=data, headers=headers)
