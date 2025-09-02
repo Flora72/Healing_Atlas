@@ -48,13 +48,9 @@ Watch the full walkthrough here:
 ---
 
 ## Screenshots
-
-| Home page | Sign up |Login|
-|-----------------|----------------|--------------|
-| ![Home Page](<img width="1439" height="853" alt="Screen Shot 2025-09-02 at 02 51 57" src="https://github.com/user-attachments/assets/88886358-be80-4398-9cd5-981d223a361c" />
-) | ![Sign Up](<img width="1440" height="840" alt="Screen Shot 2025-09-02 at 02 52 59" src="https://github.com/user-attachments/assets/50b45e76-9b39-45f1-bc8c-73af8979a432" />
-) | ![Login](<img width="1440" height="840" alt="Screen Shot 2025-09-02 at 02 53 06" src="https://github.com/user-attachments/assets/cf496794-a730-4ca9-aa82-5e70986def40" />
-) |
+| Home Page | Sign Up | Login |
+|-------------|------------|----------|
+| ![Home Page](https://github.com/user-attachments/assets/88886358-be80-4398-9cd5-981d223a361c) | ![Sign Up](https://github.com/user-attachments/assets/50b45e76-9b39-45f1-bc8c-73af8979a432) | ![Login](https://github.com/user-attachments/assets/cf496794-a730-4ca9-aa82-5e70986def40) |
 
 ---
 
