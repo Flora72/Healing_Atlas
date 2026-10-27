@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('role', models.CharField(choices=[('survivor', 'Survivor'), ('ally', 'Ally'), ('admin', 'Admin')], max_length=20)),
+                ('role', models.CharField(choices=[('survivor', 'Survivor'), ('ally', 'Ally'), ('admin', 'Admin')], default='survivor', max_length=20, blank=True, null=True)),
                 ('emotional_tone', models.CharField(choices=[('soft', 'Soft'), ('neutral', 'Neutral'), ('alert', 'Alert')], max_length=20)),
                 ('membership', models.CharField(default='free', max_length=50)),
                 ('safety_flag', models.BooleanField(default=False)),
@@ -63,6 +63,7 @@ class Migration(migrations.Migration):
                 ('objects', django.contrib.auth.models.UserManager()),
             ],
         ),
+    
         migrations.CreateModel(
             name='Resource',
             fields=[
