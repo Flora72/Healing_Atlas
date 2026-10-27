@@ -69,7 +69,7 @@ WSGI_APPLICATION = 'atlas_core.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgresql://healingatlas_db_user:GId7zYl4FO3d30lqWLugMLW0uLVFGgVv@dpg-d2qtt1qdbo4c73ck06rg-a.oregon-postgres.render.com/healingatlas_db')
+    'default': dj_database_url.config(default='postgresql://neondb_owner:npg_eXR9lNQH1Akc@ep-snowy-mouse-b4jhikwe-pooler.c-6.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require')
 }
 
 # Static files
