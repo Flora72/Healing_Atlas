@@ -49,6 +49,7 @@ class Migration(migrations.Migration):
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
                 ('role', models.CharField(choices=[('survivor', 'Survivor'), ('ally', 'Ally'), ('admin', 'Admin')], max_length=20)),
                 ('emotional_tone', models.CharField(choices=[('soft', 'Soft'), ('neutral', 'Neutral'), ('alert', 'Alert')], max_length=20)),
+                ('membership', models.CharField(default='free', max_length=50)),
                 ('safety_flag', models.BooleanField(default=False)),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions')),
