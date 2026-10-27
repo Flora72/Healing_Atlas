@@ -72,7 +72,7 @@ class Migration(migrations.Migration):
                 ('emotional_tone', models.CharField(choices=[('soft', '🌸 Soft'), ('neutral', '🌿 Neutral'), ('alert', '⚠️ Alert')], max_length=20)),
                 ('is_archived', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('tags', models.ManyToManyField(blank=True, to='Atlas.Tag')),
+                ('tags', models.ManyToManyField(blank=True, to='atlas.Tag')),
             ],
             managers=[
                 ('objects', django.contrib.auth.models.UserManager()),
