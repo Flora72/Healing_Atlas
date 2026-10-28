@@ -322,7 +322,7 @@ def initialize_payment(request):
         messages.error(request, "Invalid membership tier.")
         return redirect('upgrade_prompt')
 
-    amount = 50000 if tier == 'basic' else 120000
+    amount = 50000 if tier == 'basic' else 150000
 
     headers = {
         "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
@@ -373,7 +373,7 @@ def payment_confirmation(request):
     if not reference or tier not in ['basic', 'premium']:
         return failed_payment()
 
-    expected_amount = 50000 if tier == 'basic' else 120000
+    expected_amount = 50000 if tier == 'basic' else 150000
 
     headers = {
         "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"
