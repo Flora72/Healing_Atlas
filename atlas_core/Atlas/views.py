@@ -295,7 +295,7 @@ def paystack_checkout(request):
     tier = request.GET.get('tier', 'basic')
     context = {
         'tier': tier,
-        'price': 'KES 500' if tier == 'basic' else 'KES 1200',
+        'price': 'KES 500' if tier == 'basic' else 'KES 1500',
         'features': [
             'Emotion charts',
             'Journaling tools',
