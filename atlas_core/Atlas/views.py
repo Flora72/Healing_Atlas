@@ -15,7 +15,7 @@ import random,json
 from django.utils.timezone import localtime
 from .forms import JournalForm
 from .utils import analyze_sentiment
-from .decorators import basic_required
+from .decorators import premium_required
 
 
 # -------------------------------------------------------
@@ -88,6 +88,8 @@ def login_view(request):
 # -------------------------------------------------------
 #                    MOOD TRACKER VIEWS 
 # -------------------------------------------------------
+@login_required
+@premium_required
 def mood_tracker(request):
     form = MoodForm()
 
@@ -143,6 +145,7 @@ def affirmations(request):
 #                    JOURNAL VIEWS 
 # -------------------------------------------------------
 @login_required
+@premium_required
 def journal_view(request):
     journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
 
@@ -170,6 +173,7 @@ def journal_view(request):
     return render(request, "journal.html", context)
 
 @login_required
+@premium_required
 def journal_entries_view(request):
     journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
 
@@ -194,6 +198,7 @@ def journal_entries_view(request):
 #                    RESOURCES VIEWS 
 # -------------------------------------------------------
 @login_required
+@premium_required
 def resources_page(request):
 
     return render(request, 'resources.html')
@@ -216,6 +221,7 @@ def dashboard_view(request):
 
 
 @login_required
+@premium_required
 def test_chart(request):
     mood_entries = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')[:10]
     journal_entries = JournalEntry.objects.filter(user=request.user).order_by('-created_at')[:10]
@@ -245,6 +251,7 @@ def test_chart(request):
 
  
 @login_required
+@premium_required
 def emotion_chart(request):
     return render(request, 'emotion_chart.html')
 
@@ -268,39 +275,18 @@ def delete_entry(request, entry_id):
     return render(request, 'confirm-delete.html', {'entry': entry})
 
 @login_required
+@premium_required
 def view_checkins(request):
-    checkins = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')
-    return render(request, 'view_checkins.html', {'checkins': checkins})
+    checkins = MoodEntry.objects.filter(
+        user=request.user
+    ).order_by('-timestamp')
 
+    return render(request, 'view_checkins.html', {
+        'checkins': checkins
+    })
 # -------------------------------------------------------
 #                    PAYMENTS VIEWS 
 # -------------------------------------------------------
-@login_required
-def verify_payment(request):
-    reference = request.GET.get('reference')
-    headers = {
-        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"
-    }
-    url = f"https://api.paystack.co/transaction/verify/{reference}"
-    response = requests.get(url, headers=headers)
-    data = response.json()
-
-    if data['status'] and data['data']['status'] == 'success':
-        amount = data['data']['amount'] 
-        user = request.user
-
-        # Assign membership tier based on amount
-        if amount == 500:
-            user.membership = 'basic'
-        elif amount == 1500:
-            user.membership = 'premium'
-        user.save()
-
-        return render(request, 'payment_success.html', {'tier': user.membership})
-    else:
-        return render(request, 'payment_failed.html')
-
-
 def upgrade_prompt(request):
     return render(request, 'upgrade_prompt.html')
 
@@ -322,86 +308,113 @@ def paystack_checkout(request):
     return render(request, 'checkout.html', context)
 
 
+@login_required
+@premium_required
+def premium_insights(request):
+    return render(request, 'premium_insights.html')
+
+@login_required
+def initialize_payment(request):
+    tier = request.GET.get('tier', 'basic')
+
+    # Accept only the two supported paid tiers.
+    if tier not in ['basic', 'premium']:
+        messages.error(request, "Invalid membership tier.")
+        return redirect('upgrade_prompt')
+
+    amount = 50000 if tier == 'basic' else 120000
+
+    headers = {
+        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    data = {
+        "email": request.user.email,
+        "amount": amount,
+        "currency": "KES",
+        "callback_url": request.build_absolute_uri(
+            f"/payment_confirmation/?tier={tier}"
+        )
+    }
+
+    try:
+        response = requests.post(
+            "https://api.paystack.co/transaction/initialize",
+            json=data,
+            headers=headers,
+            timeout=20
+        )
+        response.raise_for_status()
+        result = response.json()
+
+        if result.get('status'):
+            return redirect(result['data']['authorization_url'])
+
+    except (requests.RequestException, ValueError):
+        pass
+
+    messages.error(request, "Unable to initiate payment. Please try again.")
+    return redirect('upgrade_prompt')
+
+
+@login_required
 def payment_confirmation(request):
     reference = request.GET.get('reference')
     tier = request.GET.get('tier', 'basic')
 
-    headers = {
-        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"
-    }
-
-    url = f"https://api.paystack.co/transaction/verify/{reference}"
-    response = requests.get(url, headers=headers)
-    result = response.json()
-
-    if result['status'] and result['data']['status'] == 'success':
-        # You can update user's subscription status here
-        return render(request, 'payment_confirmation.html', {
-            'tier': tier,
-            'status': 'success',
-            'amount': result['data']['amount'] / 100,  
-            'reference': reference
-        })
-    else:
+    def failed_payment():
         return render(request, 'payment_confirmation.html', {
             'tier': tier,
             'status': 'failed',
             'reference': reference
         })
-    
-@login_required
-@basic_required
-def premium_insights(request):
-    if not request.user.profile.is_premium:
-        messages.warning(request, "This feature is available to premium members.")
-        return redirect('dashboard')
-    return render(request, 'premium_insights.html')
 
+    if not reference or tier not in ['basic', 'premium']:
+        return failed_payment()
 
-
-def initiate_payment(request):
-    callback_url = request.build_absolute_uri(reverse('payment_confirmation'))
-    headers = {
-        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
-        "Content-Type": "application/json"
-    }
-    data = {
-        "email": request.user.email,
-        "amount": 5000 * 100,  
-        "callback_url": callback_url
-    }
-    response = requests.post("https://api.paystack.co/transaction/initialize", 
-                             headers=headers, json=data)
-    res_data = response.json()
-    return redirect(res_data['data']['authorization_url'])
-
-
-def initialize_payment(request):
-    tier = request.GET.get('tier', 'basic')
-    email = request.user.email
-    amount = 50000 if tier == 'basic' else 120000  # Amount in kobo
+    expected_amount = 50000 if tier == 'basic' else 120000
 
     headers = {
-        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
-        "Content-Type": "application/json"
+        "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"
     }
 
-    data = {
-        "email": email,
-        "amount": amount,
-        "callback_url": request.build_absolute_uri(f"/payment_confirmation/?tier={tier}")
-    }
+    try:
+        response = requests.get(
+            f"https://api.paystack.co/transaction/verify/{reference}",
+            headers=headers,
+            timeout=20
+        )
+        response.raise_for_status()
+        result = response.json()
 
-    response = requests.post("https://api.paystack.co/transaction/initialize", json=data, headers=headers)
-    result = response.json()
+    except (requests.RequestException, ValueError):
+        return failed_payment()
 
-    if result['status']:
-        return redirect(result['data']['authorization_url'])
-    else:
-        return render(request, 'checkout.html', {
-            'tier': tier,
-            'price': 'KES 500' if tier == 'basic' else 'KES 1500',
-            'features': [...],
-            'error': 'Unable to initiate payment. Please try again.'
-        })
+    if not result.get('status'):
+        return failed_payment()
+
+    transaction = result.get('data', {})
+
+    # Verify the payment before granting membership.
+    if (
+        transaction.get('status') != 'success'
+        or transaction.get('amount') != expected_amount
+        or transaction.get('currency') != 'KES'
+        or transaction.get('customer', {}).get('email', '').lower()
+        != request.user.email.lower()
+    ):
+        return failed_payment()
+
+    # Activate the verified membership.
+    request.user.membership = tier
+    request.user.save(update_fields=['membership'])
+
+    return render(request, 'payment_confirmation.html', {
+        'tier': tier,
+        'status': 'success',
+        'amount': transaction['amount'] / 100,
+        'reference': reference
+    })
+
 
